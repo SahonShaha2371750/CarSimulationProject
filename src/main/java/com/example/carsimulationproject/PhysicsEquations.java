@@ -14,4 +14,10 @@ public class PhysicsEquations {
 
     }
 
+    public void findTime(double distance, double velocity) {
+
+        double time = distance / velocity;
+
+    }
+
 }
