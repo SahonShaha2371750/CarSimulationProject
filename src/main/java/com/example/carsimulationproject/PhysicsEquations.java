@@ -8,15 +8,18 @@ public class PhysicsEquations {
 
     }
 
-    public void findAcceleration(double deltaV, double deltaT) {
+    double findAcceleration(double deltaV, double deltaT) {
 
         double acceleration = deltaV / deltaT;
+        return acceleration;
 
     }
 
-    public void findTime(double distance, double velocity) {
+    double findTime(double distance, double velocity) {
 
         double time = distance / velocity;
+
+        return time;
 
     }
 

@@ -57,6 +57,15 @@ public class HelloApplication extends Application {
         root.setLeft(vBox);
 
 
+        Animate animation = new Animate();
+        animation.setLayoutX(400);
+        animation.setLayoutY(300);
+        animation.playanimation();
+
+        root.getChildren().add(animation);
+
+
+
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setMaximized(true);
