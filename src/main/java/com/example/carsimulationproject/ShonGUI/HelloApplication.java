@@ -1,7 +1,7 @@
-package com.example.carsimulationproject;
+package com.example.carsimulationproject.ShonGUI;
 
+import com.example.carsimulationproject.VinithAnimations.Animate;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -56,6 +56,7 @@ public class HelloApplication extends Application {
         root.setTop(menuBar);
         root.setLeft(vBox);
 
+        //play the animation
 
         Animate animation = new Animate();
         animation.setLayoutX(400);
