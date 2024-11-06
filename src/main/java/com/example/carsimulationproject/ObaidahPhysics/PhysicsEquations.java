@@ -16,7 +16,6 @@ public class PhysicsEquations {
 
         return acceleration;
 
-
     }
 
     public double findTime(double distance, double velocity) {
