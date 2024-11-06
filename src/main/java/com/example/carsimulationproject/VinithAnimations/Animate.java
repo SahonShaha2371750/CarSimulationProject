@@ -36,7 +36,7 @@ public class Animate extends Pane {
 
      this.getChildren().add(chosenpath);
 
-     double time = physics.findTime(modelclass.distance,modelclass.velocity);
+     double time = physics.findTime(modelclass.distance, modelclass.velocity);
 
         PathTransition transition = new PathTransition(Duration.seconds(time), chosenpath,car);
 

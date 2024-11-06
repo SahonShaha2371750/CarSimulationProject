@@ -2,48 +2,46 @@ package com.example.carsimulationproject.ObaidahPhysics;
 
 public class PhysicsEquations {
 
-    double friction;
-    double caracceleration;
+    public double findFriction(double mu, double Fnormal) {
 
-    double time;
-
-    double findFriction(double mu, double Fnormal) {
-
-        friction = mu * Fnormal;
+        double friction = mu * Fnormal;
 
         return friction;
 
     }
 
-
-    double findcaracceleration (double carmass, double engineforce) {
-
-        caracceleration = engineforce/ carmass;
-
-        return caracceleration;
-    }
-
-    double findAcceleration(double deltaV, double deltaT) {
+    public double findAcceleration(double deltaV, double deltaT) {
 
         double acceleration = deltaV / deltaT;
+
         return acceleration;
+
 
     }
 
+    public double findTime(double distance, double velocity) {
 
-    public double findTime(double distance, double startingvelocity) {
-
-        time = distance / startingvelocity;
+        double time = distance / velocity;
 
         return time;
 
     }
 
+    public double findFnormal(double mass, double g) {
 
-    double findforcecausedbygravity(double carmass, double angle) {
+        double Fnormal = mass * g;
 
-        double forcecausedbygravity = carmass * 9.8 * Math.sin(angle);
-        return forcecausedbygravity;
+        return Fnormal;
+
+    }
+
+    public double findFnormalOnRamp(double mass, double g, double angle) {
+
+        double angleInRadians = Math.toRadians(angle);
+        double Fnormal = (mass * g) * Math.cos(angleInRadians);
+
+        return Fnormal;
+
     }
 
 }
