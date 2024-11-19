@@ -60,12 +60,12 @@ public class HelloApplication extends Application {
 
 
         //play the animation
-        Animate animation = new Animate();
+        /*Animate animation = new Animate();
         animation.setLayoutX(400);
         animation.setLayoutY(300);
         animation.playanimation();
 
-        mainScreen.root.getChildren().add(animation);
+        mainScreen.root.getChildren().add(animation);*/
 
 
 
