@@ -107,6 +107,8 @@ public class MainScreen {
         energyGrid.add(mechanicalEnergyLabel, 2, 0);
         energyGrid.add(mechanicalEnergyLevel, 2, 1);
 
+        root.setStyle("-fx-background-color: lightBlue;");
+
 
         // Adding Everything to the Root
         VBox vBox = new VBox();
@@ -127,7 +129,6 @@ public class MainScreen {
         animation.setLayoutX(400);
         animation.setLayoutY(300);
         animation.playanimation();
-
         root.getChildren().add(animation);
 
         return root;
