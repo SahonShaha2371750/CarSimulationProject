@@ -5,9 +5,11 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
 
 public class MainScreen {
@@ -28,7 +30,6 @@ public class MainScreen {
         changeCar.getItems().addAll(car, truck);
         car.setOnAction(actionEvent -> {int carMass = 50;});
         truck.setOnAction(actionEvent -> {int truckMass = 100;});
-
 
         MenuButton changeEngine = new MenuButton("Change Engine");
         MenuItem strongEngine = new MenuItem("Engine Ultra S-500");
@@ -56,14 +57,17 @@ public class MainScreen {
         MenuItem downhill = new MenuItem("Downhill Track");
         MenuItem uphill = new MenuItem("Uphill Track");
         changeTrack.getItems().addAll(straight, downhill, uphill);
+        downhill.setOnAction(actionEvent -> {customizeTrack();});
+        uphill.setOnAction(actionEvent -> {customizeTrack();});
 
-        downhill.setOnAction(actionEvent -> {
-            customizeTrack();
-        });
+        Label potentialEnergyLabel = new Label("Potential Energy: ");
+        Text potentialEnergyLevel = new Text("0");
 
-        uphill.setOnAction(actionEvent -> {
-            customizeTrack();
-        });
+        Label kineticEnergyLabel = new Label("Kinetic Energy: ");
+        Text kineticEnergyLevel = new Text("0");
+
+        Label mechanicalEnergyLabel = new Label("Mechanical Energy: ");
+        Text mechanicalEnergyLevel = new Text("0");
 
 
         // STYLING EVERYTHING
@@ -84,13 +88,41 @@ public class MainScreen {
         menuButtonGrid.add(changeWeather, 1, 1);
         menuButtonGrid.add(changeTrack, 0, 2, 2, 1);
 
+
+        GridPane energyGrid = new GridPane();
+        energyGrid.setHgap(20);
+        energyGrid.setVgap(50);
+        energyGrid.setAlignment(Pos.CENTER);
+        potentialEnergyLabel.setFont(menuButtonFont);
+        kineticEnergyLabel.setFont(menuButtonFont);
+        mechanicalEnergyLabel.setFont(menuButtonFont);
+        potentialEnergyLevel.setFont(Font.font(20));
+        kineticEnergyLevel.setFont(Font.font(20));
+        mechanicalEnergyLevel.setFont(Font.font(20));
+
+        energyGrid.add(potentialEnergyLabel, 0, 0);
+        energyGrid.add(potentialEnergyLevel, 0, 1);
+        energyGrid.add(kineticEnergyLabel, 1, 0);
+        energyGrid.add(kineticEnergyLevel, 1, 1);
+        energyGrid.add(mechanicalEnergyLabel, 2, 0);
+        energyGrid.add(mechanicalEnergyLevel, 2, 1);
+
+
+        // Adding Everything to the Root
         VBox vBox = new VBox();
         vBox.setAlignment(Pos.CENTER);
         vBox.getChildren().addAll(menuButtonGrid);
 
+        HBox energyLevels = new HBox();
+        energyLevels.setAlignment(Pos.CENTER);
+        energyLevels.getChildren().addAll(energyGrid);
+
         root.setTop(menuBar);
+        root.setBottom(energyLevels);
         root.setLeft(vBox);
 
+
+        // Playing the animation
         Animate animation = new Animate();
         animation.setLayoutX(400);
         animation.setLayoutY(300);
