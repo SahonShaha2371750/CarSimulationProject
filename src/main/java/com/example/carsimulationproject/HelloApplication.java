@@ -1,15 +1,9 @@
 package com.example.carsimulationproject;
 
-import com.example.carsimulationproject.Model.Animate;
+
 import com.example.carsimulationproject.View.MainScreen;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;

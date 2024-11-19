@@ -13,7 +13,7 @@ public class Animate extends Pane {
     Rectangle car = new Rectangle(30, 50, 40, 20);
     Rectangle truck = new Rectangle(30, 50, 80, 40); //not for now
 
-    double engineforce;
+    public double engineforce;
 
     public Animate() {
 

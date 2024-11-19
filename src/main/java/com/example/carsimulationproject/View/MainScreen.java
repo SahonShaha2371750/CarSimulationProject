@@ -26,21 +26,30 @@ public class MainScreen {
         MenuItem car = new MenuItem("Car");
         MenuItem truck = new MenuItem("Truck");
         changeCar.getItems().addAll(car, truck);
+        car.setOnAction(actionEvent -> {int carMass = 50;});
+        truck.setOnAction(actionEvent -> {int truckMass = 100;});
+
 
         MenuButton changeEngine = new MenuButton("Change Engine");
         MenuItem strongEngine = new MenuItem("Engine Ultra S-500");
         MenuItem weakEngine = new MenuItem("Engine F-001");
         changeEngine.getItems().addAll(strongEngine, weakEngine);
+        strongEngine.setOnAction(actionEvent -> {int strongEngineForce = 100;});
+        weakEngine.setOnAction(actionEvent -> {int weakEngineForce = 50;});
 
         MenuButton changeTires = new MenuButton("Change Tires");
         MenuItem regularTire = new MenuItem("Regular Tires");
         MenuItem winterTire = new MenuItem("Winter Tires");
         changeTires.getItems().addAll(regularTire,winterTire);
+        regularTire.setOnAction(actionEvent -> {int regularFriction = 0;});
+        winterTire.setOnAction(actionEvent -> {int winterFriction = 25;});
 
         MenuButton changeWeather = new MenuButton("Change Weather");
         MenuItem sunny = new MenuItem("Sunny Weather");
         MenuItem rainy = new MenuItem("Rainy Weather");
         changeWeather.getItems().addAll(sunny, rainy);
+        sunny.setOnAction(actionEvent -> {int sunnyFriction = 0;});
+        rainy.setOnAction(actionEvent -> {int rainyFriction = 10;});
 
         MenuButton changeTrack = new MenuButton("Change Track");
         MenuItem straight = new MenuItem("Straight Track");
@@ -81,8 +90,6 @@ public class MainScreen {
 
         root.setTop(menuBar);
         root.setLeft(vBox);
-
-
 
         Animate animation = new Animate();
         animation.setLayoutX(400);
