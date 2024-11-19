@@ -1,4 +1,4 @@
-package com.example.carsimulationproject.VinithAnimations;
+package com.example.carsimulationproject.Model;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.LineTo;

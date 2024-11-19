@@ -1,6 +1,6 @@
-package com.example.carsimulationproject.VinithAnimations;
+package com.example.carsimulationproject.Model;
 
-import com.example.carsimulationproject.ObaidahPhysics.PhysicsEquations;
+import com.example.carsimulationproject.Controller.PhysicsEquations;
 import javafx.animation.Interpolator;
 import javafx.animation.PathTransition;
 import javafx.scene.layout.Pane;
@@ -25,7 +25,7 @@ public class Animate extends Pane {
 
     }
 
-    PathTransition transition() {
+    public PathTransition transition() {
 
      PhysicsEquations physics = new PhysicsEquations();
      Model modelclass = new Model();
@@ -55,7 +55,7 @@ public class Animate extends Pane {
     }
 
     //stopping the animation
-    void stopanimation() {
+    public void stopanimation() {
         transition().stop();
     }
 

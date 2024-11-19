@@ -1,6 +1,7 @@
-package com.example.carsimulationproject.ShonGUI;
+package com.example.carsimulationproject;
 
-import com.example.carsimulationproject.VinithAnimations.Animate;
+import com.example.carsimulationproject.Model.Animate;
+import com.example.carsimulationproject.View.MainScreen;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
@@ -16,9 +17,10 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        BorderPane root = new BorderPane();
+        //BorderPane root = new BorderPane();
+        MainScreen mainScreen = new MainScreen();
 
-        MenuBar menuBar = new MenuBar();
+       /* MenuBar menuBar = new MenuBar();
         Menu showCode = new Menu("Show Code");
         Menu showAssets = new Menu("Show Assets and Images");
         Menu changeBackground = new Menu("Change Background");
@@ -54,20 +56,20 @@ public class HelloApplication extends Application {
         vBox.getChildren().addAll(changeCar, changeEngine,changeTires, changeWeather, changeTrack);
 
         root.setTop(menuBar);
-        root.setLeft(vBox);
+        root.setLeft(vBox);*/
+
 
         //play the animation
-
         Animate animation = new Animate();
         animation.setLayoutX(400);
         animation.setLayoutY(300);
         animation.playanimation();
 
-        root.getChildren().add(animation);
+        mainScreen.root.getChildren().add(animation);
 
 
 
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(mainScreen.initialize());
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();
