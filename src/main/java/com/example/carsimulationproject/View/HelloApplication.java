@@ -1,15 +1,9 @@
 package com.example.carsimulationproject.View;
 
-import com.example.carsimulationproject.Model.Animate;
+
 import com.example.carsimulationproject.View.MainScreen;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -60,12 +54,12 @@ public class HelloApplication extends Application {
 
 
         //play the animation
-        Animate animation = new Animate();
+        /*Animate animation = new Animate();
         animation.setLayoutX(400);
         animation.setLayoutY(300);
         animation.playanimation();
 
-        mainScreen.root.getChildren().add(animation);
+        mainScreen.root.getChildren().add(animation);*/
 
 
 

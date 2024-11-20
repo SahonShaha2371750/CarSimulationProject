@@ -1,6 +1,5 @@
 package com.example.carsimulationproject.View;
 
-import com.example.carsimulationproject.Model.Model;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -95,7 +94,6 @@ public class MainScreen {
         TextField angle = new TextField();
         angle.setPromptText("Angle");
 
-
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
@@ -116,11 +114,6 @@ public class MainScreen {
         if (result != null) {
             array[0] = Integer.parseInt(length.getText());
             array[1] = Integer.parseInt(angle.getText());
-
-            Model model = new Model();
-            model.setDistance(Integer.parseInt(length.getText()));
-            model.setAngle(Integer.parseInt(angle.getText()));
-
         }
         else {
             System.out.println("Dialog canceled or invalid input.");
