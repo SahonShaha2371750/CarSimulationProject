@@ -1,8 +1,7 @@
 package com.example.carsimulationproject.Model;
 
 import com.example.carsimulationproject.Controller.PhysicsEquations;
-import javafx.animation.Interpolator;
-import javafx.animation.PathTransition;
+import javafx.animation.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
@@ -48,6 +47,30 @@ public class Animate extends Pane {
         return transition;
 
     }
+
+    // for acceleration, under construction
+    void timelineanimation() {
+
+        KeyValue initvaluex = new KeyValue(car.translateXProperty(),50);
+        KeyValue initvaluey = new KeyValue(car.translateYProperty(),50);
+        KeyFrame keyFrameinit = new KeyFrame(Duration.ZERO, initvaluex,initvaluey);
+
+        KeyValue valuex2 = new KeyValue(car.translateXProperty(),150);
+        KeyValue valuey2 = new KeyValue(car.translateYProperty(),150);
+        KeyFrame keyFrame2 = new KeyFrame(Duration.seconds(2), valuex2, valuey2);
+
+        KeyValue valuex3 = new KeyValue(car.translateXProperty(),250);
+        KeyValue valuey3 = new KeyValue(car.translateYProperty(),250);
+        KeyFrame keyFrame3 = new KeyFrame(Duration.seconds(2), valuex3,valuex3);
+
+        Timeline timeline = new Timeline(keyFrameinit,keyFrame2,keyFrame3);
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+
+
+
+    }
+
 
     //running the animation
     public void playanimation() {

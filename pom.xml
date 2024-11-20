@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.example.carsimulationproject/com.example.carsimulationproject.HelloApplication
+                                com.example.carsimulationproject/com.example.carsimulationproject.View.HelloApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

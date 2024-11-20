@@ -12,6 +12,7 @@ public class PhysicsEquations {
 
     }
 
+    //only works on a flat road
     public double findAcceleration(double deltaV, double deltaT) {
 
         double acceleration = deltaV / deltaT;

@@ -1,4 +1,4 @@
-package com.example.carsimulationproject;
+package com.example.carsimulationproject.View;
 
 import com.example.carsimulationproject.Model.Animate;
 import com.example.carsimulationproject.View.MainScreen;

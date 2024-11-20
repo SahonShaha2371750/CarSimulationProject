@@ -15,4 +15,6 @@ module com.example.carsimulationproject {
     //opens com.example.carsimulationproject.View to javafx.fxml;
     exports com.example.carsimulationproject.Controller;
     opens com.example.carsimulationproject.Controller to javafx.fxml;
+    exports com.example.carsimulationproject.View;
+    opens com.example.carsimulationproject.View to javafx.fxml;
 }

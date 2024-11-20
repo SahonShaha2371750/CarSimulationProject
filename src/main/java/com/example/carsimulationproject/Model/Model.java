@@ -8,16 +8,16 @@ import javafx.scene.transform.Rotate;
 
 public class Model {
 
-    double distance = 300; //will be turned into a parameter that user can change
-    double angle = 45; //will be turned into a parameter that user can change
-    double velocity = 10; //initial velocity is set by the user
+    double distance; //will be turned into a parameter that user can change
+    double angle; //will be turned into a parameter that user can change
+    double velocity= 25; //initial velocity is set by the user
 
 
-    void setDistance(double distance) {
+   public void setDistance(double distance) {
         this.distance = distance;
     }
 
-    void setAngle (double angle) {
+    public void setAngle (double angle) {
         this.angle = angle;
     }
 
@@ -75,22 +75,35 @@ public class Model {
         return trackincline;
     }
 
-    Path loop() {
 
-        Path trackloop = new Path(
+    //the angles are not all the same, this will be fixed next time
+    Path combotrack() {
 
+        double endfirsttrack = 50 + distance;
 
+        double endsecondtrackx = endfirsttrack + 2*distance* Math.cos(angle);
+        double endsecondtracky = 50+ + 2*distance* Math.sin(angle);
 
-        );
+        double endthirdtrackx = endsecondtrackx + distance;
+        double endthirdtracky = endsecondtracky;
 
-      return trackloop;
-    };
+        double endfourthtrackx = endthirdtrackx + distance*Math.cos(angle);
+        double endfourthtracky = endthirdtracky + distance*Math.sin(angle);
 
+        double endfifthtrackx = endfourthtrackx + distance*Math.cos(angle);
+        double fifthtracky = endthirdtracky;
 
+       Path combination = new Path(
 
+               new MoveTo(50,50),
+               new LineTo(endfirsttrack,50),
+               new LineTo(endsecondtrackx,endsecondtracky),
+               new LineTo(endthirdtrackx,endthirdtracky),
+               new LineTo(endfourthtrackx,endfourthtracky)
 
-
-
-
+       );
+        combination.setStroke(Color.BLACK);
+        return combination;
+    }
 
 }
