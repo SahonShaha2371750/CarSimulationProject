@@ -49,7 +49,7 @@ public class Animate extends Pane {
     }
 
     // for acceleration, under construction
-    void timelineanimation() {
+    public void timelineanimation() {
 
         KeyValue initvaluex = new KeyValue(car.translateXProperty(),50);
         KeyValue initvaluey = new KeyValue(car.translateYProperty(),50);

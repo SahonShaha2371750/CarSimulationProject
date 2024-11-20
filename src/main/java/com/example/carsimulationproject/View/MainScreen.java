@@ -1,5 +1,6 @@
 package com.example.carsimulationproject.View;
 
+import com.example.carsimulationproject.Model.Animate;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -77,6 +78,14 @@ public class MainScreen {
         VBox vBox = new VBox();
         vBox.setAlignment(Pos.CENTER);
         vBox.getChildren().addAll(menuButtonGrid);
+
+        Animate animation = new Animate();
+        animation.setLayoutX(400);
+        animation.setLayoutY(300);
+        animation.playanimation();
+
+        root.getChildren().add(animation);
+        animation.timelineanimation();
 
         root.setTop(menuBar);
         root.setLeft(vBox);
