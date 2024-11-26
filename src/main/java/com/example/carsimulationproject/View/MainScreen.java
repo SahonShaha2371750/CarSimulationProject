@@ -1,13 +1,13 @@
 package com.example.carsimulationproject.View;
 
 import com.example.carsimulationproject.Model.Animate;
+import com.example.carsimulationproject.Model.Model;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
 
 public class MainScreen {
@@ -49,12 +49,23 @@ public class MainScreen {
         changeTrack.getItems().addAll(straight, downhill, uphill);
 
         downhill.setOnAction(actionEvent -> {
-            customizeTrack();
+            Model model = new Model();
+            root.getChildren().add(model.declinettrack());
         });
 
         uphill.setOnAction(actionEvent -> {
-            customizeTrack();
+            Model model = new Model();
+            root.getChildren().add(model.inclinettrack());
         });
+
+        Label potentialEnergyLabel = new Label("Potential Energy: ");
+        Text potentialEnergyLevel = new Text("0");
+
+        Label kineticEnergyLabel = new Label("Kinetic Energy: ");
+        Text kineticEnergyLevel = new Text("0");
+
+        Label mechanicalEnergyLabel = new Label("Mechanical Energy: ");
+        Text mechanicalEnergyLevel = new Text("0");
 
 
         // STYLING EVERYTHING
@@ -75,24 +86,54 @@ public class MainScreen {
         menuButtonGrid.add(changeWeather, 1, 1);
         menuButtonGrid.add(changeTrack, 0, 2, 2, 1);
 
+        GridPane energyGrid = new GridPane();
+        energyGrid.setHgap(20);
+        energyGrid.setVgap(50);
+        energyGrid.setAlignment(Pos.CENTER);
+        potentialEnergyLabel.setFont(menuButtonFont);
+        kineticEnergyLabel.setFont(menuButtonFont);
+        mechanicalEnergyLabel.setFont(menuButtonFont);
+        potentialEnergyLevel.setFont(Font.font(20));
+        kineticEnergyLevel.setFont(Font.font(20));
+        mechanicalEnergyLevel.setFont(Font.font(20));
+
+        energyGrid.add(potentialEnergyLabel, 0, 0);
+        energyGrid.add(potentialEnergyLevel, 0, 1);
+        energyGrid.add(kineticEnergyLabel, 1, 0);
+        energyGrid.add(kineticEnergyLevel, 1, 1);
+        energyGrid.add(mechanicalEnergyLabel, 2, 0);
+        energyGrid.add(mechanicalEnergyLevel, 2, 1);
+
         VBox vBox = new VBox();
         vBox.setAlignment(Pos.CENTER);
         vBox.getChildren().addAll(menuButtonGrid);
+
+        HBox energyLevels = new HBox();
+        energyLevels.setAlignment(Pos.CENTER);
+        energyLevels.getChildren().addAll(energyGrid);
+
+        StackPane center = new StackPane();
+        center.setStyle("-fx-border-color: black; -fx-border-width: 5px;");
+
 
         Animate animation = new Animate();
         animation.setLayoutX(400);
         animation.setLayoutY(300);
         animation.playanimation();
 
-        root.getChildren().add(animation);
+        center.getChildren().add(animation);
+
+        // root.getChildren().add(animation);
+        root.setCenter(center);
         animation.timelineanimation();
 
         root.setTop(menuBar);
+        root.setBottom(energyLevels);
         root.setLeft(vBox);
         return root;
     }
 
-    public int[] customizeTrack() {
+    /*public int[] customizeTrack() {
         Dialog<int[]> dialogBox = new Dialog<>();
         dialogBox.setTitle("Customize the track");
         dialogBox.setHeaderText("Enter the length of the track and an angle");
@@ -130,5 +171,5 @@ public class MainScreen {
 
         return array;
 
-    }
+    }*/
 }

@@ -44,7 +44,7 @@ public class Model {
 
 
 // decline track
-    Path declinettrack() {
+    public Path declinettrack() {
 
 
         Rotate rotate = new Rotate(angle,50,50);
@@ -60,7 +60,7 @@ public class Model {
         return trackdecline;
     }
 
-    Path inclinettrack() {
+    public Path inclinettrack() {
 
         Rotate rotate = new Rotate(angle,50,50);
 
