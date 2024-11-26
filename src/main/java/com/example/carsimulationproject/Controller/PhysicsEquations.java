@@ -71,4 +71,27 @@ public class PhysicsEquations {
 
     }
 
+    public double findNetAcceleration(double EngineAcceleration, double angle, double mu, String direction) {
+
+        double angleInRadians = Math.toRadians(angle);
+        double netAcceleration = 0;
+
+
+        if (direction.equalsIgnoreCase("flat")) {
+            netAcceleration = EngineAcceleration - (mu * 9.8 * Math.cos(angleInRadians));
+
+        }
+
+        else if (direction.equalsIgnoreCase("uphill")) {
+            netAcceleration = EngineAcceleration - ((g * Math.sin(angleInRadians)) + (mu * 9.8 * Math.cos(angleInRadians)));
+        }
+
+        else if (direction.equalsIgnoreCase("downhill")) {
+            netAcceleration = EngineAcceleration + ((g * Math.sin(angleInRadians)) - (mu * 9.8 * Math.cos(angleInRadians)));
+        }
+
+        return netAcceleration;
+
+    }
+
 }
