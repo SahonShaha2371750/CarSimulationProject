@@ -11,7 +11,9 @@ import javafx.scene.text.Text;
 
 public class MainScreen {
     public BorderPane root = new BorderPane();
-    int engineForce;
+    int engineAcceleration; // enginetype
+    int frictionCoefficient; // tire (increase) + weather (decrease)
+    int initialVelocity; // Set by user
 
     public BorderPane initialize() {
         Font menuButtonFont = Font.font("Arial", FontWeight.BOLD, 14);
@@ -22,7 +24,7 @@ public class MainScreen {
         Menu changeBackground = new Menu("Change Background");
         menuBar.getMenus().addAll(showCode, showAssets, changeBackground);
 
-        MenuButton changeCar = new MenuButton("Change Car"); // Mass which affects normal force which affects friction force which will reduce velocity and acceleration
+        MenuButton changeCar = new MenuButton("Change Car"); // Mass which affects normal force which affects friction force which will reduce velocity and acceleration || PROBABLY NOT NEEDED
         MenuItem car = new MenuItem("Car");
         MenuItem truck = new MenuItem("Truck");
         changeCar.getItems().addAll(car, truck);
