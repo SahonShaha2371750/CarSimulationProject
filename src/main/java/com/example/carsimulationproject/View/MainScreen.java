@@ -12,7 +12,7 @@ import javafx.scene.text.Text;
 public class MainScreen {
     public BorderPane root = new BorderPane();
     int engineAcceleration; // enginetype
-    int frictionCoefficient; // tire (increase) + weather (decrease)
+    int frictionCoefficient; // tire (increase) + weather (depends on type of track)
     int initialVelocity; // Set by user
 
     public BorderPane initialize() {
