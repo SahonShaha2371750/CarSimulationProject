@@ -1,5 +1,9 @@
 package com.example.carsimulationproject.Controller;
 
+import com.example.carsimulationproject.Model.Animate;
+
+import java.util.ArrayList;
+
 public class PhysicsEquations {
 
     double g = 9.8;
@@ -93,5 +97,24 @@ public class PhysicsEquations {
         return netAcceleration;
 
     }
+
+    public void findpoints(double startx, double starty, double distance, double angle) {
+        ArrayList<Double> arrayListpositionsx = new ArrayList<>();
+        ArrayList<Double> arrayListpositionsy = new ArrayList<>();
+
+        for (int i = 1; i <= 5; i++) {
+            double positionx = startx + i * (distance / 5) * Math.cos(Math.toRadians(angle));
+            arrayListpositionsx.add(positionx);
+        }
+
+        for (int i = 1; i <= 5; i++) {
+            double positiony = starty + i * (distance / 5) * Math.sin(Math.toRadians(angle));
+            arrayListpositionsy.add(positiony);
+        }
+
+        Animate animate = new Animate();
+        animate.timelineanimation(arrayListpositionsx, arrayListpositionsy);
+    }
+
 
 }

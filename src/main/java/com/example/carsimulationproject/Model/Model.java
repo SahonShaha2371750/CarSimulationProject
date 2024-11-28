@@ -1,5 +1,6 @@
 package com.example.carsimulationproject.Model;
 
+import com.example.carsimulationproject.Controller.PhysicsEquations;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
@@ -8,8 +9,8 @@ import javafx.scene.transform.Rotate;
 
 public class Model {
 
-    double distance; //will be turned into a parameter that user can change
-    double angle; //will be turned into a parameter that user can change
+    double distance;
+    double angle;
     double velocity= 25; //initial velocity is set by the user
 
 
@@ -29,15 +30,16 @@ public class Model {
 // default track
     Path defaulttrack() {
 
-        Rotate rotate = new Rotate(angle,50,50);
 
+        distance = 200;
         Path trackdefault = new Path(
                 new MoveTo(50,50),
                 new LineTo(50+distance,50)
         );
 
         trackdefault.setStroke(Color.BLACK);
-        trackdefault.getTransforms().addAll(rotate);
+        PhysicsEquations pe = new PhysicsEquations();
+        pe.findpoints(50,50,distance,0);
 
         return trackdefault;
     }
@@ -46,9 +48,9 @@ public class Model {
 // decline track
     public Path declinettrack() {
 
-
+        angle = 20;
         Rotate rotate = new Rotate(angle,50,50);
-
+        distance = 200;
         Path trackdecline = new Path(
                 new MoveTo(50,50),
                 new LineTo(50+distance,50)
@@ -57,12 +59,17 @@ public class Model {
         trackdecline.setStroke(Color.BLACK);
         trackdecline.getTransforms().addAll(rotate);
 
+        PhysicsEquations pe = new PhysicsEquations();
+        pe.findpoints(50,50,distance,angle);
+
         return trackdecline;
     }
 
     public Path inclinettrack() {
 
+        angle = (-20);
         Rotate rotate = new Rotate(angle,50,50);
+        distance = 200;
 
         Path trackincline = new Path(
                 new MoveTo(50,50),
@@ -77,31 +84,70 @@ public class Model {
 
 
     //the angles are not all the same, this will be fixed next time
+
+
     Path combotrack() {
 
-        double endfirsttrack = 50 + distance;
 
-        double endsecondtrackx = endfirsttrack + 2*distance* Math.cos(angle);
-        double endsecondtracky = 50+ + 2*distance* Math.sin(angle);
+        double startpointx = 50;
+        double startpointy = 50;
 
+        distance = 80;
+        //flat part
+        double endfirsttrack = startpointx + distance;
+
+
+        //decline part
+        angle = 40;
+        distance = 120;
+        double endsecondtrackx = endfirsttrack + ( distance * Math.cos( Math.toRadians(angle)) );
+        double endsecondtracky = startpointy + ( distance* Math.sin( Math.toRadians(angle)) );
+
+        //flat part
+        distance = 60;
         double endthirdtrackx = endsecondtrackx + distance;
         double endthirdtracky = endsecondtracky;
 
-        double endfourthtrackx = endthirdtrackx + distance*Math.cos(angle);
-        double endfourthtracky = endthirdtracky + distance*Math.sin(angle);
+        //incline incline
+        angle = 45;
+        distance = 75;
+        double endfourthtrackx = endthirdtrackx + (distance * Math.cos( Math.toRadians(angle)));
+        double endfourthtracky = endthirdtracky - (distance * Math.sin( Math.toRadians(angle)));
 
-        double endfifthtrackx = endfourthtrackx + distance*Math.cos(angle);
-        double fifthtracky = endthirdtracky;
+        //flat part
+        distance = 65;
+        double endfifthtrackx = endfourthtrackx + distance;
+        double endfifthtracky = endfourthtracky;
 
-       Path combination = new Path(
+        //decline part
+        angle = 25;
+        distance = 60;
 
-               new MoveTo(50,50),
-               new LineTo(endfirsttrack,50),
-               new LineTo(endsecondtrackx,endsecondtracky),
-               new LineTo(endthirdtrackx,endthirdtracky),
-               new LineTo(endfourthtrackx,endfourthtracky)
+        double endsixthtrackx = endfifthtrackx + distance * Math.cos( Math.toRadians(angle));
+        double endsixthtracky = endfifthtracky - distance * Math.sin( Math.toRadians(angle));
 
-       );
+        //end of track
+
+        angle = 35;
+        distance = 60;
+
+        double endseventhtrackx = endsixthtrackx + distance * Math.cos( Math.toRadians(angle));
+        double endseventhtracky = endsixthtracky + distance * Math.sin( Math.toRadians(angle));
+
+
+
+        Path combination = new Path(
+
+                new MoveTo(50,50),
+                new LineTo(endfirsttrack,50),
+                new LineTo(endsecondtrackx,endsecondtracky),
+                new LineTo(endthirdtrackx,endthirdtracky),
+                new LineTo(endfourthtrackx,endfourthtracky),
+                new LineTo(endfifthtrackx,endfifthtracky),
+                new LineTo(endsixthtrackx, endsixthtracky),
+                new LineTo(endseventhtrackx, endseventhtracky)
+
+        );
         combination.setStroke(Color.BLACK);
         return combination;
     }

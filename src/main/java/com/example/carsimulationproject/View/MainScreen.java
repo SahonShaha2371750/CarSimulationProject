@@ -125,7 +125,7 @@ public class MainScreen {
 
         // root.getChildren().add(animation);
         root.setCenter(center);
-        animation.timelineanimation();
+        //animation.timelineanimation();
 
         root.setTop(menuBar);
         root.setBottom(energyLevels);
