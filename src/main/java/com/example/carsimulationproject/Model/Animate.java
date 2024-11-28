@@ -15,7 +15,6 @@ public class Animate extends Pane {
     Rectangle car = new Rectangle(30, 50, 40, 20);
     Rectangle truck = new Rectangle(30, 50, 80, 40); //not for now
 
-    public double engineforce;
 
     public Animate() {
 
@@ -53,7 +52,7 @@ public class Animate extends Pane {
     }
 
     // for acceleration, under construction
-    public void timelineanimation(ArrayList<Double> arrayListpositionsx, ArrayList<Double> arrayListpositionsy) {
+    public void timelineanimation(ArrayList<Double> arrayListpositionsx, ArrayList<Double> arrayListpositionsy, ArrayList<Double> listTime) {
 
         if (arrayListpositionsx.isEmpty() || arrayListpositionsy.isEmpty()) {
             throw new IllegalStateException("Points must be generated before animating.");
@@ -65,19 +64,19 @@ public class Animate extends Pane {
 
         KeyValue valuex2 = new KeyValue(car.translateXProperty(), arrayListpositionsx.get(1));
         KeyValue valuey2 = new KeyValue(car.translateYProperty(), arrayListpositionsy.get(1));
-        KeyFrame keyFrame2 = new KeyFrame(Duration.seconds(2), valuex2, valuey2);
+        KeyFrame keyFrame2 = new KeyFrame(Duration.seconds(listTime.get(1)), valuex2, valuey2);
 
         KeyValue valuex3 = new KeyValue(car.translateXProperty(), arrayListpositionsx.get(2));
         KeyValue valuey3 = new KeyValue(car.translateYProperty(), arrayListpositionsy.get(2));
-        KeyFrame keyFrame3 = new KeyFrame(Duration.seconds(4), valuex3, valuey3);
+        KeyFrame keyFrame3 = new KeyFrame(Duration.seconds(listTime.get(2)), valuex3, valuey3);
 
         KeyValue valuex4 = new KeyValue(car.translateXProperty(), arrayListpositionsx.get(3));
         KeyValue valuey4 = new KeyValue(car.translateYProperty(), arrayListpositionsy.get(3));
-        KeyFrame keyFrame4 = new KeyFrame(Duration.seconds(6), valuex4, valuey4);
+        KeyFrame keyFrame4 = new KeyFrame(Duration.seconds(listTime.get(3)), valuex4, valuey4);
 
         KeyValue valuex5 = new KeyValue(car.translateXProperty(), arrayListpositionsx.get(4));
         KeyValue valuey5 = new KeyValue(car.translateYProperty(), arrayListpositionsy.get(4));
-        KeyFrame keyFrame5 = new KeyFrame(Duration.seconds(8), valuex5, valuey5);
+        KeyFrame keyFrame5 = new KeyFrame(Duration.seconds(listTime.get(4)), valuex5, valuey5);
 
         Timeline timeline = new Timeline(keyFrameinit, keyFrame2, keyFrame3, keyFrame4, keyFrame5);
         timeline.setCycleCount(Timeline.INDEFINITE);

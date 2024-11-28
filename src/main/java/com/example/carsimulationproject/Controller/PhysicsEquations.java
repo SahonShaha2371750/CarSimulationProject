@@ -82,7 +82,7 @@ public class PhysicsEquations {
 
 
         if (direction.equalsIgnoreCase("flat")) {
-            netAcceleration = EngineAcceleration - (mu * 9.8 * Math.cos(angleInRadians));
+            netAcceleration = EngineAcceleration - (mu * 9.8 * Math.cos(angleInRadians)); // since its flat, not need for angle since gravity is not affecting it
 
         }
 
@@ -112,8 +112,27 @@ public class PhysicsEquations {
             arrayListpositionsy.add(positiony);
         }
 
-        Animate animate = new Animate();
-        animate.timelineanimation(arrayListpositionsx, arrayListpositionsy);
+        /*Animate animate = new Animate();
+        animate.timelineanimation(arrayListpositionsx, arrayListpositionsy, );*/
+    }
+
+    public ArrayList<Double> timeAtAPoint(double initialSpeed, int distance,
+                             double engineAcceleration, double angle, double mu, String direction) {
+
+        double netAcceleration = findNetAcceleration(engineAcceleration, angle, mu, direction);
+
+        ArrayList<Double > arraylistvelocities = new ArrayList<Double>();
+        for(int  i = 1; i<=5; i++) {
+            Double vel = Math.sqrt(Math.pow(initialSpeed, 2) + (2 * netAcceleration * i* distance/5));
+            arraylistvelocities.add(vel);
+        }
+
+        ArrayList<Double> listTime = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            listTime.add(distance/arraylistvelocities.get(i));
+        }
+
+        return listTime;
     }
 
 
