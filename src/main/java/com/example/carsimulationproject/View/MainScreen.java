@@ -16,13 +16,18 @@ public class MainScreen {
     int initialVelocity; // Set by user
 
     public BorderPane initialize() {
-        Font menuButtonFont = Font.font("Arial", FontWeight.BOLD, 14);
+        // root.getStylesheets().add(getClass().getResource("/light-theme.css").toExternalForm());
+        Font menuButtonFont = Font.font("Arial", 14);// FontWeight.BOLD,
         MenuBar menuBar = new MenuBar();
 
         Menu showCode = new Menu("Show Code");
         Menu showAssets = new Menu("Show Assets and Images");
-        Menu changeBackground = new Menu("Change Background");
-        menuBar.getMenus().addAll(showCode, showAssets, changeBackground);
+        //Menu changeBackground = new Menu("Change Background");
+        Menu changeTheme = new Menu("Light Mode");
+        MenuItem enableLightMode = new MenuItem("Enable Light Mode");
+        MenuItem enableDarkMode = new Menu("Enable Dark Mode");
+        changeTheme.getItems().addAll(enableLightMode, enableDarkMode);
+        menuBar.getMenus().addAll(showCode, showAssets, changeTheme);
 
         MenuButton changeCar = new MenuButton("Change Car"); // Mass which affects normal force which affects friction force which will reduce velocity and acceleration || PROBABLY NOT NEEDED
         MenuItem car = new MenuItem("Car");
@@ -118,6 +123,7 @@ public class MainScreen {
         center.setStyle("-fx-border-color: black; -fx-border-width: 5px;");
 
 
+
         Animate animation = new Animate();
         animation.setLayoutX(400);
         animation.setLayoutY(300);
@@ -136,6 +142,71 @@ public class MainScreen {
         root.setTop(menuBar);
         root.setBottom(energyLevels);
         root.setLeft(vBox);
+
+
+
+        // LIGHT MODE COLOR SWITCHES
+        enableLightMode.setOnAction(actionEvent -> {
+            center.setStyle("-fx-border-color: #b190bb; -fx-border-width: 5px; -fx-background-color: #7190a8;");
+            root.setStyle("-fx-background-color: #f6f8f9");
+
+            potentialEnergyLabel.setStyle("-fx-text-fill: #0e1416");
+            potentialEnergyLevel.setStyle("-fx-text-fill: white");
+            kineticEnergyLabel.setStyle("-fx-text-fill: #0e1416");
+            kineticEnergyLevel.setStyle("-fx-text-fill: #0e1416");
+            mechanicalEnergyLabel.setStyle("-fx-text-fill: #0e1416");
+            mechanicalEnergyLevel.setStyle("-fx-text-fill: #0e1416");
+
+            changeCar.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            car.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            truck.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            changeEngine.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            strongEngine.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            weakEngine.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            changeTires.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            regularTire.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            winterTire.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            changeWeather.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            rainy.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            sunny.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            changeTrack.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            straight.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            uphill.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            downhill.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+        });
+
+
+        enableDarkMode.setOnAction(actionEvent -> {
+            center.setStyle("-fx-border-color: #65446f; -fx-border-width: 5px; -fx-background-color: #17083a;");
+            root.setStyle("-fx-background-color: #060809");
+
+            potentialEnergyLabel.setStyle("-fx-text-fill: #e9eff1");
+            potentialEnergyLevel.setStyle("-fx-text-fill: #e9eff1");
+            kineticEnergyLabel.setStyle("-fx-text-fill: #e9eff1");
+            kineticEnergyLevel.setStyle("-fx-text-fill: #e9eff1");
+            mechanicalEnergyLabel.setStyle("-fx-text-fill: #e9eff1");
+            mechanicalEnergyLevel.setStyle("-fx-text-fill: #e9eff1");
+
+            changeCar.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            car.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            truck.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            changeEngine.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            strongEngine.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            weakEngine.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            changeTires.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            regularTire.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            winterTire.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            changeWeather.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            rainy.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            sunny.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            changeTrack.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            straight.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            uphill.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            downhill.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+
+        });
+
+
         return root;
     }
 
