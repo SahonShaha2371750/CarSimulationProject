@@ -9,35 +9,42 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-
 public class MainScreen {
     public BorderPane root = new BorderPane();
+    int engineAcceleration; // enginetype
+    int frictionCoefficient; // tire (increase) + weather (depends on type of track)
+    int initialVelocity; // Set by user
 
     public BorderPane initialize() {
-        Font menuButtonFont = Font.font("Arial", FontWeight.BOLD, 14);
+        // root.getStylesheets().add(getClass().getResource("/light-theme.css").toExternalForm());
+        Font menuButtonFont = Font.font("Arial", 14);// FontWeight.BOLD,
         MenuBar menuBar = new MenuBar();
 
         Menu showCode = new Menu("Show Code");
         Menu showAssets = new Menu("Show Assets and Images");
-        Menu changeBackground = new Menu("Change Background");
-        menuBar.getMenus().addAll(showCode, showAssets, changeBackground);
+        //Menu changeBackground = new Menu("Change Background");
+        Menu changeTheme = new Menu("Light Mode");
+        MenuItem enableLightMode = new MenuItem("Enable Light Mode");
+        MenuItem enableDarkMode = new Menu("Enable Dark Mode");
+        changeTheme.getItems().addAll(enableLightMode, enableDarkMode);
+        menuBar.getMenus().addAll(showCode, showAssets, changeTheme);
 
-        MenuButton changeCar = new MenuButton("Change Car");
+        MenuButton changeCar = new MenuButton("Change Car"); // Mass which affects normal force which affects friction force which will reduce velocity and acceleration || PROBABLY NOT NEEDED
         MenuItem car = new MenuItem("Car");
         MenuItem truck = new MenuItem("Truck");
         changeCar.getItems().addAll(car, truck);
 
-        MenuButton changeEngine = new MenuButton("Change Engine");
+        MenuButton changeEngine = new MenuButton("Change Engine"); // affects acceleration
         MenuItem strongEngine = new MenuItem("Engine Ultra S-500");
         MenuItem weakEngine = new MenuItem("Engine F-001");
         changeEngine.getItems().addAll(strongEngine, weakEngine);
 
-        MenuButton changeTires = new MenuButton("Change Tires");
+        MenuButton changeTires = new MenuButton("Change Tires"); // affects the coefficient of friction which lowers friction force
         MenuItem regularTire = new MenuItem("Regular Tires");
         MenuItem winterTire = new MenuItem("Winter Tires");
         changeTires.getItems().addAll(regularTire,winterTire);
 
-        MenuButton changeWeather = new MenuButton("Change Weather");
+        MenuButton changeWeather = new MenuButton("Change Weather"); // affects the coefficient of friction which increases friction force
         MenuItem sunny = new MenuItem("Sunny Weather");
         MenuItem rainy = new MenuItem("Rainy Weather");
         changeWeather.getItems().addAll(sunny, rainy);
@@ -116,10 +123,15 @@ public class MainScreen {
         center.setStyle("-fx-border-color: black; -fx-border-width: 5px;");
 
 
+
         Animate animation = new Animate();
         animation.setLayoutX(400);
         animation.setLayoutY(300);
-        animation.playanimation();
+
+        // setonaction for button that will contain the following code
+        /**
+         * timelineAnimation(findPoints(50, 50, Model.getDistance, Model.getAngle), timeAtPoint(etc)) <- repeat this multiple times for each segment of the track for the "complex track" if it's not complex, we can just call it once because its just one segment
+         */
 
         center.getChildren().add(animation);
 
@@ -130,46 +142,73 @@ public class MainScreen {
         root.setTop(menuBar);
         root.setBottom(energyLevels);
         root.setLeft(vBox);
+
+
+
+        // LIGHT MODE COLOR SWITCHES
+        enableLightMode.setOnAction(actionEvent -> {
+            center.setStyle("-fx-border-color: #b190bb; -fx-border-width: 5px; -fx-background-color: #7190a8;");
+            root.setStyle("-fx-background-color: #f6f8f9");
+
+            potentialEnergyLabel.setStyle("-fx-text-fill: #0e1416");
+            potentialEnergyLevel.setStyle("-fx-text-fill: white");
+            kineticEnergyLabel.setStyle("-fx-text-fill: #0e1416");
+            kineticEnergyLevel.setStyle("-fx-text-fill: #0e1416");
+            mechanicalEnergyLabel.setStyle("-fx-text-fill: #0e1416");
+            mechanicalEnergyLevel.setStyle("-fx-text-fill: #0e1416");
+
+            changeCar.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            car.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            truck.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            changeEngine.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            strongEngine.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            weakEngine.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            changeTires.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            regularTire.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            winterTire.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            changeWeather.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            rainy.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            sunny.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            changeTrack.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            straight.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            uphill.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            downhill.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+        });
+
+
+        enableDarkMode.setOnAction(actionEvent -> {
+            center.setStyle("-fx-border-color: #65446f; -fx-border-width: 5px; -fx-background-color: #17083a;");
+            root.setStyle("-fx-background-color: #060809");
+
+            potentialEnergyLabel.setStyle("-fx-text-fill: #e9eff1");
+            potentialEnergyLevel.setStyle("-fx-text-fill: #e9eff1");
+            kineticEnergyLabel.setStyle("-fx-text-fill: #e9eff1");
+            kineticEnergyLevel.setStyle("-fx-text-fill: #e9eff1");
+            mechanicalEnergyLabel.setStyle("-fx-text-fill: #e9eff1");
+            mechanicalEnergyLevel.setStyle("-fx-text-fill: #e9eff1");
+
+            changeCar.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            car.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            truck.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            changeEngine.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            strongEngine.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            weakEngine.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            changeTires.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            regularTire.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            winterTire.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            changeWeather.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            rainy.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            sunny.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            changeTrack.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            straight.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            uphill.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            downhill.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+
+        });
+
+
         return root;
     }
 
-    /*public int[] customizeTrack() {
-        Dialog<int[]> dialogBox = new Dialog<>();
-        dialogBox.setTitle("Customize the track");
-        dialogBox.setHeaderText("Enter the length of the track and an angle");
 
-        TextField length = new TextField();
-        length.setPromptText("Length");
-
-        TextField angle = new TextField();
-        angle.setPromptText("Angle");
-
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-
-        grid.add(new Label("Length:"), 0, 0);
-        grid.add(length, 1, 0);
-        grid.add(new Label("Angle:"), 0, 1);
-        grid.add(angle, 1, 1);
-
-        dialogBox.getDialogPane().setContent(grid);
-
-        ButtonType okButtonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
-        ButtonType cancelButtonType = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-        dialogBox.getDialogPane().getButtonTypes().addAll(okButtonType, cancelButtonType);
-
-        int[] result = dialogBox.showAndWait().orElse(null);
-        int[] array = new int[2];
-        if (result != null) {
-            array[0] = Integer.parseInt(length.getText());
-            array[1] = Integer.parseInt(angle.getText());
-        }
-        else {
-            System.out.println("Dialog canceled or invalid input.");
-        }
-
-        return array;
-
-    }*/
 }
