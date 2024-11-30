@@ -1,12 +1,23 @@
 package com.example.carsimulationproject.Controller;
 
 import com.example.carsimulationproject.Model.Animate;
+import javafx.animation.AnimationTimer;
+import javafx.scene.Group;
+import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
 public class PhysicsEquations {
 
     double g = 9.8;
+
+    //Dummy values
+    double carMass = 1000;
+    double carSpeed = 100;
+    double height = 20;
+    double kineticEnergy = 0;
+    double potentialEnergy = 0;
+    double mechanicalEnergy = 0;
 
     public double findFriction(double mu, double Fnormal) {
 
@@ -116,5 +127,65 @@ public class PhysicsEquations {
         animate.timelineanimation(arrayListpositionsx, arrayListpositionsy);
     }
 
+    public AnimationTimer animationTimer = new AnimationTimer() {
+        private long lastUpdate = 0;
+
+
+        @Override
+        public void handle(long now) {
+            if (lastUpdate > 0) {
+                double deltaTime = (now - lastUpdate) / 1_000_000_000.0;
+                updateSimulation(deltaTime);
+            }
+
+            lastUpdate = now;
+            drawEnergyValues();
+
+        }
+
+        public void updateSimulation(double deltaTime) {
+            //Update car's kinetic energy every frame
+            kineticEnergy = findKineticEnergy(carMass, carSpeed);
+
+            //Update car's potential energy every frame
+            potentialEnergy = findPotentialEnergy(carMass, height);
+
+            //Update car's mechanical energy every frame
+            mechanicalEnergy = findMechanicalEnergy(findKineticEnergy(carMass, carSpeed), findPotentialEnergy(carMass, height));
+
+        }
+
+        public Group drawEnergyValues() {
+            Text speedText = new Text("Speed: " + carSpeed + " km/h");
+            speedText.setX(10);
+            speedText.setY(20);
+
+            Text kineticText = new Text("Kinetic Energy: " + kineticEnergy + " J");
+            kineticText.setX(10);
+            kineticText.setY(40);
+
+            Text potentialText = new Text("Potential Energy: " + potentialEnergy + " J");
+            potentialText.setX(10);
+            potentialText.setY(60);
+
+            Text mechanicalText = new Text("Mechanical Energy: " + mechanicalEnergy + " J");
+            mechanicalText.setX(10);
+            mechanicalText.setY(80);
+
+            Group groupLabels = new Group();
+            groupLabels.getChildren().addAll(speedText, kineticText, potentialText, mechanicalText);
+            return groupLabels;
+        }
+    };
+
+    public double getKineticEnergy() {
+        return kineticEnergy;
+    }
+    public double getPotentialEnergy() {
+        return potentialEnergy;
+    }
+    public double getMechanicalEnergy() {
+        return mechanicalEnergy;
+    }
 
 }
