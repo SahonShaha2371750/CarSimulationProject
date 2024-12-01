@@ -37,6 +37,7 @@ public class Animate extends Pane {
         }
 
 
+
         KeyValue initvaluex = new KeyValue(car.translateXProperty(), arrayListpositionsx.get(0));
         KeyValue initvaluey = new KeyValue(car.translateYProperty(), arrayListpositionsy.get(0));
         KeyFrame keyFrameinit = new KeyFrame(Duration.ZERO, initvaluex, initvaluey);

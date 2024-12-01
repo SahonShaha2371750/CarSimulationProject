@@ -110,25 +110,32 @@ public class PhysicsEquations {
 
     }
 
-    public void findpoints(double startx, double starty, double distance, double angle) {
-        ArrayList<Double> arrayListpositionsx = new ArrayList<>();
-        ArrayList<Double> arrayListpositionsy = new ArrayList<>();
+    public ArrayList<Double> findPoints(double startx, double starty, double distance, double angle, String condition) {
+        ArrayList<Double> arrayListPositions = new ArrayList<>();
 
         for (int i = 1; i <= 5; i++) {
             double positionx = startx + i * (distance / 5) * Math.cos(Math.toRadians(angle));
-            arrayListpositionsx.add(positionx);
+            double positiony;
+
+            if (condition.equalsIgnoreCase("downhill")) {
+                positiony = starty + i * (distance / 5) * Math.sin(Math.toRadians(angle));
+            } else if (condition.equalsIgnoreCase("uphill")) {
+                positiony = starty - i * (distance / 5) * Math.sin(Math.toRadians(angle));
+            } else if (condition.equalsIgnoreCase("flat")) {
+                positiony = starty; // No change in y for flat slope
+            } else {
+                throw new IllegalArgumentException("Invalid condition. Use 'downhill', 'uphill', or 'flat'.");
+            }
+
+            arrayListPositions.add(positionx); // Add x-coordinate
+            arrayListPositions.add(positiony); // Add y-coordinate
         }
 
-        for (int i = 1; i <= 5; i++) {
-            double positiony = starty + i * (distance / 5) * Math.sin(Math.toRadians(angle));
-            arrayListpositionsy.add(positiony);
-        }
-
-        /*Animate animate = new Animate();
-        animate.timelineanimation(arrayListpositionsx, arrayListpositionsy, );*/
+        return arrayListPositions;
     }
 
-    public ArrayList<Double> velocitiesAtPoint(double initialSpeed, int distance,
+
+    public ArrayList<Double> velocitiesAtPoint(double initialSpeed, double distance,
                              double engineAcceleration, double angle, double mu, String direction) {
 
         double netAcceleration = findNetAcceleration(engineAcceleration, angle, mu, direction);
@@ -142,7 +149,7 @@ public class PhysicsEquations {
         return listvelocities;
     }
 
-    public ArrayList<Double> timeAtPoint(double initialSpeed, int distance,
+    public ArrayList<Double> timeAtPoint(double initialSpeed, double distance,
                                          double engineAcceleration, double angle, double mu, String direction) {
 
         ArrayList<Double> listvelocities = velocitiesAtPoint(initialSpeed, distance, engineAcceleration, angle, mu, direction);

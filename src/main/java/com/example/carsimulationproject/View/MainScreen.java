@@ -18,10 +18,8 @@ public class MainScreen {
     int vehicleMass = 100;
     int engineAcceleration; // enginetype
     int frictionCoefficient; // tire (increase) + weather (depends on type of track)
-    int initialVelocity; // this variable needs to be updated at every frame of the animation
+    int initialVelocity; // Set by user
     int height; // <- this will be replaced by a method
-    boolean isLightMode;
-    int mechanicalEnergy;
 
     public BorderPane initialize() {
         // root.getStylesheets().add(getClass().getResource("/light-theme.css").toExternalForm());
@@ -181,7 +179,6 @@ public class MainScreen {
 
         // LIGHT MODE COLOR SWITCHES
         enableLightMode.setOnAction(actionEvent -> {
-            isLightMode = true;
             center.setStyle("-fx-border-color: #b190bb; -fx-border-width: 5px; -fx-background-color: #7190a8;");
             root.setStyle("-fx-background-color: #f6f8f9");
 
@@ -212,7 +209,6 @@ public class MainScreen {
 
 
         enableDarkMode.setOnAction(actionEvent -> {
-            isLightMode = false;
             center.setStyle("-fx-border-color: #65446f; -fx-border-width: 5px; -fx-background-color: #17083a;");
             root.setStyle("-fx-background-color: #060809");
 
@@ -258,7 +254,6 @@ public class MainScreen {
             equations.setMechanicalEnergy(equations.findMechanicalEnergy(equations.findKineticEnergy(vehicleMass, initialVelocity),
                     equations.findPotentialEnergy(vehicleMass, height)));
             root.setBottom(equations.drawEnergyValues());
-
         });
 
 
