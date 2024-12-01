@@ -158,6 +158,7 @@ public class PhysicsEquations {
 
 
 
+
     public AnimationTimer animationTimer = new AnimationTimer() {
         private long lastUpdate = 0;
 
