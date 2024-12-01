@@ -16,9 +16,9 @@ import javafx.stage.Stage;
 public class MainScreen {
     public BorderPane root = new BorderPane();
     int vehicleMass = 100;
-    int engineAcceleration; // enginetype
-    int frictionCoefficient; // tire (increase) + weather (depends on type of track)
-    public int initialVelocity; // Set by user
+    public Double engineAcceleration = 60.0; // enginetype
+    public Double frictionCoefficient; // tire (increase) + weather (depends on type of track)
+    public Double initialVelocity = 5.0; // Set by user
     int height; // <- this will be replaced by a method
 
     public BorderPane initialize() {
@@ -55,9 +55,17 @@ public class MainScreen {
         MenuButton changeEngine = new MenuButton("Change Engine"); // affects acceleration
         MenuItem strongEngine = new MenuItem("Engine Ultra S-500");
         MenuItem weakEngine = new MenuItem("Engine F-001");
-        weakEngine.setOnAction(actionEvent -> {
-            engineAcceleration = 900;
+
+        strongEngine.setOnAction(actionEvent -> {
+
+            engineAcceleration = 100.0;
         });
+
+        weakEngine.setOnAction(actionEvent -> {
+            engineAcceleration = 70.0;
+        });
+
+
         changeEngine.getItems().addAll(strongEngine, weakEngine);
 
         MenuButton changeTires = new MenuButton("Change Tires"); // affects the coefficient of friction which lowers friction force
@@ -74,7 +82,15 @@ public class MainScreen {
         MenuItem straight = new MenuItem("Straight Track");
         MenuItem downhill = new MenuItem("Downhill Track");
         MenuItem uphill = new MenuItem("Uphill Track");
-        changeTrack.getItems().addAll(straight, downhill, uphill);
+        MenuItem combination = new MenuItem("Combo Track");
+        changeTrack.getItems().addAll(straight, downhill, uphill,combination);
+
+        straight.setOnAction(actionEvent ->{
+            Trackselections ts = new Trackselections();
+            root.getChildren().add(ts.defaulttrack());
+
+        });
+
 
         downhill.setOnAction(actionEvent -> {
             Trackselections ts = new Trackselections();
@@ -85,6 +101,13 @@ public class MainScreen {
             Trackselections ts = new Trackselections();
             root.getChildren().add(ts.inclinettrack());
         });
+
+        combination.setOnAction(actionEvent -> {
+            Trackselections ts = new Trackselections();
+            root.getChildren().add(ts.combotrack());
+
+        });
+
 
         TextField userSetVelocity = new TextField();
 
@@ -242,7 +265,8 @@ public class MainScreen {
         go.setOnAction(actionEvent -> {
             PhysicsEquations equations = new PhysicsEquations();
             Animate animate1 = new Animate();
-            initialVelocity = Integer.parseInt(userSetVelocity.getText());
+            initialVelocity = (double) Integer.parseInt(userSetVelocity.getText());
+
 
             // insert animation play code
 

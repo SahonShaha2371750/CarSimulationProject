@@ -17,7 +17,7 @@ public class Trackselections {
     double initialvelocity; //initial velocity is set by the user
     MainScreen ms = new MainScreen();
     PhysicsEquations pe = new PhysicsEquations();
-
+    Animate animate = new Animate();
 
     void setInitialvelocityVelocity ( double velocity) {
         this.initialvelocity = velocity;
@@ -25,7 +25,7 @@ public class Trackselections {
 
 
 // default track
-    Path defaulttrack() {
+    public Path defaulttrack() {
 
         angle = 0;
         distance = 200;
@@ -36,10 +36,10 @@ public class Trackselections {
 
         trackdefault.setStroke(Color.BLACK);
 
-        Double accelerationfirstsection = pe.findNetAcceleration(20,angle,0.5,"flat");
+        Double accelerationfirstsection = pe.findNetAcceleration(ms.engineAcceleration,angle,0.5,"flat");
         ArrayList<Double> pointsfirstsection = pe.findPoints(50,50,distance,20, "flat");
-        ArrayList<Double> velocitiesfirstsection = pe.velocitiesAtPoint(ms.initialVelocity,distance,20,angle,0.5,"flat");
-
+        ArrayList<Double> timesfirstsection = pe.timeAtPoint(ms.initialVelocity,distance,ms.engineAcceleration,angle,0.5,"flat");
+        animate.timelineanimation(pointsfirstsection, timesfirstsection );
         return trackdefault;
     }
 
@@ -59,18 +59,18 @@ public class Trackselections {
         trackdecline.getTransforms().addAll(rotate);
 
 
-        Double accelerationfirstsection = pe.findNetAcceleration(20,angle,0.5,"downhill");
+        Double accelerationfirstsection = pe.findNetAcceleration(ms.engineAcceleration,angle,0.5,"downhill");
         ArrayList<Double> pointsfirstsection = pe.findPoints(50,50,distance,angle, "downhill");
-        ArrayList<Double> velocitiesfirstsection = pe.velocitiesAtPoint(ms.initialVelocity,distance,20,angle,0.5,"downhill");
+        ArrayList<Double> timesfirstsection = pe.timeAtPoint(ms.initialVelocity,distance,ms.engineAcceleration,angle,0.5,"downhill");
 
-
+        animate.timelineanimation(pointsfirstsection, timesfirstsection );
         return trackdecline;
     }
 
     public Path inclinettrack() {
 
-        angle = (-20);
-        Rotate rotate = new Rotate(angle,50,50);
+        angle = 20;
+        Rotate rotate = new Rotate((-1*angle),50,50);
         distance = 200;
 
         Path trackincline = new Path(
@@ -81,9 +81,13 @@ public class Trackselections {
         trackincline.setStroke(Color.BLACK);
         trackincline.getTransforms().addAll(rotate);
 
-        Double accelerationfirstsection = pe.findNetAcceleration(20,angle,0.5,"uphill");
-        ArrayList<Double> pointsfirstsection = pe.findPoints(50,50,distance,angle, "uphill");
-        ArrayList<Double> velocitiesfirstsection = pe.velocitiesAtPoint(ms.initialVelocity,distance,20,angle,0.5,"uphill");
+        Double accelerationfirstsection = pe.findNetAcceleration(ms.engineAcceleration,angle,0.5,"uphill");
+        ArrayList <Double> pointsfirstsection = pe.findPoints(50,50,distance,angle, "uphill");
+        ArrayList <Double> timesfirstsection = pe.timeAtPoint(ms.initialVelocity,distance,ms.engineAcceleration,angle,0.5,"uphill");
+
+
+        animate.timelineanimation(pointsfirstsection, timesfirstsection );
+
 
         return trackincline;
     }
@@ -92,7 +96,7 @@ public class Trackselections {
     //the angles are not all the same, this will be fixed next time
 
 
-    Path combotrack() {
+   public Path combotrack() {
 
 
         double startpointx = 50;
@@ -103,66 +107,75 @@ public class Trackselections {
         distance = 80;
         angle = 0;
 
-        Double accelerationFirstsection = pe.findNetAcceleration(20,angle,0.5,"flat");
-        ArrayList<Double> pointsFirstsection = pe.findPoints(startpointx,startpointy,distance,0,"flat");
-        ArrayList<Double> velocitiesFirstsection = pe.velocitiesAtPoint(ms.initialVelocity,distance,20,angle,0.5,"flat");
+        Double accelerationFirstsection = pe.findNetAcceleration(ms.engineAcceleration, angle,0.5,"flat");
+        ArrayList<Double> pointsFirstsection = pe.findPoints(startpointx,startpointy,distance,angle,"flat");
+        ArrayList<Double> velocitiesFirstsection = pe.velocitiesAtPoint(ms.initialVelocity,distance,ms.engineAcceleration,angle,0.5,"flat");
+        ArrayList<Double> timesFirstsection = pe.timeAtPoint(ms.initialVelocity,distance,ms.engineAcceleration,angle,0.5,"flat");
         Double lastvelocitiesFirstsection = velocitiesFirstsection.get(4);
 
         double endFirstTrackX = pointsFirstsection.get(8);
         double endFirstTrackY = startpointy;
-
+        animate.timelineanimation(pointsFirstsection, timesFirstsection );
 
         //decline part (Second part)
         angle = 40;
         distance = 120;
 
-        Double accelerationSecondsection = pe.findNetAcceleration(20,angle,0.5,"downhill");
-        ArrayList<Double> pointsSecondsection = pe.findPoints(endFirstTrackX,startpointy,distance,angle,"downhill");
-        ArrayList<Double> velocitiesSecondsection = pe.velocitiesAtPoint(lastvelocitiesFirstsection,distance,20,angle,0.5,"downhill");
+        Double accelerationSecondsection = pe.findNetAcceleration(ms.engineAcceleration,angle,0.5,"downhill");
+        ArrayList<Double> pointsSecondsection = pe.findPoints(endFirstTrackX,endFirstTrackY,distance,angle,"downhill");
+        ArrayList<Double> velocitiesSecondsection = pe.velocitiesAtPoint(lastvelocitiesFirstsection,distance,ms.engineAcceleration,angle,0.5,"downhill");
+        ArrayList<Double> timesSecondsection = pe.timeAtPoint(lastvelocitiesFirstsection,distance,ms.engineAcceleration,angle,0.5,"downhill");
         Double lastvelocitiesSecondsection = velocitiesSecondsection.get(4);
 
         double endSecondTrackX = pointsSecondsection.get(8); // Second last element is X
         double endSecondTrackY = pointsSecondsection.get(9);
+        animate.timelineanimation(pointsSecondsection, timesSecondsection );
 
 
         //flat part (Third part)
         angle = 0;
         distance = 60;
 
-        Double accelerationThirdsection = pe.findNetAcceleration(20,angle,0.5,"flat");
+        Double accelerationThirdsection = pe.findNetAcceleration(ms.engineAcceleration,angle,0.5,"flat");
         ArrayList<Double> pointsThirdsection = pe.findPoints(endSecondTrackX,endSecondTrackY,distance,angle,"flat");
-        ArrayList<Double> velocitiesThirdsection = pe.velocitiesAtPoint(lastvelocitiesSecondsection,distance,20,0,0.5,"downhill");
+        ArrayList<Double> velocitiesThirdsection = pe.velocitiesAtPoint(lastvelocitiesSecondsection,distance, ms.engineAcceleration, angle,0.5,"downhill");
+        ArrayList<Double> timesThirdsection = pe.timeAtPoint(lastvelocitiesFirstsection,distance,ms.engineAcceleration,angle,0.5,"downhill");
         Double lastvelocitiesThirdsection = velocitiesThirdsection.get(4);
 
         double endThirdTrackX = pointsThirdsection.get(8);
         double endThirdTrackY = pointsThirdsection.get(9);
-
+        animate.timelineanimation(pointsThirdsection, timesThirdsection );
 
 
         //incline part (Fourth part)
         angle = 45;
         distance = 75;
 
-        Double accelerationFourthsection = pe.findNetAcceleration(20,angle,0.5,"uphill");
+        Double accelerationFourthsection = pe.findNetAcceleration(ms.engineAcceleration,angle,0.5,"uphill");
         ArrayList<Double> pointsFourthsection =  pe.findPoints(endThirdTrackX,endThirdTrackY,distance,angle,"uphill");
-        ArrayList<Double> velocitiesFourthsection = pe.velocitiesAtPoint(lastvelocitiesThirdsection,distance,20,0,0.5,"uphill");
+        ArrayList<Double> velocitiesFourthsection = pe.velocitiesAtPoint(lastvelocitiesThirdsection,distance,ms.engineAcceleration,0,0.5,"uphill");
+        ArrayList<Double> timesFourthsection = pe.timeAtPoint(lastvelocitiesThirdsection,distance,ms.engineAcceleration,0,0.5,"uphill");
         Double lastvelocitiesFourthsection = velocitiesFourthsection.get(4);
 
         double endFourthTrackX = pointsFourthsection.get(8);
         double endFourthTrackY = pointsFourthsection.get(9);
+        animate.timelineanimation(pointsFourthsection, timesFourthsection );
 
 
         //flat part (Fifth part)
         angle = 0;
         distance = 65;
 
-        Double accelerationFifthsection = pe.findNetAcceleration(20,angle,0.5,"flat");
+        Double accelerationFifthsection = pe.findNetAcceleration(ms.engineAcceleration,angle,0.5,"flat");
         ArrayList<Double> pointsFifthsection = pe.findPoints(endFourthTrackX,endFourthTrackY,distance,angle, "flat");
-        ArrayList<Double> velocitiesFifthsection = pe.velocitiesAtPoint(lastvelocitiesFourthsection,distance,20,angle,0.5,"flat");
+        ArrayList<Double> velocitiesFifthsection = pe.velocitiesAtPoint(lastvelocitiesFourthsection,distance,ms.engineAcceleration,angle,0.5,"flat");
+        ArrayList<Double> timesFifthsection = pe.timeAtPoint(lastvelocitiesFourthsection,distance,ms.engineAcceleration,angle,0.5,"flat");
         Double lastvelocitiesFifthsection = velocitiesFifthsection.get(4);
 
         double endFifthTrackX = pointsFifthsection.get(8);
         double endFifthTrackY = pointsFifthsection.get(9);
+        animate.timelineanimation(pointsFifthsection, timesFifthsection );
+
 
         //incline part (Sixth part)
         angle = 25;
@@ -170,12 +183,13 @@ public class Trackselections {
 
         Double accelerationSixthsection = pe.findNetAcceleration(20,angle,0.5,"uphill");
         ArrayList<Double> pointsSixthsection = pe.findPoints(endFifthTrackX,endFifthTrackY,distance,angle, "uphill");
-        ArrayList<Double> velocitiesSixthsection = pe.velocitiesAtPoint(lastvelocitiesFifthsection,distance,20,angle,0.5,"uphill");
+        ArrayList<Double> velocitiesSixthsection = pe.velocitiesAtPoint(lastvelocitiesFifthsection,distance,ms.engineAcceleration,angle,0.5,"uphill");
+        ArrayList<Double> timesSixthsection = pe.timeAtPoint(lastvelocitiesFifthsection,distance,ms.engineAcceleration,angle,0.5,"uphill");
         Double lastvelocitiesSixthsection = velocitiesSixthsection.get(4);
 
         double endSixthTrackX = pointsSixthsection.get(8);
         double endSixthTrackY = pointsSixthsection.get(9);
-
+        animate.timelineanimation(pointsSixthsection, timesSixthsection );
 
         //decline part (Seventh part)
         angle = 35;
@@ -183,12 +197,13 @@ public class Trackselections {
 
         Double accelerationSeventhsection = pe.findNetAcceleration(20,angle,0.5,"downhill");
         ArrayList<Double> pointsSeventhsection = pe.findPoints(endSixthTrackX ,endSixthTrackY,distance,angle,"downhill" );
-        ArrayList<Double> velocitiesSeventhsection = pe.velocitiesAtPoint(lastvelocitiesSixthsection,distance,20,angle,0.5,"downhill");
+        ArrayList<Double> velocitiesSeventhsection = pe.velocitiesAtPoint(lastvelocitiesSixthsection,distance,ms.engineAcceleration,angle,0.5,"downhill");
+        ArrayList<Double> timesSeventhsection = pe.timeAtPoint(lastvelocitiesSixthsection,distance,ms.engineAcceleration,angle,0.5,"downhill");
         Double lastvelocitiesSeventhsection = velocitiesSeventhsection.get(4);
 
         double endSeventhTrackX = pointsSeventhsection.get(8);
         double endSeventhTrackY = pointsSeventhsection.get(9);
-
+        animate.timelineanimation(pointsSeventhsection, timesSeventhsection );
 
         Path combination = new Path(
 

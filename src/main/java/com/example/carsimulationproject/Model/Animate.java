@@ -29,8 +29,7 @@ public class Animate extends Pane {
 
 
 
-    // for acceleration, under construction
-    //just instanciate the things inside method inetad of passing
+
     public void timelineanimation(ArrayList<Double> arrayListpositions,  ArrayList<Double> listTime) {
 
         if (arrayListpositions.isEmpty()) {
@@ -41,7 +40,7 @@ public class Animate extends Pane {
 
         KeyValue initvaluex = new KeyValue(car.translateXProperty(), arrayListpositions.get(0));
         KeyValue initvaluey = new KeyValue(car.translateYProperty(), arrayListpositions.get(1));
-        KeyFrame keyFrameinit = new KeyFrame(Duration.ZERO, initvaluex, initvaluey);
+        KeyFrame keyFrameinit = new KeyFrame(Duration.seconds(listTime.get(0)), initvaluex, initvaluey);
 
         KeyValue valuex2 = new KeyValue(car.translateXProperty(), arrayListpositions.get(2));
         KeyValue valuey2 = new KeyValue(car.translateYProperty(), arrayListpositions.get(3));
@@ -64,6 +63,16 @@ public class Animate extends Pane {
         timeline.play();
 
     }
+
+
+
+
+
+
+
+
+
+
 
 
 
