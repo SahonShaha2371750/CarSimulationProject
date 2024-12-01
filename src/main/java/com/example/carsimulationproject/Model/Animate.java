@@ -27,16 +27,11 @@ public class Animate extends Pane {
 
     }
 
-
-
-
     public void timelineanimation(ArrayList<Double> arrayListpositions,  ArrayList<Double> listTime) {
 
         if (arrayListpositions.isEmpty()) {
             throw new IllegalStateException("Points must be generated before animating.");
         }
-
-
 
         KeyValue initvaluex = new KeyValue(car.translateXProperty(), arrayListpositions.get(0));
         KeyValue initvaluey = new KeyValue(car.translateYProperty(), arrayListpositions.get(1));
