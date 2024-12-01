@@ -17,7 +17,7 @@ public class MainScreen {
     int vehicleMass = 100;
     int engineAcceleration; // enginetype
     int frictionCoefficient; // tire (increase) + weather (depends on type of track)
-    int initialVelocity; // Set by user
+    public int initialVelocity; // Set by user
     int height; // <- this will be replaced by a method
 
     public BorderPane initialize() {
