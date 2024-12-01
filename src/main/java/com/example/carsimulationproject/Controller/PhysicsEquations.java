@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class PhysicsEquations {
 
-    double g = 9.8;
+   public double g = 9.8;
 
     //Dummy values
     double carMass = 1000;
@@ -127,23 +127,32 @@ public class PhysicsEquations {
         animate.timelineanimation(arrayListpositionsx, arrayListpositionsy, );*/
     }
 
-    public ArrayList<Double> timeAtAPoint(double initialSpeed, int distance,
+    public ArrayList<Double> velocitiesAtPoint(double initialSpeed, int distance,
                              double engineAcceleration, double angle, double mu, String direction) {
 
         double netAcceleration = findNetAcceleration(engineAcceleration, angle, mu, direction);
 
-        ArrayList<Double > arraylistvelocities = new ArrayList<Double>();
+        ArrayList<Double > listvelocities = new ArrayList<Double>();
         for(int  i = 1; i<=5; i++) {
             Double vel = Math.sqrt(Math.pow(initialSpeed, 2) + (2 * netAcceleration * i* distance/5));
-            arraylistvelocities.add(vel);
+            listvelocities.add(vel);
         }
 
+        return listvelocities;
+    }
+
+    public ArrayList<Double> timeAtPoint(double initialSpeed, int distance,
+                                         double engineAcceleration, double angle, double mu, String direction) {
+
+        ArrayList<Double> listvelocities = velocitiesAtPoint(initialSpeed, distance, engineAcceleration, angle, mu, direction);
         ArrayList<Double> listTime = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            listTime.add(distance/arraylistvelocities.get(i));
+        for (double velocity : listvelocities) {
+            double time = distance / velocity;
+            listTime.add(time);
         }
 
         return listTime;
+
     }
 
     public AnimationTimer animationTimer = new AnimationTimer() {
@@ -197,6 +206,30 @@ public class PhysicsEquations {
         }
     };
 
+    public void setCarMass(double carMass) {
+        this.carMass = carMass;
+    }
+
+    public void setCarSpeed(double carSpeed) {
+        this.carSpeed = carSpeed;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public void setKineticEnergy(double kineticEnergy) {
+        this.kineticEnergy = kineticEnergy;
+    }
+
+    public void setPotentialEnergy(double potentialEnergy) {
+        this.potentialEnergy = potentialEnergy;
+    }
+
+    public void setMechanicalEnergy(double mechanicalEnergy) {
+        this.mechanicalEnergy = mechanicalEnergy;
+    }
+
     public double getKineticEnergy() {
         return kineticEnergy;
     }
@@ -206,5 +239,6 @@ public class PhysicsEquations {
     public double getMechanicalEnergy() {
         return mechanicalEnergy;
     }
+
 
 }

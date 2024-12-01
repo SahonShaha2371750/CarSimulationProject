@@ -13,7 +13,6 @@ import java.util.ArrayList;
 public class Animate extends Pane {
 
     Rectangle car = new Rectangle(30, 50, 40, 20);
-    Rectangle truck = new Rectangle(30, 50, 80, 40); //not for now
 
 
     public Animate() {
@@ -25,31 +24,10 @@ public class Animate extends Pane {
 
         this.getChildren().addAll(car);
 
-    }
-
-    public PathTransition transition() {
-
-     PhysicsEquations physics = new PhysicsEquations();
-     Model modelclass = new Model();
-
-
-     Path chosenpath = new Path();
-     chosenpath = modelclass.declinettrack();
-
-     this.getChildren().add(chosenpath);
-
-     double time = physics.findTime(modelclass.distance, modelclass.velocity);
-
-        PathTransition transition = new PathTransition(Duration.seconds(time), chosenpath,car);
-
-        transition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
-        transition.setCycleCount(PathTransition.INDEFINITE);
-        transition.interpolatorProperty().setValue(Interpolator.LINEAR);
-        transition.setAutoReverse(false);
-
-        return transition;
 
     }
+
+
 
     // for acceleration, under construction
     public void timelineanimation(ArrayList<Double> arrayListpositionsx, ArrayList<Double> arrayListpositionsy, ArrayList<Double> listTime) {
@@ -57,6 +35,8 @@ public class Animate extends Pane {
         if (arrayListpositionsx.isEmpty() || arrayListpositionsy.isEmpty()) {
             throw new IllegalStateException("Points must be generated before animating.");
         }
+
+
 
         KeyValue initvaluex = new KeyValue(car.translateXProperty(), arrayListpositionsx.get(0));
         KeyValue initvaluey = new KeyValue(car.translateYProperty(), arrayListpositionsy.get(0));
@@ -81,6 +61,7 @@ public class Animate extends Pane {
         Timeline timeline = new Timeline(keyFrameinit, keyFrame2, keyFrame3, keyFrame4, keyFrame5);
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
+
     }
 
 
@@ -88,12 +69,12 @@ public class Animate extends Pane {
 
     //running the animation
     public void playanimation() {
-        transition().play();
+       // timelineanimation().play();
     }
 
     //stopping the animation
     public void stopanimation() {
-        transition().stop();
+       // timelineanimation().stop();
     }
 
 }

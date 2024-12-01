@@ -2,7 +2,7 @@ package com.example.carsimulationproject.View;
 
 import com.example.carsimulationproject.Controller.PhysicsEquations;
 import com.example.carsimulationproject.Model.Animate;
-import com.example.carsimulationproject.Model.Model;
+import com.example.carsimulationproject.Model.Trackselections;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -14,29 +14,32 @@ import javafx.stage.Stage;
 
 public class MainScreen {
     public BorderPane root = new BorderPane();
+    int vehicleMass = 100;
     int engineAcceleration; // enginetype
     int frictionCoefficient; // tire (increase) + weather (depends on type of track)
     int initialVelocity; // Set by user
+    int height; // <- this will be replaced by a method
 
     public BorderPane initialize() {
         // root.getStylesheets().add(getClass().getResource("/light-theme.css").toExternalForm());
         Font menuButtonFont = Font.font("Arial", 14);// FontWeight.BOLD,
         MenuBar menuBar = new MenuBar();
+        Animate animate = new Animate();
 
         Menu showCode = new Menu("Show Code");
         MenuItem physicsEquations = new MenuItem("PhysicsEquations");
         physicsEquations.setOnAction(e -> { showCodePhysicsEquations(); });
-        MenuItem animate = new MenuItem("Animate");
-        animate.setOnAction(e -> { showCodeAnimate(); });
+        MenuItem animateCode = new MenuItem("Animate");
+        animateCode.setOnAction(e -> { showCodeAnimate(); });
         MenuItem modelClass = new MenuItem("Model");
         modelClass.setOnAction(e -> { showCodeModel(); });
         MenuItem mainScreen = new MenuItem("MainScreen");
         mainScreen.setOnAction(e -> { showCodeMainScreen(); });
 
-        showCode.getItems().addAll(physicsEquations, animate, modelClass, mainScreen);
+        showCode.getItems().addAll(physicsEquations, animateCode, modelClass, mainScreen);
+
 
         Menu showAssets = new Menu("Show Assets and Images");
-        //Menu changeBackground = new Menu("Change Background");
         Menu changeTheme = new Menu("Light Mode");
         MenuItem enableLightMode = new MenuItem("Enable Light Mode");
         MenuItem enableDarkMode = new Menu("Enable Dark Mode");
@@ -51,6 +54,9 @@ public class MainScreen {
         MenuButton changeEngine = new MenuButton("Change Engine"); // affects acceleration
         MenuItem strongEngine = new MenuItem("Engine Ultra S-500");
         MenuItem weakEngine = new MenuItem("Engine F-001");
+        weakEngine.setOnAction(actionEvent -> {
+            engineAcceleration = 900;
+        });
         changeEngine.getItems().addAll(strongEngine, weakEngine);
 
         MenuButton changeTires = new MenuButton("Change Tires"); // affects the coefficient of friction which lowers friction force
@@ -70,22 +76,29 @@ public class MainScreen {
         changeTrack.getItems().addAll(straight, downhill, uphill);
 
         downhill.setOnAction(actionEvent -> {
-            Model model = new Model();
-            root.getChildren().add(model.declinettrack());
+            Trackselections ts = new Trackselections();
+            root.getChildren().add(ts.declinetrack());
         });
 
         uphill.setOnAction(actionEvent -> {
-            Model model = new Model();
-            root.getChildren().add(model.inclinettrack());
+            Trackselections ts = new Trackselections();
+            root.getChildren().add(ts.inclinettrack());
         });
 
-        //Labels here
+        TextField userSetVelocity = new TextField();
+
         Label potentialEnergyLabel = new Label("Potential Energy: ");
         Text potentialEnergyLevel = new Text("0");
+
         Label kineticEnergyLabel = new Label("Kinetic Energy: ");
         Text kineticEnergyLevel = new Text("0");
+
         Label mechanicalEnergyLabel = new Label("Mechanical Energy: ");
         Text mechanicalEnergyLevel = new Text("0");
+
+        Button go = new Button("Go!");
+        Button reset = new Button("Reset!");
+
 
         // STYLING EVERYTHING
         changeCar.setFont(menuButtonFont);
@@ -104,6 +117,7 @@ public class MainScreen {
         menuButtonGrid.add(changeTires, 0, 1);
         menuButtonGrid.add(changeWeather, 1, 1);
         menuButtonGrid.add(changeTrack, 0, 2, 2, 1);
+        menuButtonGrid.add(userSetVelocity, 0,2,1,1);
 
         GridPane energyGrid = new GridPane();
         energyGrid.setHgap(20);
@@ -131,6 +145,10 @@ public class MainScreen {
         energyLevels.setAlignment(Pos.CENTER);
         energyLevels.getChildren().addAll(energyGrid);
 
+        VBox goAndResetButtons = new VBox();
+        goAndResetButtons.setAlignment(Pos.CENTER);
+        goAndResetButtons.getChildren().addAll(go, reset);
+
         StackPane center = new StackPane();
         center.setStyle("-fx-border-color: black; -fx-border-width: 5px;");
 
@@ -154,6 +172,7 @@ public class MainScreen {
         root.setTop(menuBar);
         root.setBottom(energyLevels);
         root.setLeft(vBox);
+        root.setRight(goAndResetButtons);
 
 
 
@@ -215,6 +234,25 @@ public class MainScreen {
             straight.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
             uphill.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
             downhill.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+
+        });
+
+
+        go.setOnAction(actionEvent -> {
+            PhysicsEquations equations = new PhysicsEquations();
+            initialVelocity = Integer.parseInt(userSetVelocity.getText());
+
+            // insert animation play code
+
+            equations.setCarMass(vehicleMass);
+            equations.setCarSpeed(initialVelocity);
+            equations.setHeight(height);
+            equations.setKineticEnergy(equations.findKineticEnergy(vehicleMass, initialVelocity));
+            equations.setPotentialEnergy(equations.findPotentialEnergy(vehicleMass, height));
+            equations.setMechanicalEnergy(equations.findMechanicalEnergy(equations.findKineticEnergy(vehicleMass, initialVelocity),
+                    equations.findPotentialEnergy(vehicleMass, height)));
+
+
 
         });
 

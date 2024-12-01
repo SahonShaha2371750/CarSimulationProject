@@ -7,11 +7,11 @@ import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.scene.transform.Rotate;
 
-public class Model {
+public class Trackselections {
 
     double distance;
     double angle;
-    double velocity= 25; //initial velocity is set by the user
+    double initialvelocity; //initial velocity is set by the user
 
 
    public void setDistance(double distance) {
@@ -22,8 +22,8 @@ public class Model {
         this.angle = angle;
     }
 
-    void setVelocity ( double velocity) {
-        this.velocity = velocity;
+    void setInitialvelocityVelocity ( double velocity) {
+        this.initialvelocity = velocity;
     }
 
 
@@ -46,7 +46,7 @@ public class Model {
 
 
 // decline track
-    public Path declinettrack() {
+    public  Path declinetrack() {
 
         angle = 20;
         Rotate rotate = new Rotate(angle,50,50);
@@ -91,49 +91,81 @@ public class Model {
 
         double startpointx = 50;
         double startpointy = 50;
+        PhysicsEquations pe = new PhysicsEquations();
 
-        distance = 80;
         //flat part
-        double endfirsttrack = startpointx + distance;
+        distance = 80;
+        angle = 0;
 
+        pe.findNetAcceleration(20,angle,0.5,"flat");
+        pe.findpoints(startpointx,startpointy,distance,0);
+        pe.velocitiesAtPoint(5,100,20,0,0.5,"flat");
+
+        double endfirsttrack = startpointx + distance;
 
         //decline part
         angle = 40;
         distance = 120;
+
+        pe.findNetAcceleration(20,angle,0.5,"downhill");
+        pe.findpoints(endfirsttrack,startpointy,distance,angle);
+
         double endsecondtrackx = endfirsttrack + ( distance * Math.cos( Math.toRadians(angle)) );
         double endsecondtracky = startpointy + ( distance* Math.sin( Math.toRadians(angle)) );
 
+
         //flat part
+        angle = 0;
         distance = 60;
+
+        pe.findNetAcceleration(20,angle,0.5,"flat");
+        pe.findpoints(endsecondtrackx,endsecondtracky,distance,angle);
+
         double endthirdtrackx = endsecondtrackx + distance;
         double endthirdtracky = endsecondtracky;
+
 
         //incline incline
         angle = 45;
         distance = 75;
+
+        pe.findNetAcceleration(20,angle,0.5,"downhill");
+        pe.findpoints(endthirdtrackx,endthirdtracky,distance,angle);
+
         double endfourthtrackx = endthirdtrackx + (distance * Math.cos( Math.toRadians(angle)));
         double endfourthtracky = endthirdtracky - (distance * Math.sin( Math.toRadians(angle)));
 
+
         //flat part
+        angle = 0;
         distance = 65;
+
+        pe.findNetAcceleration(20,angle,0.5,"flat");
+        pe.findpoints(endfourthtrackx,endfourthtracky,distance,angle);
+
         double endfifthtrackx = endfourthtrackx + distance;
         double endfifthtracky = endfourthtracky;
 
-        //decline part
+        //incline part
         angle = 25;
         distance = 60;
+
+        pe.findNetAcceleration(20,angle,0.5,"uphill");
+        pe.findpoints(endfifthtrackx,endfifthtracky,distance,angle);
 
         double endsixthtrackx = endfifthtrackx + distance * Math.cos( Math.toRadians(angle));
         double endsixthtracky = endfifthtracky - distance * Math.sin( Math.toRadians(angle));
 
-        //end of track
 
+        //decline part
         angle = 35;
         distance = 60;
 
+        pe.findNetAcceleration(20,angle,0.5,"downhill");
+        pe.findpoints(endsixthtrackx,endsixthtracky,distance,angle);
+
         double endseventhtrackx = endsixthtrackx + distance * Math.cos( Math.toRadians(angle));
         double endseventhtracky = endsixthtracky + distance * Math.sin( Math.toRadians(angle));
-
 
 
         Path combination = new Path(
