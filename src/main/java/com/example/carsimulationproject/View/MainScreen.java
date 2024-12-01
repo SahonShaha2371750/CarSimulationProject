@@ -79,6 +79,7 @@ public class MainScreen {
             root.getChildren().add(model.inclinettrack());
         });
 
+        //Labels here
         Label potentialEnergyLabel = new Label("Potential Energy: ");
         Text potentialEnergyLevel = new Text("0");
         Label kineticEnergyLabel = new Label("Kinetic Energy: ");
