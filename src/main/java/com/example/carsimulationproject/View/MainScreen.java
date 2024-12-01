@@ -3,6 +3,7 @@ package com.example.carsimulationproject.View;
 import com.example.carsimulationproject.Controller.PhysicsEquations;
 import com.example.carsimulationproject.Model.Animate;
 import com.example.carsimulationproject.Model.Trackselections;
+import javafx.animation.AnimationTimer;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -240,6 +241,7 @@ public class MainScreen {
 
         go.setOnAction(actionEvent -> {
             PhysicsEquations equations = new PhysicsEquations();
+            Animate animate1 = new Animate();
             initialVelocity = Integer.parseInt(userSetVelocity.getText());
 
             // insert animation play code
@@ -251,9 +253,7 @@ public class MainScreen {
             equations.setPotentialEnergy(equations.findPotentialEnergy(vehicleMass, height));
             equations.setMechanicalEnergy(equations.findMechanicalEnergy(equations.findKineticEnergy(vehicleMass, initialVelocity),
                     equations.findPotentialEnergy(vehicleMass, height)));
-
-
-
+            root.setBottom(equations.drawEnergyValues());
         });
 
 

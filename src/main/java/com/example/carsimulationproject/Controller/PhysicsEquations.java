@@ -3,6 +3,7 @@ package com.example.carsimulationproject.Controller;
 import com.example.carsimulationproject.Model.Animate;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
@@ -162,6 +163,8 @@ public class PhysicsEquations {
 
     }
 
+
+
     public AnimationTimer animationTimer = new AnimationTimer() {
         private long lastUpdate = 0;
 
@@ -178,40 +181,42 @@ public class PhysicsEquations {
 
         }
 
-        public void updateSimulation(double deltaTime) {
-            //Update car's kinetic energy every frame
-            kineticEnergy = findKineticEnergy(carMass, carSpeed);
 
-            //Update car's potential energy every frame
-            potentialEnergy = findPotentialEnergy(carMass, height);
-
-            //Update car's mechanical energy every frame
-            mechanicalEnergy = findMechanicalEnergy(findKineticEnergy(carMass, carSpeed), findPotentialEnergy(carMass, height));
-
-        }
-
-        public Group drawEnergyValues() {
-            Text speedText = new Text("Speed: " + carSpeed + " km/h");
-            speedText.setX(10);
-            speedText.setY(20);
-
-            Text kineticText = new Text("Kinetic Energy: " + kineticEnergy + " J");
-            kineticText.setX(10);
-            kineticText.setY(40);
-
-            Text potentialText = new Text("Potential Energy: " + potentialEnergy + " J");
-            potentialText.setX(10);
-            potentialText.setY(60);
-
-            Text mechanicalText = new Text("Mechanical Energy: " + mechanicalEnergy + " J");
-            mechanicalText.setX(10);
-            mechanicalText.setY(80);
-
-            Group groupLabels = new Group();
-            groupLabels.getChildren().addAll(speedText, kineticText, potentialText, mechanicalText);
-            return groupLabels;
-        }
     };
+
+    public void updateSimulation(double deltaTime) {
+        //Update car's kinetic energy every frame
+        kineticEnergy = findKineticEnergy(carMass, carSpeed);
+
+        //Update car's potential energy every frame
+        potentialEnergy = findPotentialEnergy(carMass, height);
+
+        //Update car's mechanical energy every frame
+        mechanicalEnergy = findMechanicalEnergy(findKineticEnergy(carMass, carSpeed), findPotentialEnergy(carMass, height));
+
+    }
+
+    public Group drawEnergyValues() {
+        Text speedText = new Text("Speed: " + carSpeed + " km/h");
+        speedText.setX(10);
+        speedText.setY(20);
+
+        Text kineticText = new Text("Kinetic Energy: " + kineticEnergy + " J");
+        kineticText.setX(10);
+        kineticText.setY(40);
+
+        Text potentialText = new Text("Potential Energy: " + potentialEnergy + " J");
+        potentialText.setX(10);
+        potentialText.setY(60);
+
+        Text mechanicalText = new Text("Mechanical Energy: " + mechanicalEnergy + " J");
+        mechanicalText.setX(10);
+        mechanicalText.setY(80);
+
+        Group groupLabels = new Group();
+        groupLabels.getChildren().addAll(speedText, kineticText, potentialText, mechanicalText);
+        return groupLabels;
+    }
 
     public void setCarMass(double carMass) {
         this.carMass = carMass;
