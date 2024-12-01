@@ -16,9 +16,9 @@ import javafx.stage.Stage;
 public class MainScreen {
     public BorderPane root = new BorderPane();
     int vehicleMass = 100;
-    int engineAcceleration; // enginetype
-    int frictionCoefficient; // tire (increase) + weather (depends on type of track)
-    int initialVelocity; // Set by user
+    public int engineAcceleration; // enginetype
+    int frictionCoefficient = 0; // tire (increase) + weather (depends on type of track)
+    public int initialVelocity; // Set by user
     int height; // <- this will be replaced by a method
 
     public BorderPane initialize() {
@@ -55,20 +55,24 @@ public class MainScreen {
         MenuButton changeEngine = new MenuButton("Change Engine"); // affects acceleration
         MenuItem strongEngine = new MenuItem("Engine Ultra S-500");
         MenuItem weakEngine = new MenuItem("Engine F-001");
-        weakEngine.setOnAction(actionEvent -> {
-            engineAcceleration = 900;
-        });
+        weakEngine.setOnAction(actionEvent -> {engineAcceleration = 10;});
+        strongEngine.setOnAction(actionEvent -> {engineAcceleration = 50;});
         changeEngine.getItems().addAll(strongEngine, weakEngine);
 
         MenuButton changeTires = new MenuButton("Change Tires"); // affects the coefficient of friction which lowers friction force
         MenuItem regularTire = new MenuItem("Regular Tires");
         MenuItem winterTire = new MenuItem("Winter Tires");
         changeTires.getItems().addAll(regularTire,winterTire);
+        regularTire.setOnAction(actionEvent -> {frictionCoefficient += 1;});
+        winterTire.setOnAction(actionEvent -> {frictionCoefficient += 10;});
 
         MenuButton changeWeather = new MenuButton("Change Weather"); // affects the coefficient of friction which increases friction force
         MenuItem sunny = new MenuItem("Sunny Weather");
         MenuItem rainy = new MenuItem("Rainy Weather");
         changeWeather.getItems().addAll(sunny, rainy);
+        sunny.setOnAction(actionEvent -> {frictionCoefficient += 1;});
+        rainy.setOnAction(actionEvent -> {frictionCoefficient += 10;});
+
 
         MenuButton changeTrack = new MenuButton("Change Track");
         MenuItem straight = new MenuItem("Straight Track");
@@ -118,7 +122,7 @@ public class MainScreen {
         menuButtonGrid.add(changeTires, 0, 1);
         menuButtonGrid.add(changeWeather, 1, 1);
         menuButtonGrid.add(changeTrack, 0, 2, 2, 1);
-        menuButtonGrid.add(userSetVelocity, 0,2,1,1);
+        menuButtonGrid.add(userSetVelocity, 0,3,1,1);
 
         GridPane energyGrid = new GridPane();
         energyGrid.setHgap(20);
@@ -155,16 +159,16 @@ public class MainScreen {
 
 
 
-        Animate animation = new Animate();
+        /*Animate animation = new Animate();
         animation.setLayoutX(400);
         animation.setLayoutY(300);
-
+*/
         // setonaction for button that will contain the following code
         /**
          * timelineAnimation(findPoints(50, 50, Model.getDistance, Model.getAngle), timeAtPoint(etc)) <- repeat this multiple times for each segment of the track for the "complex track" if it's not complex, we can just call it once because its just one segment
          */
 
-        center.getChildren().add(animation);
+        /*center.getChildren().add(animation);*/
 
         // root.getChildren().add(animation);
         root.setCenter(center);
@@ -241,10 +245,16 @@ public class MainScreen {
 
         go.setOnAction(actionEvent -> {
             PhysicsEquations equations = new PhysicsEquations();
-            Animate animate1 = new Animate();
+            Trackselections a = new Trackselections();
             initialVelocity = Integer.parseInt(userSetVelocity.getText());
 
-            // insert animation play code
+            Animate animation = new Animate();
+            /*animation.setLayoutX(400);
+            animation.setLayoutY(300);*/
+            center.getChildren().add(animation.inclineCarAnimation(initialVelocity, 30, vehicleMass, 9.8));
+            // animation.timelineanimation();
+            //a.defaulttrack();
+
 
             equations.setCarMass(vehicleMass);
             equations.setCarSpeed(initialVelocity);
