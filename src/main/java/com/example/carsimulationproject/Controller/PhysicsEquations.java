@@ -197,6 +197,30 @@ public class PhysicsEquations {
         }
     };
 
+    public void setCarMass(double carMass) {
+        this.carMass = carMass;
+    }
+
+    public void setCarSpeed(double carSpeed) {
+        this.carSpeed = carSpeed;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public void setKineticEnergy(double kineticEnergy) {
+        this.kineticEnergy = kineticEnergy;
+    }
+
+    public void setPotentialEnergy(double potentialEnergy) {
+        this.potentialEnergy = potentialEnergy;
+    }
+
+    public void setMechanicalEnergy(double mechanicalEnergy) {
+        this.mechanicalEnergy = mechanicalEnergy;
+    }
+
     public double getKineticEnergy() {
         return kineticEnergy;
     }
