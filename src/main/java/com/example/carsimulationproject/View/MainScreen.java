@@ -1,13 +1,16 @@
 package com.example.carsimulationproject.View;
 
+import com.example.carsimulationproject.Controller.PhysicsEquations;
 import com.example.carsimulationproject.Model.Animate;
 import com.example.carsimulationproject.Model.Model;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class MainScreen {
     public BorderPane root = new BorderPane();
@@ -21,6 +24,17 @@ public class MainScreen {
         MenuBar menuBar = new MenuBar();
 
         Menu showCode = new Menu("Show Code");
+        MenuItem physicsEquations = new MenuItem("PhysicsEquations");
+        physicsEquations.setOnAction(e -> { showCodePhysicsEquations(); });
+        MenuItem animate = new MenuItem("Animate");
+        animate.setOnAction(e -> { showCodeAnimate(); });
+        MenuItem modelClass = new MenuItem("Model");
+        modelClass.setOnAction(e -> { showCodeModel(); });
+        MenuItem mainScreen = new MenuItem("MainScreen");
+        mainScreen.setOnAction(e -> { showCodeMainScreen(); });
+
+        showCode.getItems().addAll(physicsEquations, animate, modelClass, mainScreen);
+
         Menu showAssets = new Menu("Show Assets and Images");
         //Menu changeBackground = new Menu("Change Background");
         Menu changeTheme = new Menu("Light Mode");
@@ -67,13 +81,10 @@ public class MainScreen {
 
         Label potentialEnergyLabel = new Label("Potential Energy: ");
         Text potentialEnergyLevel = new Text("0");
-
         Label kineticEnergyLabel = new Label("Kinetic Energy: ");
         Text kineticEnergyLevel = new Text("0");
-
         Label mechanicalEnergyLabel = new Label("Mechanical Energy: ");
         Text mechanicalEnergyLevel = new Text("0");
-
 
         // STYLING EVERYTHING
         changeCar.setFont(menuButtonFont);
@@ -210,5 +221,60 @@ public class MainScreen {
         return root;
     }
 
+    private void showCodePhysicsEquations() {
+        Stage codeWindow = new Stage();
+        //Add the code here
+        String codeSnippet = "Add code here";
+
+        Text codeArea = new Text(codeSnippet);
+
+        StackPane codeRoot = new StackPane(codeArea);
+        Scene codeScene = new Scene(codeRoot, 400, 300);
+        codeWindow.setTitle("Code Snippet");
+        codeWindow.setScene(codeScene);
+        codeWindow.show();
+    }
+
+    private void showCodeAnimate() {
+        Stage codeWindow = new Stage();
+        //Add the code here
+        String codeSnippet = "Add code here";
+
+        Text codeArea = new Text(codeSnippet);
+
+        StackPane codeRoot = new StackPane(codeArea);
+        Scene codeScene = new Scene(codeRoot, 400, 300);
+        codeWindow.setTitle("Code Snippet");
+        codeWindow.setScene(codeScene);
+        codeWindow.show();
+    }
+
+    private void showCodeModel() {
+        Stage codeWindow = new Stage();
+        //Add the code here
+        String codeSnippet = "Add code here";
+
+        Text codeArea = new Text(codeSnippet);
+
+        StackPane codeRoot = new StackPane(codeArea);
+        Scene codeScene = new Scene(codeRoot, 400, 300);
+        codeWindow.setTitle("Code Snippet");
+        codeWindow.setScene(codeScene);
+        codeWindow.show();
+    }
+
+    private void showCodeMainScreen() {
+        Stage codeWindow = new Stage();
+        //Add the code here
+        String codeSnippet = "Add code here";
+
+        Text codeArea = new Text(codeSnippet);
+
+        StackPane codeRoot = new StackPane(codeArea);
+        Scene codeScene = new Scene(codeRoot, 400, 300);
+        codeWindow.setTitle("Code Snippet");
+        codeWindow.setScene(codeScene);
+        codeWindow.show();
+    }
 
 }
