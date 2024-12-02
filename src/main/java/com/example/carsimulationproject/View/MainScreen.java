@@ -46,13 +46,31 @@ public class MainScreen {
 
         showCode.getItems().addAll(physicsEquations, animateCode, modelClass, mainScreen);
 
-
         Menu showAssets = new Menu("Show Assets and Images");
-        Menu changeTheme = new Menu("Light Mode");
+
+        Menu changeTheme = new Menu("Change Theme");
         MenuItem enableLightMode = new MenuItem("Enable Light Mode");
-        MenuItem enableDarkMode = new Menu("Enable Dark Mode");
+        MenuItem enableDarkMode = new MenuItem("Enable Dark Mode");
         changeTheme.getItems().addAll(enableLightMode, enableDarkMode);
-        menuBar.getMenus().addAll(showCode, showAssets, changeTheme);
+
+        Menu userGuide = new Menu("User Guide");
+        MenuItem viewUserGuide = new MenuItem("View User Guide");
+        viewUserGuide.setOnAction(e -> {
+            Stage userGuideWindow = new Stage();
+            //Add user guide text here
+            String text = "Add text here";
+
+            Text userGuideText = new Text(text);
+
+            StackPane userGuideRoot = new StackPane(userGuideText);
+            Scene scene = new Scene(userGuideRoot, 400, 300);
+            userGuideWindow.setTitle("User Guide");
+            userGuideWindow.setScene(scene);
+            userGuideWindow.show();
+        });
+        userGuide.getItems().addAll(viewUserGuide);
+
+        menuBar.getMenus().addAll(showCode, showAssets, changeTheme, userGuide);
 
         MenuButton changeCar = new MenuButton("Change Car"); // Mass which affects normal force which affects friction force which will reduce velocity and acceleration || PROBABLY NOT NEEDED
         MenuItem car = new MenuItem("Car");
@@ -261,6 +279,10 @@ public class MainScreen {
 
         });
 
+        reset.setOnAction(e-> {
+            center.getChildren().clear();
+        });
+
 
         return root;
     }
@@ -274,7 +296,7 @@ public class MainScreen {
 
         StackPane codeRoot = new StackPane(codeArea);
         Scene codeScene = new Scene(codeRoot, 400, 300);
-        codeWindow.setTitle("Code Snippet");
+        codeWindow.setTitle("PhysicsEquations");
         codeWindow.setScene(codeScene);
         codeWindow.show();
     }
@@ -288,7 +310,7 @@ public class MainScreen {
 
         StackPane codeRoot = new StackPane(codeArea);
         Scene codeScene = new Scene(codeRoot, 400, 300);
-        codeWindow.setTitle("Code Snippet");
+        codeWindow.setTitle("Animate");
         codeWindow.setScene(codeScene);
         codeWindow.show();
     }
@@ -302,7 +324,7 @@ public class MainScreen {
 
         StackPane codeRoot = new StackPane(codeArea);
         Scene codeScene = new Scene(codeRoot, 400, 300);
-        codeWindow.setTitle("Code Snippet");
+        codeWindow.setTitle("Model");
         codeWindow.setScene(codeScene);
         codeWindow.show();
     }
@@ -316,7 +338,7 @@ public class MainScreen {
 
         StackPane codeRoot = new StackPane(codeArea);
         Scene codeScene = new Scene(codeRoot, 400, 300);
-        codeWindow.setTitle("Code Snippet");
+        codeWindow.setTitle("MainScreen");
         codeWindow.setScene(codeScene);
         codeWindow.show();
     }
