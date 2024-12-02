@@ -25,6 +25,7 @@ public class MainScreen {
     int frictionCoefficient = 0; // tire (increase) + weather (depends on type of track)
     public int initialVelocity; // Set by user
     int height; // <- this will be replaced by a method
+    Path chosenTrack;
 
     public BorderPane initialize() {
         // root.getStylesheets().add(getClass().getResource("/light-theme.css").toExternalForm());
@@ -88,21 +89,24 @@ public class MainScreen {
 
         combo.setOnAction(actionEvent -> {
             Trackselections ts = new Trackselections();
-            center.getChildren().clear();
-            center.getChildren().add(ts.combotrack());
+            /*center.getChildren().clear();
+            center.getChildren().add(ts.combotrack());*/
+            chosenTrack = ts.combotrack();
 
         });
 
         downhill.setOnAction(actionEvent -> {
             Trackselections ts = new Trackselections();
-            center.getChildren().clear();
-            center.getChildren().add(ts.declinetrack());
+            /*center.getChildren().clear();
+            center.getChildren().add(ts.declinetrack());*/
+            chosenTrack = ts.declinetrack();
         });
 
         uphill.setOnAction(actionEvent -> {
             Trackselections ts = new Trackselections();
-            center.getChildren().clear();
-            center.getChildren().add(ts.inclinettrack());
+            /*center.getChildren().clear();
+            center.getChildren().add(ts.inclinettrack());*/
+            chosenTrack = ts.inclinettrack();
         });
 
         TextField userSetVelocity = new TextField();
@@ -173,22 +177,7 @@ public class MainScreen {
         center.setStyle("-fx-border-color: black; -fx-border-width: 5px;");
 
 
-
-        /*Animate animation = new Animate();
-        animation.setLayoutX(400);
-        animation.setLayoutY(300);
-*/
-        // setonaction for button that will contain the following code
-        /**
-         * timelineAnimation(findPoints(50, 50, Model.getDistance, Model.getAngle), timeAtPoint(etc)) <- repeat this multiple times for each segment of the track for the "complex track" if it's not complex, we can just call it once because its just one segment
-         */
-
-        /*center.getChildren().add(animation);*/
-
-        // root.getChildren().add(animation);
         root.setCenter(center);
-        //animation.timelineanimation();
-
         root.setTop(menuBar);
         root.setBottom(energyLevels);
         root.setLeft(vBox);
@@ -260,25 +249,16 @@ public class MainScreen {
 
         go.setOnAction(actionEvent -> {
             PhysicsEquations equations = new PhysicsEquations();
-            Trackselections a = new Trackselections();
             initialVelocity = Integer.parseInt(userSetVelocity.getText());
 
             Animate animation = new Animate();
-            /*animation.setLayoutX(400);
-            animation.setLayoutY(300);*/
-            center.getChildren().add(animation.inclineCarAnimation(initialVelocity, 30, vehicleMass, 9.8));
-            // animation.timelineanimation();
-            //a.defaulttrack();
+            animation.setLayoutX(400);
+            animation.setLayoutY(300);
+            //center.getChildren().add(animation.comboTrackAnimation(vehicleMass, initialVelocity, chosenTrack));
+            center.getChildren().add(animation.animateIncline(initialVelocity, chosenTrack));
+            //center.getChildren().add(animation.comboTrackAnimation(vehicleMass, initialVelocity, chosenTrack));
+            center.setAlignment(Pos.CENTER);
 
-
-            equations.setCarMass(vehicleMass);
-            equations.setCarSpeed(initialVelocity);
-            equations.setHeight(height);
-            equations.setKineticEnergy(equations.findKineticEnergy(vehicleMass, initialVelocity));
-            equations.setPotentialEnergy(equations.findPotentialEnergy(vehicleMass, height));
-            equations.setMechanicalEnergy(equations.findMechanicalEnergy(equations.findKineticEnergy(vehicleMass, initialVelocity),
-                    equations.findPotentialEnergy(vehicleMass, height)));
-            root.setBottom(equations.drawEnergyValues());
         });
 
 

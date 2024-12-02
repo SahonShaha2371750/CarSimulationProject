@@ -134,11 +134,168 @@ public class Animate extends Pane {
 
 
 
+    public Pane comboTrackAnimation(double mass, double velocity, Path combo) {
+        /*Pane pane = new Pane();
+        pane.setPrefSize(800, 600);
+
+        Rectangle car = new Rectangle(50, 30, Color.RED);
+        double centerX = (pane.getPrefWidth() - combo.getBoundsInLocal().getWidth()) / 2;
+        double centerY = (pane.getPrefHeight() - combo.getBoundsInLocal().getHeight()) / 2;
+
+        combo.setTranslateX(centerX);
+        combo.setTranslateY(centerY);
+        pane.getChildren().add(car);
+
+        Text energyDisplay = new Text(10, 500, "Energy: ");
+        energyDisplay.setFill(Color.BLACK);
+        pane.getChildren().add(combo);
+
+        PathTransition pathTransition = new PathTransition();
+        pathTransition.setPath(combo);
+        pathTransition.setNode(car);
+        pathTransition.setInterpolator(Interpolator.LINEAR);
+        pathTransition.setDuration(Duration.seconds(combo.getBoundsInLocal().getWidth() / velocity));
+        pathTransition.setCycleCount(1);
 
 
+        pathTransition.play();
+
+        return pane;*/
+
+        Pane pane = new Pane();
+        pane.setPrefSize(800, 600);
+
+        // Rectangle representing the car
+        Rectangle car = new Rectangle(50, 30, Color.RED);
+
+        // Center the path in the pane
+        double centerX = (pane.getPrefWidth() - combo.getBoundsInLocal().getWidth()) / 2;
+        double centerY = (pane.getPrefHeight() - combo.getBoundsInLocal().getHeight()) / 2;
+
+        combo.setTranslateX(centerX);
+        combo.setTranslateY(centerY);
+
+        // Create a sub-path up to the desired point
+        Path subPath = new Path();
+        subPath.setStroke(Color.BLACK);
+        subPath.setStrokeWidth(2);
+
+        // Add path elements up to the stopping point
+        subPath.getElements().add(new MoveTo(0, 200)); // Start point
+        subPath.getElements().add(new LineTo(200, 200)); // Add first segment
+        subPath.getElements().add(new LineTo(300, 150)); // Add second segment
+        subPath.getElements().add(new LineTo(400, 150)); // Add third segment
+        subPath.getElements().add(new LineTo(500, 200)); // Add fourth segment
+        subPath.getElements().add(new LineTo(700, 200)); // Stop here
+
+        // Center the subPath
+        subPath.setTranslateX(centerX);
+        subPath.setTranslateY(centerY);
+
+        // Add the car to the pane
+        pane.getChildren().addAll(combo, car);
+
+        // Text display for energy (optional)
+        Text energyDisplay = new Text(10, 500, "Energy: ");
+        energyDisplay.setFill(Color.BLACK);
+        pane.getChildren().add(energyDisplay);
+
+        // PathTransition for the car animation
+        PathTransition pathTransition = new PathTransition();
+        pathTransition.setPath(subPath);
+        pathTransition.setNode(car);
+        pathTransition.setInterpolator(Interpolator.LINEAR);
+        pathTransition.setDuration(Duration.seconds(subPath.getBoundsInLocal().getWidth() / velocity));
+        pathTransition.setCycleCount(1);
+
+        // Play the animation
+        pathTransition.play();
+
+        return pane;
+    }
 
 
+    public Pane animateIncline(double velocity, Path incline) {
+        Pane pane = new Pane();
+        pane.setPrefSize(800, 600);
 
+        Path trackincline = new Path();
+        trackincline.setStroke(Color.BLACK);
+        trackincline.setStrokeWidth(2);
+
+        // Define the points of the incline track
+        MoveTo start = new MoveTo(0, 500);
+        LineTo summit = new LineTo(700, 100); // Summit
+
+        // Add all points to the Path
+        trackincline.getElements().addAll(start, summit);
+
+        // Create a rectangle representing the car
+        Rectangle car = new Rectangle(50, 30, Color.RED);
+
+        // Center the path in the pane
+        double centerX = (pane.getPrefWidth() - trackincline.getBoundsInLocal().getWidth()) / 2;
+        double centerY = (pane.getPrefHeight() - trackincline.getBoundsInLocal().getHeight()) / 2;
+
+        trackincline.setTranslateX(centerX);
+        trackincline.setTranslateY(centerY);
+
+        pane.getChildren().addAll(incline, car);
+
+        // PathTransition for the car animation
+        PathTransition pathTransition = new PathTransition();
+        pathTransition.setPath(trackincline);
+        pathTransition.setNode(car);
+        pathTransition.setInterpolator(Interpolator.LINEAR);
+        pathTransition.setDuration(Duration.seconds(trackincline.getBoundsInLocal().getWidth() / velocity));
+        pathTransition.setCycleCount(1);
+
+        // Play the animation
+        pathTransition.play();
+
+        return pane;
+    }
+
+    public Pane animateDecline(double velocity, Path decline) {
+        Pane pane = new Pane();
+        pane.setPrefSize(800, 600);
+
+        Path trackdecline = new Path();
+        trackdecline.setStroke(Color.BLACK);
+        trackdecline.setStrokeWidth(2);
+
+        // Define the points of the decline track
+        MoveTo start = new MoveTo(0, 200);
+        LineTo bottom = new LineTo(700, 700); // Bottom
+
+        // Add all points to the Path
+        trackdecline.getElements().addAll(start, bottom);
+
+        // Create a rectangle representing the car
+        Rectangle car = new Rectangle(50, 30, Color.BLUE);
+
+        // Center the path in the pane
+        double centerX = (pane.getPrefWidth() - trackdecline.getBoundsInLocal().getWidth()) / 2;
+        double centerY = (pane.getPrefHeight() - trackdecline.getBoundsInLocal().getHeight()) / 2;
+
+        trackdecline.setTranslateX(centerX);
+        trackdecline.setTranslateY(centerY);
+
+        pane.getChildren().addAll(decline, car);
+
+        // PathTransition for the car animation
+        PathTransition pathTransition = new PathTransition();
+        pathTransition.setPath(trackdecline);
+        pathTransition.setNode(car);
+        pathTransition.setInterpolator(Interpolator.LINEAR);
+        pathTransition.setDuration(Duration.seconds(trackdecline.getBoundsInLocal().getWidth() / velocity));
+        pathTransition.setCycleCount(1);
+
+        // Play the animation
+        pathTransition.play();
+
+        return pane;
+    }
 
 
 
