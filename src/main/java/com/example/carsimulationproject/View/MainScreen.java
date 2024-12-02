@@ -8,6 +8,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -26,6 +31,7 @@ public class MainScreen {
         Font menuButtonFont = Font.font("Arial", 14);// FontWeight.BOLD,
         MenuBar menuBar = new MenuBar();
         Animate animate = new Animate();
+        StackPane center = new StackPane();
 
         Menu showCode = new Menu("Show Code");
         MenuItem physicsEquations = new MenuItem("PhysicsEquations");
@@ -75,19 +81,28 @@ public class MainScreen {
 
 
         MenuButton changeTrack = new MenuButton("Change Track");
-        MenuItem straight = new MenuItem("Straight Track");
+        MenuItem combo = new MenuItem("Combo Track");
         MenuItem downhill = new MenuItem("Downhill Track");
         MenuItem uphill = new MenuItem("Uphill Track");
-        changeTrack.getItems().addAll(straight, downhill, uphill);
+        changeTrack.getItems().addAll(combo, downhill, uphill);
+
+        combo.setOnAction(actionEvent -> {
+            Trackselections ts = new Trackselections();
+            center.getChildren().clear();
+            center.getChildren().add(ts.combotrack());
+
+        });
 
         downhill.setOnAction(actionEvent -> {
             Trackselections ts = new Trackselections();
-            root.getChildren().add(ts.declinetrack());
+            center.getChildren().clear();
+            center.getChildren().add(ts.declinetrack());
         });
 
         uphill.setOnAction(actionEvent -> {
             Trackselections ts = new Trackselections();
-            root.getChildren().add(ts.inclinettrack());
+            center.getChildren().clear();
+            center.getChildren().add(ts.inclinettrack());
         });
 
         TextField userSetVelocity = new TextField();
@@ -154,7 +169,7 @@ public class MainScreen {
         goAndResetButtons.setAlignment(Pos.CENTER);
         goAndResetButtons.getChildren().addAll(go, reset);
 
-        StackPane center = new StackPane();
+
         center.setStyle("-fx-border-color: black; -fx-border-width: 5px;");
 
 
@@ -206,7 +221,7 @@ public class MainScreen {
             rainy.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
             sunny.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
             changeTrack.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
-            straight.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            combo.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
             uphill.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
             downhill.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
         });
@@ -236,7 +251,7 @@ public class MainScreen {
             rainy.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
             sunny.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
             changeTrack.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            straight.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
+            combo.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
             uphill.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
             downhill.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
 
