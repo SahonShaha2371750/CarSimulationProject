@@ -26,6 +26,7 @@ public class MainScreen {
     public int totalVelocity = 0; // enginetype
     int totalFriction = 0; // tire (increase) + weather (depends on type of track)
     Path chosenTrack;
+    Path chosenSky;
 
     public BorderPane initialize() {
         // root.getStylesheets().add(getClass().getResource("/light-theme.css").toExternalForm());
@@ -135,6 +136,7 @@ public class MainScreen {
             /*center.getChildren().clear();
             center.getChildren().add(ts.inclinettrack());*/
             chosenTrack = ts.inclinettrack();
+            chosenSky = ts.inclinesky();
         });
 
         TextField userSetVelocity = new TextField();
@@ -347,7 +349,7 @@ public class MainScreen {
             animation.setLayoutX(400);
             animation.setLayoutY(300);
             center.getChildren().clear();
-            center.getChildren().add(animation.comboTrackAnimation(vehicleMass, totalVelocity, chosenTrack, totalFriction, root));
+            center.getChildren().add(animation.animateIncline(vehicleMass, totalVelocity, chosenTrack, totalFriction, root,chosenSky));
             center.setAlignment(Pos.CENTER);
 
         });

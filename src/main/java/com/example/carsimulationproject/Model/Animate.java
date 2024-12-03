@@ -6,9 +6,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
@@ -20,7 +18,7 @@ public class Animate extends Pane {
 
     public Animate() {
 
-    //setting the vehicule properties like setting the engine
+        //setting the vehicule properties like setting the engine
 
         car.setFill(Color.BLUE);
 
@@ -124,8 +122,9 @@ public class Animate extends Pane {
     }
 
 
-    public Pane animateIncline(double velocity, Path incline) {
+    public Pane animateIncline(double mass, double velocity, Path incline, int friction, BorderPane root, Path chosenSky) {
         Pane pane = new Pane();
+        PhysicsEquations equations = new PhysicsEquations();
         pane.setPrefSize(800, 600);
 
         Rectangle car = new Rectangle(50, 30, Color.RED);
@@ -168,6 +167,9 @@ public class Animate extends Pane {
 
         // Play the animation
         pathTransition.play();
+
+        TextFlow energyDisplay = equations.createEnergyDisplayUphill(incline, velocity, friction, mass, pathTransition);
+        root.setBottom(energyDisplay);
 
         return pane;
     }
@@ -218,12 +220,12 @@ public class Animate extends Pane {
 
     //running the animation
     public void playanimation() {
-       // timelineanimation().play();
+        // timelineanimation().play();
     }
 
     //stopping the animation
     public void stopanimation() {
-       // timelineanimation().stop();
+        // timelineanimation().stop();
     }
 
 }

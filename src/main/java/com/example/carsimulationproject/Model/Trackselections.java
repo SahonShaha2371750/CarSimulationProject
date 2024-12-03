@@ -2,7 +2,9 @@ package com.example.carsimulationproject.Model;
 
 import com.example.carsimulationproject.Controller.PhysicsEquations;
 import com.example.carsimulationproject.View.MainScreen;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.*;
 import javafx.scene.transform.Rotate;
 
@@ -23,7 +25,7 @@ public class Trackselections {
 
 
 // default track
-    /*public Path defaulttrack() {
+   /* public Path defaulttrack() {
 
         angle = 0;
         distance = 200;
@@ -39,8 +41,8 @@ public class Trackselections {
         ArrayList<Double> timesAtPointsdefault = pe.timeAtPoint(ms.initialVelocity,distance,ms.engineAcceleration,angle,0.5,"flat");
         animate.timelineanimation(pointsdefault , timesAtPointsdefault );
         return trackdefault;
-    }*/
-
+    }
+*/
 
 // decline track
     public  Path declinetrack() {
@@ -54,8 +56,8 @@ public class Trackselections {
         trackdecline.setStrokeWidth(2);
 
         //Define the points of the track
-        MoveTo start = new MoveTo(0, 100);
-        LineTo line = new LineTo(700, 500);
+        MoveTo start = new MoveTo(0, 200);
+        LineTo line = new LineTo(700, 700);
 
         //Add all points to the Path
         trackdecline.getElements().addAll(start, line);
@@ -90,17 +92,27 @@ public class Trackselections {
 
         //Simplfied the track
 
-        Path trackincline = new Path();
+        Path trackincline = new Path(
+
+                new MoveTo(0, 500),
+                new LineTo(830, 0),
+                new LineTo(1160,0),
+                new LineTo(1160,660),
+                new LineTo(0,660),
+                new LineTo(0,500)
+
+
+        );
+
+        Image grass = new Image("file:src/main/resources/grass.png");
+
+        trackincline.setFill(new ImagePattern(grass));
 
         trackincline.setStroke(Color.BLACK);
         trackincline.setStrokeWidth(2);
 
         //Define the points of the track
-        MoveTo start = new MoveTo(0, 500);
-        LineTo line = new LineTo(700, 100);
 
-        //Add all points to the Path
-        trackincline.getElements().addAll(start, line);
 
         /*
         angle = 20;
@@ -128,6 +140,26 @@ public class Trackselections {
          */
         return trackincline;
     }
+
+    public Path inclinesky () {
+
+        Path inclineskyy = new Path(
+
+                new MoveTo(0, 500),
+                new LineTo(0, 0),
+                new LineTo(830,0),
+                new LineTo(0,500)
+
+        );
+
+        inclineskyy.setFill(Color.LIGHTBLUE);
+
+        return inclineskyy;
+    }
+
+
+
+
 
 
     //the angles are not all the same, this will be fixed next time
