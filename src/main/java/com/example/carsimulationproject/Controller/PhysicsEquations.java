@@ -208,6 +208,52 @@ public class PhysicsEquations {
         return energyDisplay;
     }
 
+    public TextFlow createEnergyDisplayUphill(Path trackdecline, double velocity, int friction, double mass, PathTransition pathTransition) {
+        Text keText = new Text("KE: 0 J\n");
+        Text peText = new Text("PE: 0 J\n");
+        Text meText = new Text("ME: 0 J\n");
+
+        TextFlow energyDisplay = new TextFlow(keText, peText, meText);
+        energyDisplay.setPadding(new Insets(10));
+        energyDisplay.setStyle("-fx-background-color: lightgrey; -fx-border-color: black; -fx-border-width: 1px;");
+
+
+        //.currentTimeProperty serves to update the time as the animation progresses
+        // .addListener does something whenever a property is change, in this case the time
+        // obs is the property being observed, oldtime is the time before the update, newTime is the time after
+        pathTransition.currentTimeProperty().addListener((obs, oldTime, newTime) -> {
+            double progress = newTime.toSeconds() / pathTransition.getTotalDuration().toSeconds(); // finds how mch % of the animation is done
+
+            double x = 50 + progress * (750 - 50); // initialX + distance done so far ; 750 - 50 represents the distance of the track
+            double y = 500 - progress * (500 - 100);
+
+            double startHeight = 100;
+            double endHeight = 500;
+            double distance = endHeight - startHeight;
+
+            double height = startHeight + progress * (distance);
+
+            double totalVelocity = velocity - friction;
+            double ke = 0.5 * mass * totalVelocity * totalVelocity;
+            double pe = mass * 9.8 * height;
+            double me = ke + pe;
+
+
+            keText.setText(String.format("KE: %.2f J\n", ke));
+            peText.setText(String.format("PE: %.2f J\n", pe));
+            meText.setText(String.format("ME: %.2f J\n", me));
+        });
+
+
+        pathTransition.setOnFinished(event -> {
+            keText.setText("KE: Finished\n");
+            peText.setText("PE: Finished\n");
+            meText.setText("ME: Finished\n");
+        });
+
+        return energyDisplay;
+    }
+
 
     public TextFlow energyDisplayComboTrack(Path trackdecline, double velocity, int friction, double mass, PathTransition pathTransition) {
         Text keText = new Text("KE: 0 J\n");

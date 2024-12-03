@@ -124,8 +124,9 @@ public class Animate extends Pane {
     }
 
 
-    public Pane animateIncline(double velocity, Path incline) {
+    public Pane animateIncline(double mass, double velocity, Path incline, int friction, BorderPane root) {
         Pane pane = new Pane();
+        PhysicsEquations equations = new PhysicsEquations();
         pane.setPrefSize(800, 600);
 
         Rectangle car = new Rectangle(50, 30, Color.RED);
@@ -168,6 +169,9 @@ public class Animate extends Pane {
 
         // Play the animation
         pathTransition.play();
+
+        TextFlow energyDisplay = equations.createEnergyDisplayUphill(incline, velocity, friction, mass, pathTransition);
+        root.setBottom(energyDisplay);
 
         return pane;
     }
