@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class PhysicsEquations {
 
-   public double g = 9.8;
+    public double g = 9.8;
 
     //Dummy values
     double carMass = 1000;
@@ -136,7 +136,7 @@ public class PhysicsEquations {
 
 
     public ArrayList<Double> velocitiesAtPoint(double initialSpeed, double distance,
-                             double engineAcceleration, double angle, double mu, String direction) {
+                                               double engineAcceleration, double angle, double mu, String direction) {
 
         double netAcceleration = findNetAcceleration(engineAcceleration, angle, mu, direction);
 
