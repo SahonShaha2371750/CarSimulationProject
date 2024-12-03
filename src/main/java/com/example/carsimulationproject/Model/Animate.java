@@ -2,6 +2,7 @@ package com.example.carsimulationproject.Model;
 
 import com.example.carsimulationproject.Controller.PhysicsEquations;
 import javafx.animation.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -66,7 +67,7 @@ public class Animate extends Pane {
 
 
 
-    public Pane comboTrackAnimation(double mass, double velocity, Path combo, int friction, BorderPane root) {
+    public Pane comboTrackAnimation(double mass, double velocity, Path combo, int friction, BorderPane root, ImageView carType) {
         Pane pane = new Pane();
         PhysicsEquations equations = new PhysicsEquations();
         pane.setPrefSize(800, 600);
@@ -99,17 +100,13 @@ public class Animate extends Pane {
         subPath.setTranslateY(centerY);
 
         // Add the car to the pane
-        pane.getChildren().addAll(combo, car);
+        pane.getChildren().addAll(combo, carType);
 
-//        // Text display for energy (optional)
-//        Text energyDisplay = new Text(10, 500, "Energy: ");
-//        energyDisplay.setFill(Color.BLACK);
-//        pane.getChildren().add(energyDisplay);
 
         // PathTransition for the car animation
         PathTransition pathTransition = new PathTransition();
         pathTransition.setPath(subPath);
-        pathTransition.setNode(car);
+        pathTransition.setNode(carType);
         pathTransition.setInterpolator(Interpolator.LINEAR);
         pathTransition.setDuration(Duration.seconds(subPath.getBoundsInLocal().getWidth() / velocity));
         pathTransition.setCycleCount(1);
@@ -124,7 +121,7 @@ public class Animate extends Pane {
     }
 
 
-    public Pane animateIncline(double mass, double velocity, Path incline, int friction, BorderPane root) {
+    public Pane animateIncline(double mass, double velocity, Path incline, int friction, BorderPane root, ImageView carType) {
         Pane pane = new Pane();
         PhysicsEquations equations = new PhysicsEquations();
         pane.setPrefSize(800, 600);
@@ -162,7 +159,7 @@ public class Animate extends Pane {
         // PathTransition for the car animation
         PathTransition pathTransition = new PathTransition();
         pathTransition.setPath(trackincline);
-        pathTransition.setNode(car);
+        pathTransition.setNode(carType);
         pathTransition.setInterpolator(Interpolator.LINEAR);
         pathTransition.setDuration(Duration.seconds(trackincline.getBoundsInLocal().getWidth() / velocity));
         pathTransition.setCycleCount(1);
@@ -176,7 +173,7 @@ public class Animate extends Pane {
         return pane;
     }
 
-    public Pane animateDecline(int mass, double velocity, Path decline, int friction, BorderPane root) {
+    public Pane animateDecline(int mass, double velocity, Path decline, int friction, BorderPane root, ImageView carType) {
         PhysicsEquations equations = new PhysicsEquations();
         Pane pane = new Pane();
         pane.setPrefSize(800, 600);
@@ -203,7 +200,7 @@ public class Animate extends Pane {
 
         PathTransition pathTransition = new PathTransition();
         pathTransition.setPath(trackdecline);
-        pathTransition.setNode(car);
+        pathTransition.setNode(carType);
         pathTransition.setInterpolator(Interpolator.LINEAR);
         pathTransition.setDuration(Duration.seconds(trackdecline.getBoundsInLocal().getWidth() / (velocity - friction)));
         pathTransition.setCycleCount(1);

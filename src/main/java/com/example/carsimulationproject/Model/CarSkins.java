@@ -5,24 +5,24 @@ import javafx.scene.image.ImageView;
 
 public class CarSkins {
 
- ImageView lamborghiniSkin() {
+ public ImageView lamborghiniSkin() {
 
-  Image lamboimage = new Image("file:C:\\Users\\user\\IdeaProjects\\CarSimulationProject\\src\\main\\resources\\lambo.png");
+  Image lamboimage = new Image("lambo.png");
 
   ImageView lamboView = new ImageView(lamboimage);
 
 
-  lamboView.setFitWidth(300);
-  lamboView.setFitHeight(200);
+  lamboView.setFitWidth(100);
+  lamboView.setFitHeight(100);
   lamboView.setPreserveRatio(true);
 
 
    return lamboView;
  }
 
- ImageView cybertruckSkin() {
+ public ImageView cybertruckSkin() {
 
-  Image cyberimage = new Image("file:C:\\Users\\user\\IdeaProjects\\CarSimulationProject\\src\\main\\resources\\cybertruck.png");
+  Image cyberimage = new Image("cybertruck.png");
 
   ImageView cyberView = new ImageView(cyberimage);
 
@@ -33,9 +33,9 @@ public class CarSkins {
    return cyberView;
  }
 
- ImageView regulartruckSkin() {
+ public ImageView regulartruckSkin() {
 
-  Image truckimage = new Image("file:C:\\Users\\user\\IdeaProjects\\CarSimulationProject\\src\\main\\resources\\truck.png");
+  Image truckimage = new Image("truck.png");
 
   ImageView truckView = new ImageView(truckimage);
 
