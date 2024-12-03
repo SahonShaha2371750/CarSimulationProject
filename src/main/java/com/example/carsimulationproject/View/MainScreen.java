@@ -184,28 +184,22 @@ public class MainScreen {
         combo.setOnAction(actionEvent -> {
             Trackselections ts = new Trackselections();
             Animate animation = new Animate();
-            /*center.getChildren().clear();
-            center.getChildren().add(ts.combotrack());*/
             chosenTrack = ts.combotrack();
-            chosenAnimation = animation.comboTrackAnimation(vehicleMass, totalVelocity, chosenTrack, totalFriction, root, chosenCar);
+            chosenAnimation = animate.comboTrackAnimation(vehicleMass, totalVelocity, chosenTrack, totalFriction, root, chosenCar);
         });
 
         downhill.setOnAction(actionEvent -> {
             Trackselections ts = new Trackselections();
             Animate animation = new Animate();
-            /*center.getChildren().clear();
-            center.getChildren().add(ts.declinetrack());*/
             chosenTrack = ts.declinetrack();
-            chosenAnimation = animation.animateDecline(vehicleMass, totalVelocity, chosenTrack, totalFriction, root, chosenCar);
+            chosenAnimation = animate.animateDecline(vehicleMass, totalVelocity, chosenTrack, totalFriction, root, chosenCar);
         });
 
         uphill.setOnAction(actionEvent -> {
             Trackselections ts = new Trackselections();
             Animate animation = new Animate();
-            /*center.getChildren().clear();
-            center.getChildren().add(ts.inclinettrack());*/
             chosenTrack = ts.inclinettrack();
-            chosenAnimation = animation.animateIncline(vehicleMass, totalVelocity, chosenTrack, totalFriction, root, chosenCar);
+            chosenAnimation = animate.animateIncline(vehicleMass, totalVelocity, chosenTrack, totalFriction, root, chosenCar);
         });
 
         TextField userSetVelocity = new TextField();
@@ -224,6 +218,7 @@ public class MainScreen {
 
 
         // STYLING EVERYTHING
+        // By Sahon and Obaidah
         changeCar.setFont(menuButtonFont);
         changeEngine.setFont(menuButtonFont);
         changeTires.setFont(menuButtonFont);
@@ -292,7 +287,7 @@ public class MainScreen {
         root.setRight(goAndResetButtons);
 
 
-        //By Shon and Obaidah
+        //By Sahon and Obaidah
         // LIGHT MODE COLOR SWITCHES
         enableLightMode.setOnAction(actionEvent -> {
             /*center.setStyle("-fx-border-color: #b190bb; -fx-border-width: 5px; -fx-background-color: #7190a8;");
@@ -354,7 +349,7 @@ public class MainScreen {
             reset.setStyle(originalGoAndResetOptionStyle);
         });
 
-        //By Shon and Obaidah
+        //By Sahon and Obaidah
         enableDarkMode.setOnAction(actionEvent -> {
             /*center.setStyle("-fx-border-color: #65446f; -fx-border-width: 5px; -fx-background-color: #17083a;");
             root.setStyle("-fx-background-color: #060809");*/
@@ -410,24 +405,26 @@ public class MainScreen {
         });
 
 
+        // By Sahon and Obaidah
         go.setOnAction(actionEvent -> {
-            PhysicsEquations equations = new PhysicsEquations();
             totalVelocity += Integer.parseInt(userSetVelocity.getText());
 
             Animate animation = new Animate();
             animation.setLayoutX(400);
             animation.setLayoutY(300);
+
             center.getChildren().clear();
-            //center.getChildren().add(animation.animateIncline(vehicleMass, totalVelocity, chosenTrack, totalFriction, root));
             center.getChildren().add(chosenAnimation);
             center.setAlignment(Pos.CENTER);
+            animate.getPathTransition().play(); // We take the pathTransition from the animate class, that is being set by the comboTrackAnimation method
 
         });
 
-        //By Obaidah
+        //By Obaidah and Sahon
         reset.setOnAction(e-> {
             totalVelocity = 0;
             center.getChildren().clear();
+            animate.getPathTransition().stop();
         });
 
 

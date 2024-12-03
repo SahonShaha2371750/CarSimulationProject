@@ -18,6 +18,11 @@ import java.util.ArrayList;
 public class Animate extends Pane {
 
     Rectangle car = new Rectangle(30, 50, 40, 20);
+    public PathTransition pathTransition;
+
+    public PathTransition getPathTransition() {
+        return pathTransition;
+    }
 
 
     //By Vinith
@@ -109,7 +114,7 @@ public class Animate extends Pane {
 
 
         // PathTransition for the car animation
-        PathTransition pathTransition = new PathTransition();
+        pathTransition = new PathTransition();
         pathTransition.setPath(subPath);
         pathTransition.setNode(carType);
         pathTransition.setInterpolator(Interpolator.LINEAR);
@@ -117,7 +122,7 @@ public class Animate extends Pane {
         pathTransition.setCycleCount(1);
 
         // Play the animation
-        pathTransition.play();
+        // pathTransition.play();
 
         TextFlow energyDisplay = equations.energyDisplayComboTrack(combo, velocity, friction, mass, pathTransition);
         root.setBottom(energyDisplay);
@@ -159,10 +164,10 @@ public class Animate extends Pane {
         /*trackincline.setTranslateX(centerX);
         trackincline.setTranslateY(centerY);*/
 
-        pane.getChildren().addAll(incline, car);
+        pane.getChildren().addAll(incline, carType);
 
         // PathTransition for the car animation
-        PathTransition pathTransition = new PathTransition();
+        pathTransition = new PathTransition();
         pathTransition.setPath(trackincline);
         pathTransition.setNode(carType);
         pathTransition.setInterpolator(Interpolator.LINEAR);
@@ -170,7 +175,7 @@ public class Animate extends Pane {
         pathTransition.setCycleCount(1);
 
         // Play the animation
-        pathTransition.play();
+        //pathTransition.play();
 
         TextFlow energyDisplay = equations.createEnergyDisplayUphill(incline, velocity, friction, mass, pathTransition);
         root.setBottom(energyDisplay);
@@ -202,16 +207,16 @@ public class Animate extends Pane {
         trackdecline.setTranslateX(centerX);
         trackdecline.setTranslateY(centerY);
 
-        pane.getChildren().addAll(trackdecline, car);
+        pane.getChildren().addAll(trackdecline, carType);
 
-        PathTransition pathTransition = new PathTransition();
+        pathTransition = new PathTransition();
         pathTransition.setPath(trackdecline);
         pathTransition.setNode(carType);
         pathTransition.setInterpolator(Interpolator.LINEAR);
         pathTransition.setDuration(Duration.seconds(trackdecline.getBoundsInLocal().getWidth() / (velocity - friction)));
         pathTransition.setCycleCount(1);
 
-        pathTransition.play();
+        //pathTransition.play();
 
         TextFlow energyDisplay = equations.createEnergyDisplay(decline, velocity, friction, mass, pathTransition);
         root.setBottom(energyDisplay);
