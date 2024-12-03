@@ -20,7 +20,7 @@ public class CarSkins {
    return lamboView;
  }
 
- ImageView cybertruckSkin() {
+ public ImageView cybertruckSkin() {
 
   Image cyberimage = new Image("cybertruck.png");
 
