@@ -209,10 +209,60 @@ public class PhysicsEquations {
     }
 
 
-    public double findHeight(double progress) {
-        double[] heightInY = {200, 200, 150, 150, 200, 200};
+    public TextFlow energyDisplayComboTrack(Path trackdecline, double velocity, int friction, double mass, PathTransition pathTransition) {
+        Text keText = new Text("KE: 0 J\n");
+        Text peText = new Text("PE: 0 J\n");
+        Text meText = new Text("ME: 0 J\n");
 
-        return 7;
+        TextFlow energyDisplay = new TextFlow(keText, peText, meText);
+        energyDisplay.setPadding(new Insets(10));
+        energyDisplay.setStyle("-fx-background-color: lightgrey; -fx-border-color: black; -fx-border-width: 1px;");
+
+
+        //.currentTimeProperty serves to update the time as the animation progresses
+        // .addListener does something whenever a property is change, in this case the time
+        // obs is the property being observed, oldtime is the time before the update, newTime is the time after
+        pathTransition.currentTimeProperty().addListener((obs, oldTime, newTime) -> {
+            double progress = newTime.toSeconds() / pathTransition.getTotalDuration().toSeconds(); // finds how mch % of the animation is done
+
+            double x = 50 + progress * (750 - 50); // initialX + distance done so far ; 750 - 50 represents the distance of the track
+            double y = 100 + progress * (500 - 100);
+
+            double currentHeight = findHeight(progress);
+
+            double totalVelocity = velocity - friction;
+            double height = 600 - currentHeight;
+            double ke = 0.5 * mass * totalVelocity * totalVelocity;
+            double pe = mass * 9.8 * height;
+            double me = ke + pe;
+
+
+            keText.setText(String.format("KE: %.2f J\n", ke));
+            peText.setText(String.format("PE: %.2f J\n", pe));
+            meText.setText(String.format("ME: %.2f J\n", me));
+        });
+
+
+        pathTransition.setOnFinished(event -> {
+            keText.setText("KE: Finished\n");
+            peText.setText("PE: Finished\n");
+            meText.setText("ME: Finished\n");
+        });
+
+        return energyDisplay;
+    }
+
+    public double findHeight(double progress) {
+        double[] heightPerPart = {200, 200, 150, 150, 200, 200};
+
+        double amountOfParts = heightPerPart.length - 1;
+        double totalProgress = progress * amountOfParts; // Allows us to see which specifically where the car is in the entire track
+        int whichPartCarIsOn = (int) totalProgress; // Rounds up the totalProgress to see which part the car is on
+        double progressOnSpecificPart = totalProgress - whichPartCarIsOn; // Sees the place to see the specific place of the car in a specific part
+
+        double y1 = heightPerPart[whichPartCarIsOn];
+        double y2 = heightPerPart[whichPartCarIsOn + 1];
+        return y1 + (y2 - y1) * progressOnSpecificPart;
     }
 
     /*

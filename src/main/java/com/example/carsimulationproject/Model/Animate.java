@@ -117,7 +117,7 @@ public class Animate extends Pane {
         // Play the animation
         pathTransition.play();
 
-        TextFlow energyDisplay = equations.createEnergyDisplay(combo, velocity, friction, mass, pathTransition);
+        TextFlow energyDisplay = equations.energyDisplayComboTrack(combo, velocity, friction, mass, pathTransition);
         root.setBottom(energyDisplay);
 
         return pane;
