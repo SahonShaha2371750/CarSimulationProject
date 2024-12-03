@@ -2,6 +2,7 @@ package com.example.carsimulationproject.Model;
 
 import com.example.carsimulationproject.Controller.PhysicsEquations;
 import com.example.carsimulationproject.View.MainScreen;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.scene.transform.Rotate;
@@ -90,17 +91,26 @@ public class Trackselections {
 
         //Simplfied the track
 
-        Path trackincline = new Path();
+        Path trackincline = new Path(
+
+             new MoveTo(0,500),
+             new LineTo(830,0),
+             new LineTo(1160,0),
+             new LineTo(0,660),
+             new LineTo(0,500)
+
+
+        );
+
+
+        trackincline.setFill(Color.LAWNGREEN);
 
         trackincline.setStroke(Color.BLACK);
         trackincline.setStrokeWidth(2);
 
         //Define the points of the track
-        MoveTo start = new MoveTo(0, 500);
-        LineTo line = new LineTo(700, 100);
 
         //Add all points to the Path
-        trackincline.getElements().addAll(start, line);
 
         /*
         angle = 20;
@@ -128,6 +138,10 @@ public class Trackselections {
          */
         return trackincline;
     }
+
+
+
+
 
 
     //the angles are not all the same, this will be fixed next time
@@ -252,18 +266,18 @@ public class Trackselections {
        combo.setFill(Color.GREEN);
 
        // Start point
-       combo.getElements().add(new MoveTo(0, 200)); // Bottom-left start point
+       combo.getElements().add(new MoveTo(370, 500)); // Bottom-left start point
 
        // Top track coordinates
-       combo.getElements().add(new LineTo(200, 200)); // (200, 200)
-       combo.getElements().add(new LineTo(300, 150)); // (300, 150)
-       combo.getElements().add(new LineTo(400, 150)); // (400, 150)
-       combo.getElements().add(new LineTo(500, 200)); // (500, 200)
-       combo.getElements().add(new LineTo(700, 200)); // (700, 200)
+       combo.getElements().add(new LineTo(700, 500)); // (200, 200)
+       combo.getElements().add(new LineTo(1000, 300)); // (300, 150)
+       combo.getElements().add(new LineTo(1300, 300)); // (400, 150)
+       combo.getElements().add(new LineTo(1600, 500)); // (500, 200)
+       combo.getElements().add(new LineTo(1900, 500)); // (700, 200)
 
        // Close the shape to the bottom edge
-       combo.getElements().add(new LineTo(700, 400)); // Bottom-right
-       combo.getElements().add(new LineTo(0, 400));   // Bottom-left
+       combo.getElements().add(new LineTo(1900, 850)); // Bottom-right
+       combo.getElements().add(new LineTo(370, 850));   // Bottom-left
        combo.getElements().add(new ClosePath());      // Close the shape
 
        /*

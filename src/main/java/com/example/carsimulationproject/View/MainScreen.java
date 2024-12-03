@@ -2,7 +2,9 @@ package com.example.carsimulationproject.View;
 
 import com.example.carsimulationproject.Controller.PhysicsEquations;
 import com.example.carsimulationproject.Model.Animate;
+import com.example.carsimulationproject.Model.CarSkins;
 import com.example.carsimulationproject.Model.Trackselections;
+import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -26,6 +28,8 @@ public class MainScreen {
     public int totalVelocity = 0; // enginetype
     int totalFriction = 0; // tire (increase) + weather (depends on type of track)
     Path chosenTrack;
+    Pane chosenAnimation;
+    ImageView chosenCar;
 
     public BorderPane initialize() {
         // root.getStylesheets().add(getClass().getResource("/light-theme.css").toExternalForm());
@@ -83,8 +87,16 @@ public class MainScreen {
         MenuButton changeCar = new MenuButton("Change Car"); // Mass which affects normal force which affects friction force which will reduce velocity and acceleration || PROBABLY NOT NEEDED
         MenuItem car = new MenuItem("Car");
         MenuItem truck = new MenuItem("Truck");
-        car.setOnAction(actionEvent -> vehicleMass += 50);
-        truck.setOnAction(actionEvent -> vehicleMass += 100);
+        car.setOnAction(actionEvent -> {
+            CarSkins carSkins = new CarSkins();
+            vehicleMass = 50;
+            chosenCar = carSkins.lamborghiniSkin();
+        });
+        truck.setOnAction(actionEvent -> {
+            CarSkins carSkins = new CarSkins();
+            vehicleMass += 100;
+            chosenCar = carSkins.regulartruckSkin();
+        });
         changeCar.getItems().addAll(car, truck);
 
         MenuButton changeEngine = new MenuButton("Change Engine"); // affects acceleration
@@ -117,24 +129,29 @@ public class MainScreen {
 
         combo.setOnAction(actionEvent -> {
             Trackselections ts = new Trackselections();
+            Animate animation = new Animate();
             /*center.getChildren().clear();
             center.getChildren().add(ts.combotrack());*/
             chosenTrack = ts.combotrack();
-
+            chosenAnimation = animation.comboTrackAnimation(vehicleMass, totalVelocity, chosenTrack, totalFriction, root, chosenCar);
         });
 
         downhill.setOnAction(actionEvent -> {
             Trackselections ts = new Trackselections();
+            Animate animation = new Animate();
             /*center.getChildren().clear();
             center.getChildren().add(ts.declinetrack());*/
             chosenTrack = ts.declinetrack();
+            chosenAnimation = animation.animateDecline(vehicleMass, totalVelocity, chosenTrack, totalFriction, root, chosenCar);
         });
 
         uphill.setOnAction(actionEvent -> {
             Trackselections ts = new Trackselections();
+            Animate animation = new Animate();
             /*center.getChildren().clear();
             center.getChildren().add(ts.inclinettrack());*/
             chosenTrack = ts.inclinettrack();
+            chosenAnimation = animation.animateIncline(vehicleMass, totalVelocity, chosenTrack, totalFriction, root, chosenCar);
         });
 
         TextField userSetVelocity = new TextField();
@@ -347,7 +364,8 @@ public class MainScreen {
             animation.setLayoutX(400);
             animation.setLayoutY(300);
             center.getChildren().clear();
-            center.getChildren().add(animation.animateIncline(vehicleMass, totalVelocity, chosenTrack, totalFriction, root));
+            //center.getChildren().add(animation.animateIncline(vehicleMass, totalVelocity, chosenTrack, totalFriction, root));
+            center.getChildren().add(chosenAnimation);
             center.setAlignment(Pos.CENTER);
 
         });
