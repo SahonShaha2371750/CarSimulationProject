@@ -194,31 +194,34 @@ public class Animate extends Pane {
     }
 
     public Pane animateDecline(double velocity, Path decline) {
+
         Pane pane = new Pane();
         pane.setPrefSize(800, 600);
 
+        // Create the car rectangle
+        Rectangle car = new Rectangle(30, 20, Color.BLUE); // Smaller size for better fit
+
+        // Define the track
         Path trackdecline = new Path();
         trackdecline.setStroke(Color.BLACK);
         trackdecline.setStrokeWidth(2);
 
-        // Define the points of the decline track
-        MoveTo start = new MoveTo(0, 200);
-        LineTo bottom = new LineTo(700, 700); // Bottom
+        // Scaled points to fit within the pane
+        MoveTo start = new MoveTo(50, 100);  // Start point closer to top-left
+        LineTo bottom = new LineTo(750, 500); // End point within the pane boundaries
 
-        // Add all points to the Path
+        // Add all points to the track
         trackdecline.getElements().addAll(start, bottom);
 
-        // Create a rectangle representing the car
-        Rectangle car = new Rectangle(50, 30, Color.BLUE);
-
-        // Center the path in the pane
+        // Center the path within the pane
         double centerX = (pane.getPrefWidth() - trackdecline.getBoundsInLocal().getWidth()) / 2;
         double centerY = (pane.getPrefHeight() - trackdecline.getBoundsInLocal().getHeight()) / 2;
 
         trackdecline.setTranslateX(centerX);
         trackdecline.setTranslateY(centerY);
 
-        pane.getChildren().addAll(decline, car);
+        // Add the track and car to the pane
+        pane.getChildren().addAll(trackdecline, car);
 
         // PathTransition for the car animation
         PathTransition pathTransition = new PathTransition();

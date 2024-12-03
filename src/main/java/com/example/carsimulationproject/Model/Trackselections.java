@@ -54,8 +54,8 @@ public class Trackselections {
         trackdecline.setStrokeWidth(2);
 
         //Define the points of the track
-        MoveTo start = new MoveTo(0, 200);
-        LineTo line = new LineTo(700, 700);
+        MoveTo start = new MoveTo(0, 100);
+        LineTo line = new LineTo(700, 500);
 
         //Add all points to the Path
         trackdecline.getElements().addAll(start, line);
