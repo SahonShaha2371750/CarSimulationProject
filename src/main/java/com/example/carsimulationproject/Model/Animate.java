@@ -66,35 +66,9 @@ public class Animate extends Pane {
 
 
 
-    public Pane comboTrackAnimation(double mass, double velocity, Path combo) {
-        /*Pane pane = new Pane();
-        pane.setPrefSize(800, 600);
-
-        Rectangle car = new Rectangle(50, 30, Color.RED);
-        double centerX = (pane.getPrefWidth() - combo.getBoundsInLocal().getWidth()) / 2;
-        double centerY = (pane.getPrefHeight() - combo.getBoundsInLocal().getHeight()) / 2;
-
-        combo.setTranslateX(centerX);
-        combo.setTranslateY(centerY);
-        pane.getChildren().add(car);
-
-        Text energyDisplay = new Text(10, 500, "Energy: ");
-        energyDisplay.setFill(Color.BLACK);
-        pane.getChildren().add(combo);
-
-        PathTransition pathTransition = new PathTransition();
-        pathTransition.setPath(combo);
-        pathTransition.setNode(car);
-        pathTransition.setInterpolator(Interpolator.LINEAR);
-        pathTransition.setDuration(Duration.seconds(combo.getBoundsInLocal().getWidth() / velocity));
-        pathTransition.setCycleCount(1);
-
-
-        pathTransition.play();
-
-        return pane;*/
-
+    public Pane comboTrackAnimation(double mass, double velocity, Path combo, int friction, BorderPane root) {
         Pane pane = new Pane();
+        PhysicsEquations equations = new PhysicsEquations();
         pane.setPrefSize(800, 600);
 
         // Rectangle representing the car
@@ -127,10 +101,10 @@ public class Animate extends Pane {
         // Add the car to the pane
         pane.getChildren().addAll(combo, car);
 
-        // Text display for energy (optional)
-        Text energyDisplay = new Text(10, 500, "Energy: ");
-        energyDisplay.setFill(Color.BLACK);
-        pane.getChildren().add(energyDisplay);
+//        // Text display for energy (optional)
+//        Text energyDisplay = new Text(10, 500, "Energy: ");
+//        energyDisplay.setFill(Color.BLACK);
+//        pane.getChildren().add(energyDisplay);
 
         // PathTransition for the car animation
         PathTransition pathTransition = new PathTransition();
@@ -142,6 +116,9 @@ public class Animate extends Pane {
 
         // Play the animation
         pathTransition.play();
+
+        TextFlow energyDisplay = equations.createEnergyDisplay(combo, velocity, friction, mass, pathTransition);
+        root.setBottom(energyDisplay);
 
         return pane;
     }

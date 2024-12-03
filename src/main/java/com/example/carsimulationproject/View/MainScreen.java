@@ -347,7 +347,7 @@ public class MainScreen {
             animation.setLayoutX(400);
             animation.setLayoutY(300);
             center.getChildren().clear();
-            center.getChildren().add(animation.animateDecline(vehicleMass, totalVelocity, chosenTrack, totalFriction, root));
+            center.getChildren().add(animation.comboTrackAnimation(vehicleMass, totalVelocity, chosenTrack, totalFriction, root));
             center.setAlignment(Pos.CENTER);
 
         });

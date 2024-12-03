@@ -209,6 +209,12 @@ public class PhysicsEquations {
     }
 
 
+    public double findHeight(double progress) {
+        double[] heightInY = {200, 200, 150, 150, 200, 200};
+
+        return 7;
+    }
+
     /*
     public AnimationTimer animationTimer = new AnimationTimer() {
         private long lastUpdate = 0;
