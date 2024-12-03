@@ -163,9 +163,7 @@ public class PhysicsEquations {
 
     }
 
-
-
-
+    /*
     public AnimationTimer animationTimer = new AnimationTimer() {
         private long lastUpdate = 0;
 
@@ -184,6 +182,7 @@ public class PhysicsEquations {
 
 
     };
+
 
     public void updateSimulation(double deltaTime) {
         //Update car's kinetic energy every frame
@@ -218,7 +217,10 @@ public class PhysicsEquations {
         groupLabels.getChildren().addAll(speedText, kineticText, potentialText, mechanicalText);
         return groupLabels;
     }
+    */
 
+
+    //Setters
     public void setCarMass(double carMass) {
         this.carMass = carMass;
     }
@@ -243,12 +245,16 @@ public class PhysicsEquations {
         this.mechanicalEnergy = mechanicalEnergy;
     }
 
+
+    //Getters
     public double getKineticEnergy() {
         return kineticEnergy;
     }
+
     public double getPotentialEnergy() {
         return potentialEnergy;
     }
+
     public double getMechanicalEnergy() {
         return mechanicalEnergy;
     }

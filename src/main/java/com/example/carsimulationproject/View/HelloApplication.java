@@ -1,7 +1,5 @@
 package com.example.carsimulationproject.View;
 
-
-import com.example.carsimulationproject.View.MainScreen;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -13,8 +11,6 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         //BorderPane root = new BorderPane();
         MainScreen mainScreen = new MainScreen();
-
-
 
         Scene scene = new Scene(mainScreen.initialize());
         stage.setScene(scene);

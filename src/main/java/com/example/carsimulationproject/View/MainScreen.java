@@ -202,66 +202,84 @@ public class MainScreen {
         root.setRight(goAndResetButtons);
 
 
+        //Setting the default theme
+        String originalCenterStyle = center.getStyle();
+        String originalRootStyle = root.getStyle();
+        String originalMenuBarStyle = menuBar.getStyle();
+        String originalLabelStyle = potentialEnergyLabel.getStyle();
+        String originalButtonStyle = changeCar.getStyle();
+        String originalOptionStyle = car.getStyle();
+        String originalGoAndResetOptionStyle = go.getStyle();
+
 
         // LIGHT MODE COLOR SWITCHES
         enableLightMode.setOnAction(actionEvent -> {
-            center.setStyle("-fx-border-color: #b190bb; -fx-border-width: 5px; -fx-background-color: #7190a8;");
-            root.setStyle("-fx-background-color: #f6f8f9");
+            // Reset styles to their original values
+            center.setStyle(originalCenterStyle);
+            root.setStyle(originalRootStyle);
+            menuBar.setStyle(originalMenuBarStyle);
 
-            potentialEnergyLabel.setStyle("-fx-text-fill: #0e1416");
-            potentialEnergyLevel.setStyle("-fx-text-fill: white");
-            kineticEnergyLabel.setStyle("-fx-text-fill: #0e1416");
-            kineticEnergyLevel.setStyle("-fx-text-fill: #0e1416");
-            mechanicalEnergyLabel.setStyle("-fx-text-fill: #0e1416");
-            mechanicalEnergyLevel.setStyle("-fx-text-fill: #0e1416");
+            potentialEnergyLabel.setStyle(originalLabelStyle);
+            potentialEnergyLevel.setStyle(originalLabelStyle);
+            kineticEnergyLabel.setStyle(originalLabelStyle);
+            kineticEnergyLevel.setStyle(originalLabelStyle);
+            mechanicalEnergyLabel.setStyle(originalLabelStyle);
+            mechanicalEnergyLevel.setStyle(originalLabelStyle);
 
-            changeCar.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
-            car.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
-            truck.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
-            changeEngine.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
-            strongEngine.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
-            weakEngine.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
-            changeTires.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
-            regularTire.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
-            winterTire.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
-            changeWeather.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
-            rainy.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
-            sunny.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
-            changeTrack.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
-            combo.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
-            uphill.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
-            downhill.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            changeCar.setStyle(originalButtonStyle);
+            car.setStyle(originalOptionStyle);
+            truck.setStyle(originalOptionStyle);
+            changeEngine.setStyle(originalButtonStyle);
+            strongEngine.setStyle(originalOptionStyle);
+            weakEngine.setStyle(originalOptionStyle);
+            changeTires.setStyle(originalButtonStyle);
+            regularTire.setStyle(originalOptionStyle);
+            winterTire.setStyle(originalOptionStyle);
+            changeWeather.setStyle(originalButtonStyle);
+            rainy.setStyle(originalOptionStyle);
+            sunny.setStyle(originalOptionStyle);
+            changeTrack.setStyle(originalButtonStyle);
+            combo.setStyle(originalOptionStyle);
+            uphill.setStyle(originalOptionStyle);
+            downhill.setStyle(originalOptionStyle);
+            go.setStyle(originalGoAndResetOptionStyle);
+            reset.setStyle(originalGoAndResetOptionStyle);
         });
 
 
         enableDarkMode.setOnAction(actionEvent -> {
-            center.setStyle("-fx-border-color: #65446f; -fx-border-width: 5px; -fx-background-color: #17083a;");
-            root.setStyle("-fx-background-color: #060809");
+            center.setStyle("-fx-border-color: #65446f; -fx-border-width: 5px; -fx-background-color: #2f333d;");
+            root.setStyle("-fx-background-color: #272930");
+            menuBar.setStyle("-fx-background-color: #77777c");
 
             potentialEnergyLabel.setStyle("-fx-text-fill: #e9eff1");
-            potentialEnergyLevel.setStyle("-fx-text-fill: #e9eff1");
+            //potentialEnergyLevel.setStyle("-fx-text-fill: #f0efef");
+            potentialEnergyLevel.setFill(Color.WHITESMOKE);
             kineticEnergyLabel.setStyle("-fx-text-fill: #e9eff1");
-            kineticEnergyLevel.setStyle("-fx-text-fill: #e9eff1");
+            //kineticEnergyLevel.setStyle("-fx-text-fill: #f0efef");
+            kineticEnergyLevel.setFill(Color.WHITESMOKE);
             mechanicalEnergyLabel.setStyle("-fx-text-fill: #e9eff1");
-            mechanicalEnergyLevel.setStyle("-fx-text-fill: #e9eff1");
+            //mechanicalEnergyLevel.setStyle("-fx-text-fill: #f0efef");
+            mechanicalEnergyLevel.setFill(Color.WHITESMOKE);
 
-            changeCar.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            car.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            truck.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            changeEngine.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            strongEngine.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            weakEngine.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            changeTires.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            regularTire.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            winterTire.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            changeWeather.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            rainy.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            sunny.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            changeTrack.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            combo.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            uphill.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            downhill.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-
+            changeCar.setStyle("-fx-background-color: #6734ac; -fx-text-fill: #e9eff1");
+            car.setStyle(/*"-fx-background-color: #453659;*/" -fx-text-fill: #131542");
+            truck.setStyle(/*"-fx-background-color: #453659;*/" -fx-text-fill: #131542");
+            changeEngine.setStyle("-fx-background-color: #6734ac; -fx-text-fill: #e9eff1");
+            strongEngine.setStyle(/*"-fx-background-color: #453659;*/" -fx-text-fill: #131542");
+            weakEngine.setStyle(/*"-fx-background-color: #453659;*/" -fx-text-fill: #131542");
+            changeTires.setStyle("-fx-background-color: #6734ac; -fx-text-fill: #e9eff1");
+            regularTire.setStyle(/*"-fx-background-color: #453659;*/" -fx-text-fill: #131542");
+            winterTire.setStyle(/*"-fx-background-color: #453659;*/" -fx-text-fill: #131542");
+            changeWeather.setStyle("-fx-background-color: #6734ac; -fx-text-fill: #e9eff1");
+            rainy.setStyle(/*"-fx-background-color: #453659;*/" -fx-text-fill: #131542");
+            sunny.setStyle(/*"-fx-background-color: #453659;*/" -fx-text-fill: #131542");
+            changeTrack.setStyle("-fx-background-color: #6734ac; -fx-text-fill: #e9eff1");
+            combo.setStyle(/*"-fx-background-color: #453659;*/" -fx-text-fill: #131542");
+            uphill.setStyle(/*"-fx-background-color: #453659;*/" -fx-text-fill: #131542");
+            downhill.setStyle(/*"-fx-background-color: #453659;*/" -fx-text-fill: #131542");
+            go.setStyle("-fx-background-color: #2b5624; -fx-text-fill: #e9eff1");
+            reset.setStyle("-fx-background-color: #660a0e; -fx-text-fill: #e9eff1");
         });
 
 
