@@ -2,10 +2,12 @@ package com.example.carsimulationproject.Model;
 
 import com.example.carsimulationproject.Controller.PhysicsEquations;
 import javafx.animation.*;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
@@ -193,49 +195,46 @@ public class Animate extends Pane {
         return pane;
     }
 
-    public Pane animateDecline(double velocity, Path decline) {
-
+    public Pane animateDecline(int mass, double velocity, Path decline, int friction, BorderPane root) {
+        PhysicsEquations equations = new PhysicsEquations();
         Pane pane = new Pane();
         pane.setPrefSize(800, 600);
 
         // Create the car rectangle
-        Rectangle car = new Rectangle(30, 20, Color.BLUE); // Smaller size for better fit
+        Rectangle car = new Rectangle(30, 20, Color.BLUE);
 
         // Define the track
         Path trackdecline = new Path();
         trackdecline.setStroke(Color.BLACK);
         trackdecline.setStrokeWidth(2);
 
-        // Scaled points to fit within the pane
-        MoveTo start = new MoveTo(50, 100);  // Start point closer to top-left
-        LineTo bottom = new LineTo(750, 500); // End point within the pane boundaries
-
-        // Add all points to the track
+        MoveTo start = new MoveTo(50, 100);
+        LineTo bottom = new LineTo(750, 500);
         trackdecline.getElements().addAll(start, bottom);
 
-        // Center the path within the pane
         double centerX = (pane.getPrefWidth() - trackdecline.getBoundsInLocal().getWidth()) / 2;
         double centerY = (pane.getPrefHeight() - trackdecline.getBoundsInLocal().getHeight()) / 2;
 
         trackdecline.setTranslateX(centerX);
         trackdecline.setTranslateY(centerY);
 
-        // Add the track and car to the pane
         pane.getChildren().addAll(trackdecline, car);
 
-        // PathTransition for the car animation
         PathTransition pathTransition = new PathTransition();
         pathTransition.setPath(trackdecline);
         pathTransition.setNode(car);
         pathTransition.setInterpolator(Interpolator.LINEAR);
-        pathTransition.setDuration(Duration.seconds(trackdecline.getBoundsInLocal().getWidth() / velocity));
+        pathTransition.setDuration(Duration.seconds(trackdecline.getBoundsInLocal().getWidth() / (velocity - friction)));
         pathTransition.setCycleCount(1);
 
-        // Play the animation
         pathTransition.play();
+
+        TextFlow energyDisplay = equations.createEnergyDisplay(decline, velocity, friction, mass, pathTransition);
+        root.setBottom(energyDisplay);
 
         return pane;
     }
+
 
 
 

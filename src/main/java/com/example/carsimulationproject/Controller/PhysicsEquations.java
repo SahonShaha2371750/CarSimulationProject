@@ -1,10 +1,14 @@
 package com.example.carsimulationproject.Controller;
 
 import com.example.carsimulationproject.Model.Animate;
-import javafx.animation.AnimationTimer;
+import javafx.animation.*;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.Path;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 
@@ -162,6 +166,48 @@ public class PhysicsEquations {
         return listTime;
 
     }
+
+    public TextFlow createEnergyDisplay(Path trackdecline, double velocity, int friction, double mass, PathTransition pathTransition) {
+        Text keText = new Text("KE: 0 J\n");
+        Text peText = new Text("PE: 0 J\n");
+        Text meText = new Text("ME: 0 J\n");
+
+        TextFlow energyDisplay = new TextFlow(keText, peText, meText);
+        energyDisplay.setPadding(new Insets(10));
+        energyDisplay.setStyle("-fx-background-color: lightgrey; -fx-border-color: black; -fx-border-width: 1px;");
+
+
+        //.currentTimeProperty serves to update the time as the animation progresses
+        // .addListener does something whenever a property is change, in this case the time
+        // obs is the property being observed, oldtime is the time before the update, newTime is the time after
+        pathTransition.currentTimeProperty().addListener((obs, oldTime, newTime) -> {
+            double progress = newTime.toSeconds() / pathTransition.getTotalDuration().toSeconds(); // finds how mch % of the animation is done
+
+            double x = 50 + progress * (750 - 50); // initialX + distance done so far ; 750 - 50 represents the distance of the track
+            double y = 100 + progress * (500 - 100);
+
+            double totalVelocity = velocity - friction;
+            double height = 600 - y;
+            double ke = 0.5 * mass * totalVelocity * totalVelocity;
+            double pe = mass * 9.8 * height / 600;
+            double me = ke + pe;
+
+
+            keText.setText(String.format("KE: %.2f J\n", ke));
+            peText.setText(String.format("PE: %.2f J\n", pe));
+            meText.setText(String.format("ME: %.2f J\n", me));
+        });
+
+
+        pathTransition.setOnFinished(event -> {
+            keText.setText("KE: Finished\n");
+            peText.setText("PE: Finished\n");
+            meText.setText("ME: Finished\n");
+        });
+
+        return energyDisplay;
+    }
+
 
     /*
     public AnimationTimer animationTimer = new AnimationTimer() {

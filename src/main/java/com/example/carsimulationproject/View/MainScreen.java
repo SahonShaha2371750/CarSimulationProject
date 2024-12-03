@@ -22,11 +22,9 @@ import javafx.stage.Stage;
 
 public class MainScreen {
     public BorderPane root = new BorderPane();
-    int vehicleMass = 100;
-    public int engineAcceleration; // enginetype
-    int frictionCoefficient = 0; // tire (increase) + weather (depends on type of track)
-    public int initialVelocity; // Set by user
-    int height; // <- this will be replaced by a method
+    int vehicleMass = 0;
+    public int totalVelocity = 0; // enginetype
+    int totalFriction = 0; // tire (increase) + weather (depends on type of track)
     Path chosenTrack;
 
     public BorderPane initialize() {
@@ -85,28 +83,30 @@ public class MainScreen {
         MenuButton changeCar = new MenuButton("Change Car"); // Mass which affects normal force which affects friction force which will reduce velocity and acceleration || PROBABLY NOT NEEDED
         MenuItem car = new MenuItem("Car");
         MenuItem truck = new MenuItem("Truck");
+        car.setOnAction(actionEvent -> vehicleMass += 50);
+        truck.setOnAction(actionEvent -> vehicleMass += 100);
         changeCar.getItems().addAll(car, truck);
 
         MenuButton changeEngine = new MenuButton("Change Engine"); // affects acceleration
         MenuItem strongEngine = new MenuItem("Engine Ultra S-500");
         MenuItem weakEngine = new MenuItem("Engine F-001");
-        weakEngine.setOnAction(actionEvent -> {engineAcceleration = 10;});
-        strongEngine.setOnAction(actionEvent -> {engineAcceleration = 50;});
+        weakEngine.setOnAction(actionEvent -> {totalVelocity += 10;});
+        strongEngine.setOnAction(actionEvent -> {totalVelocity += 50;});
         changeEngine.getItems().addAll(strongEngine, weakEngine);
 
         MenuButton changeTires = new MenuButton("Change Tires"); // affects the coefficient of friction which lowers friction force
         MenuItem regularTire = new MenuItem("Regular Tires");
         MenuItem winterTire = new MenuItem("Winter Tires");
         changeTires.getItems().addAll(regularTire,winterTire);
-        regularTire.setOnAction(actionEvent -> {frictionCoefficient += 1;});
-        winterTire.setOnAction(actionEvent -> {frictionCoefficient += 10;});
+        regularTire.setOnAction(actionEvent -> {totalFriction += 1;});
+        winterTire.setOnAction(actionEvent -> {totalFriction += 10;});
 
         MenuButton changeWeather = new MenuButton("Change Weather"); // affects the coefficient of friction which increases friction force
         MenuItem sunny = new MenuItem("Sunny Weather");
         MenuItem rainy = new MenuItem("Rainy Weather");
         changeWeather.getItems().addAll(sunny, rainy);
-        sunny.setOnAction(actionEvent -> {frictionCoefficient += 1;});
-        rainy.setOnAction(actionEvent -> {frictionCoefficient += 10;});
+        sunny.setOnAction(actionEvent -> {totalFriction += 1;});
+        rainy.setOnAction(actionEvent -> {totalFriction += 10;});
 
 
         MenuButton changeTrack = new MenuButton("Change Track");
@@ -341,19 +341,19 @@ public class MainScreen {
 
         go.setOnAction(actionEvent -> {
             PhysicsEquations equations = new PhysicsEquations();
-            initialVelocity = Integer.parseInt(userSetVelocity.getText());
+            totalVelocity += Integer.parseInt(userSetVelocity.getText());
 
             Animate animation = new Animate();
             animation.setLayoutX(400);
             animation.setLayoutY(300);
-            //center.getChildren().add(animation.comboTrackAnimation(vehicleMass, initialVelocity, chosenTrack));
-            center.getChildren().add(animation.animateDecline(initialVelocity, chosenTrack));
-            //center.getChildren().add(animation.comboTrackAnimation(vehicleMass, initialVelocity, chosenTrack));
+            center.getChildren().clear();
+            center.getChildren().add(animation.animateDecline(vehicleMass, totalVelocity, chosenTrack, totalFriction, root));
             center.setAlignment(Pos.CENTER);
 
         });
 
         reset.setOnAction(e-> {
+            totalVelocity = 0;
             center.getChildren().clear();
         });
 
@@ -365,7 +365,7 @@ public class MainScreen {
 
         Stage imageWindow = new Stage();
 
-        Image lamboimage = new Image("file:C:\\Users\\user\\IdeaProjects\\CarSimulationProject\\src\\main\\resources\\lambo.png");
+        Image lamboimage = new Image("lambo.png");
 
         ImageView lamboView = new ImageView(lamboimage);
 
@@ -386,7 +386,7 @@ public class MainScreen {
 
         Stage imageWindow = new Stage();
 
-        Image cyberimage = new Image("file:C:\\Users\\user\\IdeaProjects\\CarSimulationProject\\src\\main\\resources\\cybertruck.png");
+        Image cyberimage = new Image("cybertruck.png");
 
         ImageView cyberView = new ImageView(cyberimage);
 
@@ -407,7 +407,7 @@ public class MainScreen {
 
         Stage imageWindow = new Stage();
 
-        Image truckimage = new Image("file:C:\\Users\\user\\IdeaProjects\\CarSimulationProject\\src\\main\\resources\\truck.png");
+        Image truckimage = new Image("truck.png");
 
         ImageView truckView = new ImageView(truckimage);
 

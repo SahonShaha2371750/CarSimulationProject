@@ -23,7 +23,7 @@ public class Trackselections {
 
 
 // default track
-    public Path defaulttrack() {
+    /*public Path defaulttrack() {
 
         angle = 0;
         distance = 200;
@@ -39,7 +39,7 @@ public class Trackselections {
         ArrayList<Double> timesAtPointsdefault = pe.timeAtPoint(ms.initialVelocity,distance,ms.engineAcceleration,angle,0.5,"flat");
         animate.timelineanimation(pointsdefault , timesAtPointsdefault );
         return trackdefault;
-    }
+    }*/
 
 
 // decline track
