@@ -80,16 +80,18 @@ public class MainScreen {
                     "\n" +
                     "\tUse the menus on the left to modify the simulation.\n" +
                     "\tFor example, click on \"Change Track\" to select a type of track.\n" +
-                    "\tMake sure to select at least one item from each menu before running.\n" +
+                    "\tMake sure to select at least one item from each menu\n" +
+                    "\tbefore running.\n" +
                     "\n" +
                     "  - Exit\n" +
                     "\n" +
                     "\tClick the \"X\" button on the top right corner or " +
-                    "\n\tpress Alt + F4 to close the app.\n" +
+                    "\n\tpress Alt + F4 to close the application.\n" +
                     "\n  - Need More Help?\n" +
                     "\n" +
-                    "\tSee the full \"User Guide\" that comes with the application.\n" +
-                    "\tEnjoy driving!\n\n\n" +
+                    "\tSee the full \"User Guide\" document that comes with\n" +
+                    "\tthe application.\n" +
+                    "\n\tEnjoy driving!\n\n\n" +
                     "\tDeveloped by: Team Vroom\n";
 
             Text userGuideText = new Text(text);
@@ -499,12 +501,10 @@ public class MainScreen {
     private void showCodePhysicsEquations() {
         Stage codeWindow = new Stage();
         //Add the code here
-        String codeSnippet = "Add code here \n\n\n\n\n 34 \n\n\n\n\n 2342342 \n\n\n\n\n 454";
+        String codeSnippet = "Add code here";
 
         Text codeArea = new Text(codeSnippet);
 
-        //StackPane codeRoot = new StackPane(codeArea);
-        //StackPane userGuideRoot = new StackPane(codeRoot);
         ScrollPane scrollPane = new ScrollPane(codeArea);
 
         // Hide the scrollbars but keep scrolling functional
@@ -524,8 +524,12 @@ public class MainScreen {
 
         Text codeArea = new Text(codeSnippet);
 
-        StackPane codeRoot = new StackPane(codeArea);
-        Scene codeScene = new Scene(codeRoot, 400, 300);
+        ScrollPane scrollPane = new ScrollPane(codeArea);
+
+        // Hide the scrollbars but keep scrolling functional
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        Scene codeScene = new Scene(scrollPane, 400, 300);
         codeWindow.setTitle("Animate");
         codeWindow.setScene(codeScene);
         codeWindow.show();
@@ -539,8 +543,12 @@ public class MainScreen {
 
         Text codeArea = new Text(codeSnippet);
 
-        StackPane codeRoot = new StackPane(codeArea);
-        Scene codeScene = new Scene(codeRoot, 400, 300);
+        ScrollPane scrollPane = new ScrollPane(codeArea);
+
+        // Hide the scrollbars but keep scrolling functional
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        Scene codeScene = new Scene(scrollPane, 400, 300);
         codeWindow.setTitle("Model");
         codeWindow.setScene(codeScene);
         codeWindow.show();
@@ -554,8 +562,12 @@ public class MainScreen {
 
         Text codeArea = new Text(codeSnippet);
 
-        StackPane codeRoot = new StackPane(codeArea);
-        Scene codeScene = new Scene(codeRoot, 400, 300);
+        ScrollPane scrollPane = new ScrollPane(codeArea);
+
+        // Hide the scrollbars but keep scrolling functional
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        Scene codeScene = new Scene(scrollPane, 400, 300);
         codeWindow.setTitle("MainScreen");
         codeWindow.setScene(codeScene);
         codeWindow.show();
