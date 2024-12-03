@@ -3,8 +3,10 @@ package com.example.carsimulationproject.Model;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+//By Vinith
 public class CarSkins {
 
+ //By Vinith
  public ImageView lamborghiniSkin() {
 
   Image lamboimage = new Image("lambo.png");
@@ -20,6 +22,7 @@ public class CarSkins {
    return lamboView;
  }
 
+ //By Vinith
  public ImageView cybertruckSkin() {
 
   Image cyberimage = new Image("cybertruck.png");
@@ -33,6 +36,7 @@ public class CarSkins {
    return cyberView;
  }
 
+ //By Vinith
  public ImageView regulartruckSkin() {
 
   Image truckimage = new Image("truck.png");

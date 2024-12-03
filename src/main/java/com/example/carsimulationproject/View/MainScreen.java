@@ -65,17 +65,42 @@ public class MainScreen {
         MenuItem enableDarkMode = new MenuItem("Enable Dark Mode");
         changeTheme.getItems().addAll(enableLightMode, enableDarkMode);
 
-        Menu userGuide = new Menu("User Guide");
+        Menu userGuide = new Menu("Help/User Guide");
         MenuItem viewUserGuide = new MenuItem("View User Guide");
         viewUserGuide.setOnAction(e -> {
             Stage userGuideWindow = new Stage();
             //Add user guide text here
-            String text = "Add text here";
+            String text = "\n   Welcome to the Car Simulation Application!\n" +
+                    "\n\n" +
+                    "  - Navigation\n" +
+                    "\n" +
+                    "\tUse the Menu Bar at the top to access features.\n" +
+                    "\tClick on buttons for specific actions.\n\n" +
+                    "  - Functions\n" +
+                    "\n" +
+                    "\tUse the menus on the left to modify the simulation.\n" +
+                    "\tFor example, click on \"Change Track\" to select a type of track.\n" +
+                    "\tMake sure to select at least one item from each menu before running.\n" +
+                    "\n" +
+                    "  - Exit\n" +
+                    "\n" +
+                    "\tClick the \"X\" button on the top right corner or " +
+                    "\n\tpress Alt + F4 to close the app.\n" +
+                    "\n  - Need More Help?\n" +
+                    "\n" +
+                    "\tSee the full \"User Guide\" that comes with the application.\n" +
+                    "\tEnjoy driving!\n\n\n" +
+                    "\tDeveloped by: Team Vroom\n";
 
             Text userGuideText = new Text(text);
 
             StackPane userGuideRoot = new StackPane(userGuideText);
-            Scene scene = new Scene(userGuideRoot, 400, 300);
+            ScrollPane scrollPane = new ScrollPane(userGuideRoot);
+
+            // Hide the scrollbars but keep scrolling functional
+            scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+            scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+            Scene scene = new Scene(scrollPane, 400, 300);
             userGuideWindow.setTitle("User Guide");
             userGuideWindow.setScene(scene);
             userGuideWindow.show();
@@ -265,7 +290,7 @@ public class MainScreen {
         root.setRight(goAndResetButtons);
 
 
-
+        //By Shon and Obaidah
         // LIGHT MODE COLOR SWITCHES
         enableLightMode.setOnAction(actionEvent -> {
             /*center.setStyle("-fx-border-color: #b190bb; -fx-border-width: 5px; -fx-background-color: #7190a8;");
@@ -327,7 +352,7 @@ public class MainScreen {
             reset.setStyle(originalGoAndResetOptionStyle);
         });
 
-
+        //By Shon and Obaidah
         enableDarkMode.setOnAction(actionEvent -> {
             /*center.setStyle("-fx-border-color: #65446f; -fx-border-width: 5px; -fx-background-color: #17083a;");
             root.setStyle("-fx-background-color: #060809");*/
@@ -397,6 +422,7 @@ public class MainScreen {
 
         });
 
+        //By Obaidah
         reset.setOnAction(e-> {
             totalVelocity = 0;
             center.getChildren().clear();
@@ -469,20 +495,28 @@ public class MainScreen {
 
     }
 
+    //By Obaidah
     private void showCodePhysicsEquations() {
         Stage codeWindow = new Stage();
         //Add the code here
-        String codeSnippet = "Add code here";
+        String codeSnippet = "Add code here \n\n\n\n\n 34 \n\n\n\n\n 2342342 \n\n\n\n\n 454";
 
         Text codeArea = new Text(codeSnippet);
 
-        StackPane codeRoot = new StackPane(codeArea);
-        Scene codeScene = new Scene(codeRoot, 400, 300);
+        //StackPane codeRoot = new StackPane(codeArea);
+        //StackPane userGuideRoot = new StackPane(codeRoot);
+        ScrollPane scrollPane = new ScrollPane(codeArea);
+
+        // Hide the scrollbars but keep scrolling functional
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        Scene codeScene = new Scene(scrollPane, 400, 300);
         codeWindow.setTitle("PhysicsEquations");
         codeWindow.setScene(codeScene);
         codeWindow.show();
     }
 
+    //By Obaidah
     private void showCodeAnimate() {
         Stage codeWindow = new Stage();
         //Add the code here
@@ -497,6 +531,7 @@ public class MainScreen {
         codeWindow.show();
     }
 
+    //By Obaidah
     private void showCodeModel() {
         Stage codeWindow = new Stage();
         //Add the code here
@@ -511,6 +546,7 @@ public class MainScreen {
         codeWindow.show();
     }
 
+    //By Obaidah
     private void showCodeMainScreen() {
         Stage codeWindow = new Stage();
         //Add the code here

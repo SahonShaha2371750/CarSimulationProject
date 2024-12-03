@@ -12,6 +12,7 @@ import javafx.util.Duration;
 
 import java.util.ArrayList;
 
+//By Obaidah, Shon, and Vinith
 public class PhysicsEquations {
 
     public double g = 9.8;
@@ -24,6 +25,7 @@ public class PhysicsEquations {
     double potentialEnergy = 0;
     double mechanicalEnergy = 0;
 
+    //By Obaidah
     public double findFriction(double mu, double Fnormal) {
 
         double friction = mu * Fnormal;
@@ -32,7 +34,7 @@ public class PhysicsEquations {
 
     }
 
-    //only works on a flat road
+    //By Obaidah
     public double findAcceleration(double deltaV, double deltaT) {
 
         double acceleration = deltaV / deltaT;
@@ -42,6 +44,7 @@ public class PhysicsEquations {
 
     }
 
+    //By Obaidah
     public double findTime(double distance, double velocity) {
 
         double time = distance / velocity;
@@ -50,6 +53,7 @@ public class PhysicsEquations {
 
     }
 
+    //By Obaidah
     public double findFnormal(double mass) {
 
         double Fnormal = mass * g;
@@ -58,6 +62,7 @@ public class PhysicsEquations {
 
     }
 
+    //By Obaidah
     public double findFnormalOnRamp(double mass, double angle) {
 
         double angleInRadians = Math.toRadians(angle);
@@ -67,6 +72,7 @@ public class PhysicsEquations {
 
     }
 
+    //By Obaidah
     public double findKineticEnergy(double mass, double speed) {
 
         double kineticEnergy = 0.5 * mass * (speed * speed);
@@ -75,6 +81,7 @@ public class PhysicsEquations {
 
     }
 
+    //By Obaidah
     public double findPotentialEnergy(double mass, double height) {
 
         double potentialEnergy = mass * g * height;
@@ -83,6 +90,7 @@ public class PhysicsEquations {
 
     }
 
+    //By Obaidah
     public double findMechanicalEnergy(double kineticEnergy, double potentialEnergy) {
 
         double mechanicalEnergy = kineticEnergy + potentialEnergy;
@@ -91,6 +99,7 @@ public class PhysicsEquations {
 
     }
 
+    //By Obaidah and Vinith
     public double findNetAcceleration(double EngineAcceleration, double angle, double mu, String direction) {
 
         double angleInRadians = Math.toRadians(angle);
@@ -114,6 +123,7 @@ public class PhysicsEquations {
 
     }
 
+    //By Shon
     public ArrayList<Double> findPoints(double startx, double starty, double distance, double angle, String condition) {
         ArrayList<Double> arrayListPositions = new ArrayList<>();
 
@@ -138,7 +148,7 @@ public class PhysicsEquations {
         return arrayListPositions;
     }
 
-
+    //By Shon
     public ArrayList<Double> velocitiesAtPoint(double initialSpeed, double distance,
                                                double engineAcceleration, double angle, double mu, String direction) {
 
@@ -153,6 +163,7 @@ public class PhysicsEquations {
         return listvelocities;
     }
 
+    //By Shon
     public ArrayList<Double> timeAtPoint(double initialSpeed, double distance,
                                          double engineAcceleration, double angle, double mu, String direction) {
 
@@ -167,6 +178,7 @@ public class PhysicsEquations {
 
     }
 
+    //By Shon
     public TextFlow createEnergyDisplay(Path trackdecline, double velocity, int friction, double mass, PathTransition pathTransition) {
         Text keText = new Text("KE: 0 J\n");
         Text peText = new Text("PE: 0 J\n");
@@ -208,6 +220,7 @@ public class PhysicsEquations {
         return energyDisplay;
     }
 
+    //By Shon
     public TextFlow createEnergyDisplayUphill(Path trackdecline, double velocity, int friction, double mass, PathTransition pathTransition) {
         Text keText = new Text("KE: 0 J\n");
         Text peText = new Text("PE: 0 J\n");
@@ -254,7 +267,7 @@ public class PhysicsEquations {
         return energyDisplay;
     }
 
-
+    //By Shon
     public TextFlow energyDisplayComboTrack(Path trackdecline, double velocity, int friction, double mass, PathTransition pathTransition) {
         Text keText = new Text("KE: 0 J\n");
         Text peText = new Text("PE: 0 J\n");
@@ -298,6 +311,7 @@ public class PhysicsEquations {
         return energyDisplay;
     }
 
+    //By Shon
     public double findHeight(double progress) {
         double[] heightPerPart = {200, 200, 150, 150, 200, 200};
 
@@ -311,63 +325,7 @@ public class PhysicsEquations {
         return y1 + (y2 - y1) * progressOnSpecificPart;
     }
 
-    /*
-    public AnimationTimer animationTimer = new AnimationTimer() {
-        private long lastUpdate = 0;
-
-
-        @Override
-        public void handle(long now) {
-            if (lastUpdate > 0) {
-                double deltaTime = (now - lastUpdate) / 1_000_000_000.0;
-                updateSimulation(deltaTime);
-            }
-
-            lastUpdate = now;
-            drawEnergyValues();
-
-        }
-
-
-    };
-
-
-    public void updateSimulation(double deltaTime) {
-        //Update car's kinetic energy every frame
-        kineticEnergy = findKineticEnergy(carMass, carSpeed);
-
-        //Update car's potential energy every frame
-        potentialEnergy = findPotentialEnergy(carMass, height);
-
-        //Update car's mechanical energy every frame
-        mechanicalEnergy = findMechanicalEnergy(findKineticEnergy(carMass, carSpeed), findPotentialEnergy(carMass, height));
-
-    }
-
-    public Group drawEnergyValues() {
-        Text speedText = new Text("Speed: " + carSpeed + " km/h");
-        speedText.setX(10);
-        speedText.setY(20);
-
-        Text kineticText = new Text("Kinetic Energy: " + kineticEnergy + " J");
-        kineticText.setX(10);
-        kineticText.setY(40);
-
-        Text potentialText = new Text("Potential Energy: " + potentialEnergy + " J");
-        potentialText.setX(10);
-        potentialText.setY(60);
-
-        Text mechanicalText = new Text("Mechanical Energy: " + mechanicalEnergy + " J");
-        mechanicalText.setX(10);
-        mechanicalText.setY(80);
-
-        Group groupLabels = new Group();
-        groupLabels.getChildren().addAll(speedText, kineticText, potentialText, mechanicalText);
-        return groupLabels;
-    }
-    */
-
-
+    //By Shon
     //Setters
     public void setCarMass(double carMass) {
         this.carMass = carMass;
@@ -393,7 +351,7 @@ public class PhysicsEquations {
         this.mechanicalEnergy = mechanicalEnergy;
     }
 
-
+    //By Obaidah
     //Getters
     public double getKineticEnergy() {
         return kineticEnergy;

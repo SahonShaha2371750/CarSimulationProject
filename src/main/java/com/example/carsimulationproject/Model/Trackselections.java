@@ -23,7 +23,7 @@ public class Trackselections {
     }
 
 
-// default track
+      //Default track
     /*public Path defaulttrack() {
 
         angle = 0;
@@ -43,7 +43,8 @@ public class Trackselections {
     }*/
 
 
-// decline track
+    //By Vinith and Obaidah
+    //Decline track
     public  Path declinetrack() {
 
 
@@ -85,6 +86,7 @@ public class Trackselections {
         return trackdecline;
     }
 
+    //By Vinith and Obaidah
     public Path inclinettrack() {
 
 
@@ -146,7 +148,7 @@ public class Trackselections {
 
     //the angles are not all the same, this will be fixed next time
 
-
+    //By Obaidah
    public Path combotrack() {
 
         /*
