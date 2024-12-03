@@ -205,9 +205,9 @@ public class PhysicsEquations {
             double me = ke + pe;
 
 
-            keText.setText(String.format("KE: %.2f J\n", ke));
-            peText.setText(String.format("PE: %.2f J\n", pe));
-            meText.setText(String.format("ME: %.2f J\n", me));
+            keText.setText(String.format("Kinetic Energy: %.2f J\n", ke));
+            peText.setText(String.format("Potential Energy: %.2f J\n", pe));
+            meText.setText(String.format("Mechanical Energy: %.2f J\n", me));
         });
 
 
@@ -247,31 +247,31 @@ public class PhysicsEquations {
             double height = startHeight + progress * (distance);
 
             double totalVelocity = velocity - friction;
-            double ke = 0.5 * mass * totalVelocity * totalVelocity;
-            double pe = mass * 9.8 * height;
+            double ke = (0.5 * mass * totalVelocity * totalVelocity)/1000;
+            double pe = (mass * 9.8 * height)/1000;
             double me = ke + pe;
 
 
-            keText.setText(String.format("KE: %.2f J\n", ke));
-            peText.setText(String.format("PE: %.2f J\n", pe));
-            meText.setText(String.format("ME: %.2f J\n", me));
+            keText.setText(String.format("Kinetic Energy: %.2f kJ\n", ke));
+            peText.setText(String.format("Potential Energy: %.2f kJ\n", pe));
+            meText.setText(String.format("Mechanical Energy: %.2f kJ\n", me));
         });
 
 
-        pathTransition.setOnFinished(event -> {
+        /*pathTransition.setOnFinished(event -> {
             keText.setText("KE: Finished\n");
             peText.setText("PE: Finished\n");
             meText.setText("ME: Finished\n");
-        });
+        });*/
 
         return energyDisplay;
     }
 
     //By Shon
     public TextFlow energyDisplayComboTrack(Path trackdecline, double velocity, int friction, double mass, PathTransition pathTransition) {
-        Text keText = new Text("KE: 0 J\n");
-        Text peText = new Text("PE: 0 J\n");
-        Text meText = new Text("ME: 0 J\n");
+        Text keText = new Text("Kinetic Energy: 0 J\n");
+        Text peText = new Text("Potential Energy: 0 J\n");
+        Text meText = new Text("Mechanical Energy: 0 J\n");
 
         TextFlow energyDisplay = new TextFlow(keText, peText, meText);
         energyDisplay.setPadding(new Insets(10));

@@ -189,9 +189,6 @@ public class Animate extends Pane {
         Pane pane = new Pane();
         pane.setPrefSize(800, 600);
 
-        // Create the car rectangle
-        Rectangle car = new Rectangle(30, 20, Color.BLUE);
-
         // Define the track
         Path trackdecline = new Path();
         trackdecline.setStroke(Color.BLACK);

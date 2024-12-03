@@ -116,12 +116,12 @@ public class MainScreen {
         MenuItem truck = new MenuItem("Truck");
         car.setOnAction(actionEvent -> {
             CarSkins carSkins = new CarSkins();
-            vehicleMass = 50;
+            vehicleMass = 1520;
             chosenCar = carSkins.lamborghiniSkin();
         });
         truck.setOnAction(actionEvent -> {
             CarSkins carSkins = new CarSkins();
-            vehicleMass += 100;
+            vehicleMass += 4500;
             chosenCar = carSkins.regulartruckSkin();
         });
         changeCar.getItems().addAll(car, truck);
