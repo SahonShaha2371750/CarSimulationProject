@@ -115,7 +115,34 @@ public class MainScreen {
 
         MenuButton changeWeather = new MenuButton("Change Weather"); // affects the coefficient of friction which increases friction force
         MenuItem sunny = new MenuItem("Sunny Weather");
+
+        sunny.setOnAction(actionEvent -> {
+
+            Image sunnybackgroundimage = new Image("file:sunnysky.jpg");
+
+
+            BackgroundImage backgroundImage = new BackgroundImage(
+                    sunnybackgroundimage,
+                    BackgroundRepeat.NO_REPEAT, // No repeat
+                    BackgroundRepeat.NO_REPEAT, // No repeat
+                    BackgroundPosition.CENTER,  // Center the image
+                    BackgroundSize.DEFAULT      // Default size
+            );
+
+            // Create a Background object with the BackgroundImage
+            Background sunnybackground = new Background(backgroundImage);
+            center.setBackground(sunnybackground);
+        });
+
+
         MenuItem rainy = new MenuItem("Rainy Weather");
+
+        rainy.setOnAction(actionEvent -> {
+
+
+        });
+
+
         changeWeather.getItems().addAll(sunny, rainy);
         sunny.setOnAction(actionEvent -> {totalFriction += 1;});
         rainy.setOnAction(actionEvent -> {totalFriction += 10;});

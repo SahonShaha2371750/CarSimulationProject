@@ -87,9 +87,12 @@ public class Animate extends Pane {
         subPath.setStroke(Color.BLACK);
         subPath.setStrokeWidth(2);
 
+
         // Add path elements up to the stopping point
         subPath.getElements().add(new MoveTo(370, 500)); // Start point
         subPath.getElements().add(new LineTo(700, 500)); // Add first segment
+        Rotate rotatefirst = new Rotate();
+
         subPath.getElements().add(new LineTo(1000, 300)); // Add second segment
         subPath.getElements().add(new LineTo(1300, 300)); // Add third segment
         subPath.getElements().add(new LineTo(1600, 500)); // Add fourth segment
