@@ -149,6 +149,13 @@ public class Animate extends Pane {
         Pane pane = new Pane();
         pane.setPrefSize(800, 600);
 
+        Rectangle car = new Rectangle(50, 30, Color.RED);
+        double centerX = (pane.getPrefWidth() - incline.getBoundsInLocal().getWidth()) / 2;
+        double centerY = (pane.getPrefHeight() - incline.getBoundsInLocal().getHeight()) / 2;
+
+        incline.setTranslateX(centerX);
+        incline.setTranslateY(centerY);
+
         Path trackincline = new Path();
         trackincline.setStroke(Color.BLACK);
         trackincline.setStrokeWidth(2);
@@ -157,18 +164,18 @@ public class Animate extends Pane {
         MoveTo start = new MoveTo(0, 500);
         LineTo summit = new LineTo(700, 100); // Summit
 
-        // Add all points to the Path
-        trackincline.getElements().addAll(start, summit);
-
-        // Create a rectangle representing the car
-        Rectangle car = new Rectangle(50, 30, Color.RED);
-
-        // Center the path in the pane
-        double centerX = (pane.getPrefWidth() - trackincline.getBoundsInLocal().getWidth()) / 2;
-        double centerY = (pane.getPrefHeight() - trackincline.getBoundsInLocal().getHeight()) / 2;
-
         trackincline.setTranslateX(centerX);
         trackincline.setTranslateY(centerY);
+
+        trackincline.getElements().addAll(start, summit);
+
+
+        // Center the path in the pane
+        /*double centerX = (pane.getPrefWidth() - trackincline.getBoundsInLocal().getWidth()) / 2;
+        double centerY = (pane.getPrefHeight() - trackincline.getBoundsInLocal().getHeight()) / 2;*/
+
+        /*trackincline.setTranslateX(centerX);
+        trackincline.setTranslateY(centerY);*/
 
         pane.getChildren().addAll(incline, car);
 
