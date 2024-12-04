@@ -221,9 +221,9 @@ public class PhysicsEquations {
 
 
         pathTransition.setOnFinished(event -> {
-            keText.setText("KE: Finished\n");
-            peText.setText("PE: Finished\n");
-            meText.setText("ME: Finished\n");
+            keText.setText("Kinetic Energy: Finished\n");
+            peText.setText("Potential Energy: Finished\n");
+            meText.setText("Mechanical Energy: Finished\n");
         });
 
         return energyDisplay;
@@ -271,11 +271,11 @@ public class PhysicsEquations {
         });
 
 
-        /*pathTransition.setOnFinished(event -> {
-            keText.setText("KE: Finished\n");
-            peText.setText("PE: Finished\n");
-            meText.setText("ME: Finished\n");
-        });*/
+        pathTransition.setOnFinished(event -> {
+            keText.setText("Kinetic Energy: Finished\n");
+            peText.setText("Potential Energy: Finished\n");
+            meText.setText("Mechanicaly Energy: Finished\n");
+        });
 
         return energyDisplay;
     }
@@ -312,16 +312,16 @@ public class PhysicsEquations {
             double me = ke + pe;
 
 
-            keText.setText(String.format("KE: %.2f kJ\n", ke));
-            peText.setText(String.format("PE: %.2f kJ\n", pe));
+            keText.setText(String.format("Kinetic Energy: %.2f kJ\n", ke));
+            peText.setText(String.format("Potential Energy: %.2f kJ\n", pe));
             meText.setText(String.format("ME: %.2f kJ\n", me));
         });
 
 
         pathTransition.setOnFinished(event -> {
-            keText.setText("KE: Finished\n");
-            peText.setText("PE: Finished\n");
-            meText.setText("ME: Finished\n");
+            keText.setText("Kinetic Energy: Finished\n");
+            peText.setText("Potential Energy: Finished\n");
+            meText.setText("Mechanicaly Energy: Finished\n");
         });
 
         return energyDisplay;
