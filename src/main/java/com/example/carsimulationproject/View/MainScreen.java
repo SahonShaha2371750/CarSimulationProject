@@ -2,6 +2,7 @@ package com.example.carsimulationproject.View;
 
 import com.example.carsimulationproject.Model.Animate;
 import com.example.carsimulationproject.Model.CarSkins;
+import com.example.carsimulationproject.Model.CodeViewer;
 import com.example.carsimulationproject.Model.Trackselections;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -31,16 +32,17 @@ public class MainScreen {
         MenuBar menuBar = new MenuBar();
         Animate animate = new Animate();
         StackPane center = new StackPane();
+        CodeViewer codeViewer = new CodeViewer();
 
         Menu showCode = new Menu("Show Code");
         MenuItem physicsEquations = new MenuItem("PhysicsEquations");
-        physicsEquations.setOnAction(e -> { showCodePhysicsEquations(); });
+        physicsEquations.setOnAction(e -> { codeViewer.showCodePhysicsEquations(); });
         MenuItem animateCode = new MenuItem("Animate");
-        animateCode.setOnAction(e -> { showCodeAnimate(); });
-        MenuItem modelClass = new MenuItem("Model");
-        modelClass.setOnAction(e -> { showCodeModel(); });
+        animateCode.setOnAction(e -> { codeViewer.showCodeAnimate(); });
+        MenuItem modelClass = new MenuItem("Tracks");
+        modelClass.setOnAction(e -> { codeViewer.showCodeModel(); });
         MenuItem mainScreen = new MenuItem("MainScreen");
-        mainScreen.setOnAction(e -> { showCodeMainScreen(); });
+        mainScreen.setOnAction(e -> { codeViewer.showCodeMainScreen(); });
 
         showCode.getItems().addAll(physicsEquations, animateCode, modelClass, mainScreen);
 
@@ -218,15 +220,6 @@ public class MainScreen {
         inputvelocity.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
         TextField userSetVelocity = new TextField();
 
-        /*Label potentialEnergyLabel = new Label("Potential Energy: ");
-        Text potentialEnergyLevel = new Text("0");
-
-        Label kineticEnergyLabel = new Label("Kinetic Energy: ");
-        Text kineticEnergyLevel = new Text("0");
-
-        Label mechanicalEnergyLabel = new Label("Mechanical Energy: ");
-        Text mechanicalEnergyLevel = new Text("0");*/
-
         Button go = new Button("Go!");
         Button reset = new Button("Reset!");
 
@@ -252,31 +245,12 @@ public class MainScreen {
         menuButtonGrid.add(userSetVelocity, 1,3,1,1);
         menuButtonGrid.add(inputvelocity,0,3,1,1);
 
-        /*GridPane energyGrid = new GridPane();
-        energyGrid.setHgap(20);
-        energyGrid.setVgap(50);
-        energyGrid.setAlignment(Pos.CENTER);
-        potentialEnergyLabel.setFont(menuButtonFont);
-        kineticEnergyLabel.setFont(menuButtonFont);
-        mechanicalEnergyLabel.setFont(menuButtonFont);
-        potentialEnergyLevel.setFont(Font.font(20));
-        kineticEnergyLevel.setFont(Font.font(20));
-        mechanicalEnergyLevel.setFont(Font.font(20));
-
-        energyGrid.add(potentialEnergyLabel, 0, 0);
-        energyGrid.add(potentialEnergyLevel, 0, 1);
-        energyGrid.add(kineticEnergyLabel, 1, 0);
-        energyGrid.add(kineticEnergyLevel, 1, 1);
-        energyGrid.add(mechanicalEnergyLabel, 2, 0);
-        energyGrid.add(mechanicalEnergyLevel, 2, 1);*/
-
         VBox vBox = new VBox();
         vBox.setAlignment(Pos.CENTER);
         vBox.getChildren().addAll(menuButtonGrid);
 
         HBox energyLevels = new HBox();
         energyLevels.setAlignment(Pos.CENTER);
-        //energyLevels.getChildren().addAll(energyGrid);
 
         Pane goAndResetButtons = new Pane();
 
@@ -315,13 +289,6 @@ public class MainScreen {
         // LIGHT MODE COLOR SWITCHES
         enableLightMode.setOnAction(actionEvent -> {
 
-            /*potentialEnergyLabel.setStyle("-fx-text-fill: #0e1416");
-            potentialEnergyLevel.setStyle("-fx-text-fill: white");
-            kineticEnergyLabel.setStyle("-fx-text-fill: #0e1416");
-            kineticEnergyLevel.setStyle("-fx-text-fill: #0e1416");
-            mechanicalEnergyLabel.setStyle("-fx-text-fill: #0e1416");
-            mechanicalEnergyLevel.setStyle("-fx-text-fill: #0e1416");
-*/
             changeCar.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
             lambomenuitem.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
             cybertruckmenuitem.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
@@ -490,80 +457,6 @@ public class MainScreen {
 
     }
 
-    //By Obaidah
-    private void showCodePhysicsEquations() {
-        Stage codeWindow = new Stage();
-        //Add the code here
-        String codeSnippet = "Add code here";
 
-        Text codeArea = new Text(codeSnippet);
-
-        ScrollPane scrollPane = new ScrollPane(codeArea);
-
-        // Hide the scrollbars but keep scrolling functional
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        Scene codeScene = new Scene(scrollPane, 400, 300);
-        codeWindow.setTitle("PhysicsEquations");
-        codeWindow.setScene(codeScene);
-        codeWindow.show();
-    }
-
-    //By Obaidah
-    private void showCodeAnimate() {
-        Stage codeWindow = new Stage();
-        //Add the code here
-        String codeSnippet = "Add code here";
-
-        Text codeArea = new Text(codeSnippet);
-
-        ScrollPane scrollPane = new ScrollPane(codeArea);
-
-        // Hide the scrollbars but keep scrolling functional
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        Scene codeScene = new Scene(scrollPane, 400, 300);
-        codeWindow.setTitle("Animate");
-        codeWindow.setScene(codeScene);
-        codeWindow.show();
-    }
-
-    //By Obaidah
-    private void showCodeModel() {
-        Stage codeWindow = new Stage();
-        //Add the code here
-        String codeSnippet = "Add code here";
-
-        Text codeArea = new Text(codeSnippet);
-
-        ScrollPane scrollPane = new ScrollPane(codeArea);
-
-        // Hide the scrollbars but keep scrolling functional
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        Scene codeScene = new Scene(scrollPane, 400, 300);
-        codeWindow.setTitle("Model");
-        codeWindow.setScene(codeScene);
-        codeWindow.show();
-    }
-
-    //By Obaidah
-    private void showCodeMainScreen() {
-        Stage codeWindow = new Stage();
-        //Add the code here
-        String codeSnippet = "Add code here";
-
-        Text codeArea = new Text(codeSnippet);
-
-        ScrollPane scrollPane = new ScrollPane(codeArea);
-
-        // Hide the scrollbars but keep scrolling functional
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        Scene codeScene = new Scene(scrollPane, 400, 300);
-        codeWindow.setTitle("MainScreen");
-        codeWindow.setScene(codeScene);
-        codeWindow.show();
-    }
 
 }
