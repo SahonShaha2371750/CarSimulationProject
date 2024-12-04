@@ -52,9 +52,9 @@ public class Trackselections {
 
         // Define the path for the inverted triangle
         Path trackdecline = new Path(
-                new MoveTo(190, 530),  // Bottom-left corner (90-degree angle)
-                new LineTo(1340, 530), // Bottom-right
-                new LineTo(190, 150),  // Top-left
+                new MoveTo(120, 630),  // Bottom-left corner (90-degree angle)
+                new LineTo(1150, 630), // Bottom-right
+                new LineTo(120, 150),  // Top-left
                 new ClosePath()        // Ensures the path is fully closed
         );
 
@@ -88,6 +88,7 @@ public class Trackselections {
         animate.timelineanimation(pointsdecline, timesAtPointsdecline );
 
          */
+
     }
 
     //By Vinith, Obaidah and Sahon

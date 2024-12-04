@@ -41,6 +41,7 @@ public class MainScreen {
         modelClass.setOnAction(e -> { showCodeModel(); });
         MenuItem mainScreen = new MenuItem("MainScreen");
         mainScreen.setOnAction(e -> { showCodeMainScreen(); });
+
         showCode.getItems().addAll(physicsEquations, animateCode, modelClass, mainScreen);
 
         // Done by Vinith
@@ -103,6 +104,7 @@ public class MainScreen {
             userGuideWindow.show();
         });
         userGuide.getItems().addAll(viewUserGuide);
+
         menuBar.getMenus().addAll(showCode, showAssets, changeTheme, userGuide);
 
         //Done by Sahon
@@ -177,6 +179,8 @@ public class MainScreen {
 
 
         });
+
+
         changeWeather.getItems().addAll(sunny, rainy);
         sunny.setOnAction(actionEvent -> {totalFriction += 1;});
         rainy.setOnAction(actionEvent -> {totalFriction += 10;});
@@ -210,6 +214,8 @@ public class MainScreen {
             chosenAnimation = animate.animateIncline(vehicleMass, totalVelocity, chosenTrack, totalFriction, root, chosenCar);
         });
 
+        Label inputvelocity = new Label("Initial Velocity: ");
+        inputvelocity.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
         TextField userSetVelocity = new TextField();
 
         /*Label potentialEnergyLabel = new Label("Potential Energy: ");
@@ -243,9 +249,10 @@ public class MainScreen {
         menuButtonGrid.add(changeTires, 0, 1);
         menuButtonGrid.add(changeWeather, 1, 1);
         menuButtonGrid.add(changeTrack, 0, 2, 2, 1);
-        menuButtonGrid.add(userSetVelocity, 0,3,1,1);
-/*
-        GridPane energyGrid = new GridPane();
+        menuButtonGrid.add(userSetVelocity, 1,3,1,1);
+        menuButtonGrid.add(inputvelocity,0,3,1,1);
+
+        /*GridPane energyGrid = new GridPane();
         energyGrid.setHgap(20);
         energyGrid.setVgap(50);
         energyGrid.setAlignment(Pos.CENTER);
@@ -271,8 +278,17 @@ public class MainScreen {
         energyLevels.setAlignment(Pos.CENTER);
         //energyLevels.getChildren().addAll(energyGrid);
 
-        VBox goAndResetButtons = new VBox();
-        goAndResetButtons.setAlignment(Pos.CENTER);
+        Pane goAndResetButtons = new Pane();
+
+
+        go.setLayoutX(30);
+        go.setLayoutY(90);
+        go.setPrefSize(80,60);
+
+        reset.setLayoutX(160);
+        reset.setLayoutY(90);
+        reset.setPrefSize(80,60);
+
         goAndResetButtons.getChildren().addAll(go, reset);
 
 
@@ -286,19 +302,42 @@ public class MainScreen {
         String originalButtonStyle = changeCar.getStyle();
         String originalOptionStyle = lambomenuitem.getStyle();
         String originalGoAndResetOptionStyle = go.getStyle();
-
+        vBox.getChildren().add(goAndResetButtons);
 
         root.setCenter(center);
         root.setTop(menuBar);
         root.setBottom(energyLevels);
         root.setLeft(vBox);
-        root.setRight(goAndResetButtons);
+        //root.setRight(goAndResetButtons);
 
 
         //By Sahon and Obaidah
         // LIGHT MODE COLOR SWITCHES
         enableLightMode.setOnAction(actionEvent -> {
 
+            /*potentialEnergyLabel.setStyle("-fx-text-fill: #0e1416");
+            potentialEnergyLevel.setStyle("-fx-text-fill: white");
+            kineticEnergyLabel.setStyle("-fx-text-fill: #0e1416");
+            kineticEnergyLevel.setStyle("-fx-text-fill: #0e1416");
+            mechanicalEnergyLabel.setStyle("-fx-text-fill: #0e1416");
+            mechanicalEnergyLevel.setStyle("-fx-text-fill: #0e1416");
+*/
+            changeCar.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            lambomenuitem.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            cybertruckmenuitem.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            changeEngine.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            strongEngine.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            weakEngine.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            changeTires.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            regularTire.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            winterTire.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            changeWeather.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            rainy.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            sunny.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            changeTrack.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            combo.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            uphill.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            downhill.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");*/
 
             // Reset styles to their original values
             center.setStyle(originalCenterStyle);

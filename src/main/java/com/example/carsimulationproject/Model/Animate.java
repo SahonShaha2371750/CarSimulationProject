@@ -187,8 +187,8 @@ public class Animate extends Pane {
         trackdecline.setStroke(Color.BLACK);
         trackdecline.setStrokeWidth(2);
 
-        MoveTo start = new MoveTo(190, 150);
-        LineTo bottom = new LineTo(1340, 530);
+        MoveTo start = new MoveTo(120, 150);
+        LineTo bottom = new LineTo(1150, 630);
         trackdecline.getElements().addAll(start, bottom);
 
         double centerX = (pane.getPrefWidth() - trackdecline.getBoundsInLocal().getWidth()) / 2;
