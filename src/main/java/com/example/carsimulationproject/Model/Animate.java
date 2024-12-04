@@ -149,8 +149,8 @@ public class Animate extends Pane {
         trackincline.setStrokeWidth(2);
 
         // Define the points of the incline track
-        MoveTo start = new MoveTo(0, 500);
-        LineTo summit = new LineTo(700, 100); // Summit
+        MoveTo start = new MoveTo(190, 530);
+        LineTo summit = new LineTo(1340, 150); // Summit
 
         trackincline.setTranslateX(centerX);
         trackincline.setTranslateY(centerY);

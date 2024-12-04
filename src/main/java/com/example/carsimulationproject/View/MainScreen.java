@@ -106,19 +106,25 @@ public class MainScreen {
         menuBar.getMenus().addAll(showCode, showAssets, changeTheme, userGuide);
 
         MenuButton changeCar = new MenuButton("Change Car"); // Mass which affects normal force which affects friction force which will reduce velocity and acceleration || PROBABLY NOT NEEDED
-        MenuItem car = new MenuItem("Car");
-        MenuItem truck = new MenuItem("Truck");
-        car.setOnAction(actionEvent -> {
+        MenuItem lambomenuitem = new MenuItem("Lamborghini");
+        MenuItem cybertruckmenuitem = new MenuItem("Cybertruck");
+        MenuItem truckmenuitem = new MenuItem("Truck");
+        lambomenuitem.setOnAction(actionEvent -> {
             CarSkins carSkins = new CarSkins();
             vehicleMass = 1520;
             chosenCar = carSkins.lamborghiniSkin();
         });
-        truck.setOnAction(actionEvent -> {
+        cybertruckmenuitem.setOnAction(actionEvent -> {
+            CarSkins carSkins = new CarSkins();
+            vehicleMass = 2500;
+            chosenCar = carSkins.cybertruckSkin();
+        });
+        truckmenuitem.setOnAction(actionEvent -> {
             CarSkins carSkins = new CarSkins();
             vehicleMass += 4500;
             chosenCar = carSkins.regulartruckSkin();
         });
-        changeCar.getItems().addAll(car, truck);
+        changeCar.getItems().addAll(lambomenuitem,cybertruckmenuitem, truckmenuitem);
 
         MenuButton changeEngine = new MenuButton("Change Engine"); // affects acceleration
         MenuItem strongEngine = new MenuItem("Engine Ultra S-500");
@@ -138,27 +144,28 @@ public class MainScreen {
         MenuItem sunny = new MenuItem("Sunny Weather");
 
         sunny.setOnAction(actionEvent -> {
+            // Load the background image (make sure the file path is correct)
+            Image sunnybackgroundimage = new Image("C:\\Users\\user\\IdeaProjects\\CarSimulationProject\\src\\main\\resources\\sunnysky.jpg");
 
-            Image sunnybackgroundimage = new Image("sunnysky.jpg");
-            ImageView sunnyView = new ImageView(sunnybackgroundimage);
-            sunnyView.setFitWidth(center.getWidth());
-            sunnyView.setFitHeight(center.getHeight());
-
-
+            // Create a BackgroundImage object for the image
             BackgroundImage backgroundImage = new BackgroundImage(
                     sunnybackgroundimage,
                     BackgroundRepeat.NO_REPEAT, // No repeat
                     BackgroundRepeat.NO_REPEAT, // No repeat
                     BackgroundPosition.CENTER,  // Center the image
-                    BackgroundSize.DEFAULT      // Default size
+                    BackgroundSize.DEFAULT      // Default size (cover the entire space)
             );
 
             // Create a Background object with the BackgroundImage
             Background sunnybackground = new Background(backgroundImage);
-            //center.setBackground(sunnybackground);
-            center.getChildren().clear();
-            center.getChildren().add(sunnyView);
+
+            // Set the new background on the StackPane
+            center.setBackground(sunnybackground);
+
+            // Optionally, force a layout update to make sure the background shows
+            center.layout(); // This ensures that the layout is recalculated
         });
+
 
 
         MenuItem rainy = new MenuItem("Rainy Weather");
@@ -196,7 +203,7 @@ public class MainScreen {
         uphill.setOnAction(actionEvent -> {
 
             Animate animation = new Animate();
-            chosenTrack = ts.inclinettrack();
+            chosenTrack = ts.inclinettrack(center);
             chosenAnimation = animate.animateIncline(vehicleMass, totalVelocity, chosenTrack, totalFriction, root, chosenCar);
         });
 
@@ -274,7 +281,7 @@ public class MainScreen {
         String originalMenuBarStyle = menuBar.getStyle();
         String originalLabelStyle = potentialEnergyLabel.getStyle();
         String originalButtonStyle = changeCar.getStyle();
-        String originalOptionStyle = car.getStyle();
+        String originalOptionStyle = lambomenuitem.getStyle();
         String originalGoAndResetOptionStyle = go.getStyle();
 
 
@@ -328,8 +335,9 @@ public class MainScreen {
             mechanicalEnergyLevel.setStyle(originalLabelStyle);
 
             changeCar.setStyle(originalButtonStyle);
-            car.setStyle(originalOptionStyle);
-            truck.setStyle(originalOptionStyle);
+            lambomenuitem.setStyle(originalOptionStyle);
+            cybertruckmenuitem.setStyle(originalOptionStyle);
+            truckmenuitem.setStyle(originalOptionStyle);
             changeEngine.setStyle(originalButtonStyle);
             strongEngine.setStyle(originalOptionStyle);
             weakEngine.setStyle(originalOptionStyle);
@@ -382,8 +390,9 @@ public class MainScreen {
 
 
             changeCar.setStyle("-fx-background-color: #6734ac; -fx-text-fill: #e9eff1");
-            car.setStyle(/*"-fx-background-color: #453659;*/" -fx-text-fill: #131542");
-            truck.setStyle(/*"-fx-background-color: #453659;*/" -fx-text-fill: #131542");
+            lambomenuitem.setStyle(/*"-fx-background-color: #453659;*/" -fx-text-fill: #131542");
+            cybertruckmenuitem.setStyle(/*"-fx-background-color: #453659;*/" -fx-text-fill: #131542");
+            truckmenuitem.setStyle(/*"-fx-background-color: #453659;*/" -fx-text-fill: #131542");
             changeEngine.setStyle("-fx-background-color: #6734ac; -fx-text-fill: #e9eff1");
             strongEngine.setStyle(/*"-fx-background-color: #453659;*/" -fx-text-fill: #131542");
             weakEngine.setStyle(/*"-fx-background-color: #453659;*/" -fx-text-fill: #131542");

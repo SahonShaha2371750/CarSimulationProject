@@ -44,20 +44,27 @@ public class Trackselections {
     //Decline track
     public  Path declinetrack(StackPane center) {
 
+            double width = center.getWidth();
+            double height = center.getHeight();
 
-        //Simplified the track
+            System.out.println(width);
+            System.out.println(height);
 
-        Path trackdecline = new Path();
+            // Simplified the track
+            Path trackdecline = new Path();
+            trackdecline.getElements().addAll(
+                    new MoveTo(190, 150),
+                    new LineTo(1340, 530),
+                    new LineTo(190, 530),
+                    new ClosePath()
+            );
 
-        trackdecline.setStroke(Color.BLACK);
-        trackdecline.setStrokeWidth(2);
+            trackdecline.setFill(Color.LAWNGREEN);
+            trackdecline.setStroke(Color.BLACK);
+            trackdecline.setStrokeWidth(2);
 
-        //Define the points of the track
-        MoveTo start = new MoveTo(0, 100);
-        LineTo line = new LineTo(700, 500);
 
-        //Add all points to the Path
-        trackdecline.getElements().addAll(start, line);
+
 
         /*
 
@@ -84,21 +91,23 @@ public class Trackselections {
     }
 
     //By Vinith and Obaidah
-    public Path inclinettrack() {
+    public Path inclinettrack(StackPane center) {
 
+        double width = center.getWidth();
+        double height = center.getHeight();
 
-
-        //Simplfied the track
+        System.out.println(width);
+        System.out.println(height);
 
         Path trackincline = new Path(
 
-             new MoveTo(0,500),
-             new LineTo(830,0),
-             new LineTo(1160,0),
-             new LineTo(0,660),
-             new LineTo(0,500)
+                new MoveTo(190,530),
+                new LineTo(1340,150),
+                new LineTo(1340,530),
+                new LineTo(190,530),
 
 
+                new ClosePath()
         );
 
 
@@ -166,11 +175,11 @@ public class Trackselections {
 
 
        // Top track coordinates
-       combo.getElements().add(new LineTo(center.getLayoutX()*3/5+(width/5), height*2/3)); // (200, 200)
-       combo.getElements().add(new LineTo(center.getLayoutX()*3/5+(2*width/5), height*1/3)); // (300, 150)
-       combo.getElements().add(new LineTo(center.getLayoutX()*3/5+(3*width/5), height*1/3)); // (400, 150)
-       combo.getElements().add(new LineTo(center.getLayoutX()*3/5+(4*width/5), height*2/3)); // (500, 200)
-       combo.getElements().add(new LineTo(center.getLayoutX()*3/5+(5*width/5)-10, height*2/3)); // (700, 200)
+       combo.getElements().add(new LineTo(center.getLayoutX()*3/5+(width/5), height*2/3));
+       combo.getElements().add(new LineTo(center.getLayoutX()*3/5+(2*width/5), height*1/3));
+       combo.getElements().add(new LineTo(center.getLayoutX()*3/5+(3*width/5), height*1/3));
+       combo.getElements().add(new LineTo(center.getLayoutX()*3/5+(4*width/5), height*2/3));
+       combo.getElements().add(new LineTo(center.getLayoutX()*3/5+(5*width/5)-10, height*2/3));
 
        // Close the shape to the bottom edge
        combo.getElements().add(new LineTo(center.getLayoutX()*3/5+(5*width/5)-10, height)); // Bottom-right
