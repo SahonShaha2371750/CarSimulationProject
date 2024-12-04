@@ -161,20 +161,20 @@ public class Trackselections {
 
 
        // Start point
-       combo.getElements().add(new MoveTo(185, height*2/3)); // Bottom-left start point
-
+       combo.getElements().add(new MoveTo(center.getLayoutX()*3/5-5, height*2/3)); // Bottom-left start point
+       System.out.println(center.getLayoutX());
 
 
        // Top track coordinates
-       combo.getElements().add(new LineTo(180+(width/5), height*2/3)); // (200, 200)
-       combo.getElements().add(new LineTo(180+(2*width/5), height*1/3)); // (300, 150)
-       combo.getElements().add(new LineTo(180+(3*width/5), height*1/3)); // (400, 150)
-       combo.getElements().add(new LineTo(180+(4*width/5), height*2/3)); // (500, 200)
-       combo.getElements().add(new LineTo(180+(5*width/5), height*2/3)); // (700, 200)
+       combo.getElements().add(new LineTo(center.getLayoutX()*3/5+(width/5), height*2/3)); // (200, 200)
+       combo.getElements().add(new LineTo(center.getLayoutX()*3/5+(2*width/5), height*1/3)); // (300, 150)
+       combo.getElements().add(new LineTo(center.getLayoutX()*3/5+(3*width/5), height*1/3)); // (400, 150)
+       combo.getElements().add(new LineTo(center.getLayoutX()*3/5+(4*width/5), height*2/3)); // (500, 200)
+       combo.getElements().add(new LineTo(center.getLayoutX()*3/5+(5*width/5)-10, height*2/3)); // (700, 200)
 
        // Close the shape to the bottom edge
-       combo.getElements().add(new LineTo(180+(5*width/5), height)); // Bottom-right
-       combo.getElements().add(new LineTo(185, height));   // Bottom-left
+       combo.getElements().add(new LineTo(center.getLayoutX()*3/5+(5*width/5)-10, height)); // Bottom-right
+       combo.getElements().add(new LineTo(center.getLayoutX()*3/5-5, height));   // Bottom-left
        combo.getElements().add(new ClosePath());      // Close the shape
 
 

@@ -97,13 +97,13 @@ public class Animate extends Pane {
         double height = center.getHeight();
 
         // Add path elements up to the stopping point
-        subPath.getElements().add(new MoveTo(180, height*2/3)); // Start point
-        subPath.getElements().add(new LineTo(180+(width/5), height*2/3)); // Add first segment
+        subPath.getElements().add(new MoveTo(center.getLayoutX()*3/5-5, height*2/3)); // Start point
+        subPath.getElements().add(new LineTo(center.getLayoutX()*3/5+(width/5), height*2/3)); // Add first segment
 
-        subPath.getElements().add(new LineTo(180+(2*width/5), height/3)); // Add second segment
-        subPath.getElements().add(new LineTo(180+(3*width/5), height/3)); // Add third segment
-        subPath.getElements().add(new LineTo(180+(4*width/5), height*2/3)); // Add fourth segment
-        subPath.getElements().add(new LineTo(180+(5*width/5), height*2/3)); // Stop here
+        subPath.getElements().add(new LineTo(center.getLayoutX()*3/5+(2*width/5), height/3)); // Add second segment
+        subPath.getElements().add(new LineTo(center.getLayoutX()*3/5+(3*width/5), height/3)); // Add third segment
+        subPath.getElements().add(new LineTo(center.getLayoutX()*3/5+(4*width/5), height*2/3)); // Add fourth segment
+        subPath.getElements().add(new LineTo(center.getLayoutX()*3/5+(5*width/5)-10, height*2/3)); // Stop here
 
         // Center the subPath
         subPath.setTranslateX(centerX);
