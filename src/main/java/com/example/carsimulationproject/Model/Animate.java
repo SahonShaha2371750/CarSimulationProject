@@ -157,14 +157,6 @@ public class Animate extends Pane {
 
         trackincline.getElements().addAll(start, summit);
 
-
-        // Center the path in the pane
-        /*double centerX = (pane.getPrefWidth() - trackincline.getBoundsInLocal().getWidth()) / 2;
-        double centerY = (pane.getPrefHeight() - trackincline.getBoundsInLocal().getHeight()) / 2;*/
-
-        /*trackincline.setTranslateX(centerX);
-        trackincline.setTranslateY(centerY);*/
-
         pane.getChildren().addAll(incline, carType);
 
         // PathTransition for the car animation
@@ -195,17 +187,17 @@ public class Animate extends Pane {
         trackdecline.setStroke(Color.BLACK);
         trackdecline.setStrokeWidth(2);
 
-        MoveTo start = new MoveTo(50, 100);
-        LineTo bottom = new LineTo(750, 500);
+        MoveTo start = new MoveTo(120, 150);
+        LineTo bottom = new LineTo(1150, 630);
         trackdecline.getElements().addAll(start, bottom);
 
         double centerX = (pane.getPrefWidth() - trackdecline.getBoundsInLocal().getWidth()) / 2;
         double centerY = (pane.getPrefHeight() - trackdecline.getBoundsInLocal().getHeight()) / 2;
 
-        trackdecline.setTranslateX(centerX);
-        trackdecline.setTranslateY(centerY);
+        trackdecline.setTranslateX(190 + centerX);
+        trackdecline.setTranslateY(150 + centerY);
 
-        pane.getChildren().addAll(trackdecline, carType);
+        pane.getChildren().addAll(decline, carType);
 
         pathTransition = new PathTransition();
         pathTransition.setPath(trackdecline);

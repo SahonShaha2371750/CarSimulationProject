@@ -186,7 +186,9 @@ public class MainScreen {
         MenuItem downhill = new MenuItem("Downhill Track");
         MenuItem uphill = new MenuItem("Uphill Track");
         changeTrack.getItems().addAll(combo, downhill, uphill);
+
         Trackselections ts = new Trackselections();
+
         combo.setOnAction(actionEvent -> {
             Animate animation = new Animate();
             chosenTrack = ts.combotrack(center);
@@ -194,7 +196,6 @@ public class MainScreen {
         });
 
         downhill.setOnAction(actionEvent -> {
-
             Animate animation = new Animate();
             chosenTrack = ts.declinetrack(center);
             chosenAnimation = animate.animateDecline(vehicleMass, totalVelocity, chosenTrack, totalFriction, root, chosenCar);
@@ -207,6 +208,8 @@ public class MainScreen {
             chosenAnimation = animate.animateIncline(vehicleMass, totalVelocity, chosenTrack, totalFriction, root, chosenCar);
         });
 
+        Label inputvelocity = new Label("Initial Velocity: ");
+        inputvelocity.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
         TextField userSetVelocity = new TextField();
 
         Label potentialEnergyLabel = new Label("Potential Energy: ");
@@ -240,7 +243,8 @@ public class MainScreen {
         menuButtonGrid.add(changeTires, 0, 1);
         menuButtonGrid.add(changeWeather, 1, 1);
         menuButtonGrid.add(changeTrack, 0, 2, 2, 1);
-        menuButtonGrid.add(userSetVelocity, 0,3,1,1);
+        menuButtonGrid.add(userSetVelocity, 1,3,1,1);
+        menuButtonGrid.add(inputvelocity,0,3,1,1);
 
         GridPane energyGrid = new GridPane();
         energyGrid.setHgap(20);
@@ -268,8 +272,17 @@ public class MainScreen {
         energyLevels.setAlignment(Pos.CENTER);
         energyLevels.getChildren().addAll(energyGrid);
 
-        VBox goAndResetButtons = new VBox();
-        goAndResetButtons.setAlignment(Pos.CENTER);
+        Pane goAndResetButtons = new Pane();
+
+
+        go.setLayoutX(30);
+        go.setLayoutY(90);
+        go.setPrefSize(80,60);
+
+        reset.setLayoutX(160);
+        reset.setLayoutY(90);
+        reset.setPrefSize(80,60);
+
         goAndResetButtons.getChildren().addAll(go, reset);
 
 
@@ -283,13 +296,13 @@ public class MainScreen {
         String originalButtonStyle = changeCar.getStyle();
         String originalOptionStyle = lambomenuitem.getStyle();
         String originalGoAndResetOptionStyle = go.getStyle();
-
+        vBox.getChildren().add(goAndResetButtons);
 
         root.setCenter(center);
         root.setTop(menuBar);
         root.setBottom(energyLevels);
         root.setLeft(vBox);
-        root.setRight(goAndResetButtons);
+        //root.setRight(goAndResetButtons);
 
 
         //By Sahon and Obaidah
@@ -371,23 +384,6 @@ public class MainScreen {
             mechanicalEnergyLabel.setStyle("-fx-text-fill: #e9eff1");
             mechanicalEnergyLevel.setFill(Color.WHITESMOKE);
 
-            /*changeCar.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            car.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            truck.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            changeEngine.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            strongEngine.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            weakEngine.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            changeTires.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            regularTire.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            winterTire.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            changeWeather.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            rainy.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            sunny.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            changeTrack.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            combo.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            uphill.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            downhill.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");*/
-
 
             changeCar.setStyle("-fx-background-color: #6734ac; -fx-text-fill: #e9eff1");
             lambomenuitem.setStyle(/*"-fx-background-color: #453659;*/" -fx-text-fill: #131542");
@@ -432,6 +428,7 @@ public class MainScreen {
             totalVelocity = 0;
             center.getChildren().clear();
             animate.getPathTransition().stop();
+            root.setBottom(null);
         });
 
 

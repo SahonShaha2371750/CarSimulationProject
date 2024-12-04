@@ -185,9 +185,9 @@ public class PhysicsEquations {
 
     //By Shon
     public TextFlow createEnergyDisplay(Path trackdecline, double velocity, int friction, double mass, PathTransition pathTransition) {
-        Text keText = new Text("Kinetic Energy: 0 J\n");
-        Text peText = new Text("Potential Energy: 0 J\n");
-        Text meText = new Text("Mechanical Energy: 0 J\n");
+        Text keText = new Text("Kinetic Energy: 0 kJ\n");
+        Text peText = new Text("Potential Energy: 0 kJ\n");
+        Text meText = new Text("Mechanical Energy: 0 kJ\n");
 
         keText.setFont(new Font("Monaco", 18));
         peText.setFont(new Font("Monaco", 18));
@@ -231,9 +231,9 @@ public class PhysicsEquations {
 
     //By Shon
     public TextFlow createEnergyDisplayUphill(Path trackdecline, double velocity, int friction, double mass, PathTransition pathTransition) {
-        Text keText = new Text("Kinetic Energy: 0 J\n");
-        Text peText = new Text("Potential Energy: 0 J\n");
-        Text meText = new Text("Mechanical Energy: 0 J\n");
+        Text keText = new Text("Kinetic Energy: 0 kJ\n");
+        Text peText = new Text("Potential Energy: 0 kJ\n");
+        Text meText = new Text("Mechanical Energy: 0 kJ\n");
 
         keText.setFont(new Font("Monaco", 18));
         peText.setFont(new Font("Monaco", 18));
@@ -282,9 +282,9 @@ public class PhysicsEquations {
 
     //By Shon
     public TextFlow energyDisplayComboTrack(Path trackdecline, double velocity, int friction, double mass, PathTransition pathTransition) {
-        Text keText = new Text("Kinetic Energy: 0 J\n");
-        Text peText = new Text("Potential Energy: 0 J\n");
-        Text meText = new Text("Mechanical Energy: 0 J\n");
+        Text keText = new Text("Kinetic Energy: 0 kJ\n");
+        Text peText = new Text("Potential Energy: 0 kJ\n");
+        Text meText = new Text("Mechanical Energy: 0 kJ\n");
 
         keText.setFont(new Font("Monaco", 18));
         peText.setFont(new Font("Monaco", 18));
@@ -312,9 +312,9 @@ public class PhysicsEquations {
             double me = ke + pe;
 
 
-            keText.setText(String.format("KE: %.2f J\n", ke));
-            peText.setText(String.format("PE: %.2f J\n", pe));
-            meText.setText(String.format("ME: %.2f J\n", me));
+            keText.setText(String.format("KE: %.2f kJ\n", ke));
+            peText.setText(String.format("PE: %.2f kJ\n", pe));
+            meText.setText(String.format("ME: %.2f kJ\n", me));
         });
 
 
