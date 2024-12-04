@@ -171,7 +171,7 @@ public class Trackselections {
 
 
        // Start point
-       combo.getElements().add(new MoveTo(center.getLayoutX()*3/5-5, height*2/3)); // Bottom-left start point
+       combo.getElements().add(new MoveTo(center.getLayoutX()*3/5+15, height*2/3)); // Bottom-left start point
        System.out.println(center.getLayoutX());
 
 
@@ -184,7 +184,7 @@ public class Trackselections {
 
        // Close the shape to the bottom edge
        combo.getElements().add(new LineTo(center.getLayoutX()*3/5+(5*width/5)-10, height)); // Bottom-right
-       combo.getElements().add(new LineTo(center.getLayoutX()*3/5-5, height));   // Bottom-left
+       combo.getElements().add(new LineTo(center.getLayoutX()*3/5+15, height));   // Bottom-left
        combo.getElements().add(new ClosePath());      // Close the shape
 
 
