@@ -121,6 +121,7 @@ public class Animate extends Pane {
         pathTransition.setDuration(Duration.seconds(subPath.getBoundsInLocal().getWidth() / velocity));
         pathTransition.setCycleCount(1);
 
+
         // Play the animation
         // pathTransition.play();
 

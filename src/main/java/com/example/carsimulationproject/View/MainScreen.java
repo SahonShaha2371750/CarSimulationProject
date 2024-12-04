@@ -145,7 +145,10 @@ public class MainScreen {
 
         sunny.setOnAction(actionEvent -> {
 
-            Image sunnybackgroundimage = new Image("file:sunnysky.jpg");
+            Image sunnybackgroundimage = new Image("sunnysky.jpg");
+            ImageView sunnyView = new ImageView(sunnybackgroundimage);
+            sunnyView.setFitWidth(center.getWidth());
+            sunnyView.setFitHeight(center.getHeight());
 
 
             BackgroundImage backgroundImage = new BackgroundImage(
@@ -158,7 +161,9 @@ public class MainScreen {
 
             // Create a Background object with the BackgroundImage
             Background sunnybackground = new Background(backgroundImage);
-            center.setBackground(sunnybackground);
+            //center.setBackground(sunnybackground);
+            center.getChildren().clear();
+            center.getChildren().add(sunnyView);
         });
 
 

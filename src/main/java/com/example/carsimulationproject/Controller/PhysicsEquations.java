@@ -200,14 +200,14 @@ public class PhysicsEquations {
 
             double totalVelocity = velocity - friction;
             double height = 600 - y;
-            double ke = 0.5 * mass * totalVelocity * totalVelocity;
-            double pe = mass * 9.8 * height / 600;
+            double ke = (0.5 * mass * totalVelocity * totalVelocity)/1000;
+            double pe = (mass * 9.8 * height / 600)/1000;
             double me = ke + pe;
 
 
-            keText.setText(String.format("Kinetic Energy: %.2f J\n", ke));
-            peText.setText(String.format("Potential Energy: %.2f J\n", pe));
-            meText.setText(String.format("Mechanical Energy: %.2f J\n", me));
+            keText.setText(String.format("Kinetic Energy: %.2f kJ\n", ke));
+            peText.setText(String.format("Potential Energy: %.2f kJ\n", pe));
+            meText.setText(String.format("Mechanical Energy: %.2f kJ\n", me));
         });
 
 
@@ -291,8 +291,8 @@ public class PhysicsEquations {
 
             double totalVelocity = velocity - friction;
             double height = 600 - currentHeight;
-            double ke = 0.5 * mass * totalVelocity * totalVelocity;
-            double pe = mass * 9.8 * height;
+            double ke = (0.5 * mass * totalVelocity * totalVelocity)/1000;
+            double pe = (mass * 9.8 * height)/1000;
             double me = ke + pe;
 
 
