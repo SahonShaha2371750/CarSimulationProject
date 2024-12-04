@@ -2,13 +2,9 @@ package com.example.carsimulationproject.Model;
 
 import com.example.carsimulationproject.Controller.PhysicsEquations;
 import com.example.carsimulationproject.View.MainScreen;
-import javafx.scene.image.Image;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.*;
-import javafx.scene.transform.Rotate;
-
-import java.util.ArrayList;
 
 public class Trackselections {
 
@@ -24,8 +20,8 @@ public class Trackselections {
     }
 
 
-// default track
-   /* public Path defaulttrack() {
+      //Default track
+    /*public Path defaulttrack() {
 
         angle = 0;
         distance = 200;
@@ -41,11 +37,12 @@ public class Trackselections {
         ArrayList<Double> timesAtPointsdefault = pe.timeAtPoint(ms.initialVelocity,distance,ms.engineAcceleration,angle,0.5,"flat");
         animate.timelineanimation(pointsdefault , timesAtPointsdefault );
         return trackdefault;
-    }
-*/
+    }*/
 
-// decline track
-    public  Path declinetrack() {
+
+    //By Vinith and Obaidah
+    //Decline track
+    public  Path declinetrack(StackPane center) {
 
 
         //Simplified the track
@@ -56,8 +53,8 @@ public class Trackselections {
         trackdecline.setStrokeWidth(2);
 
         //Define the points of the track
-        MoveTo start = new MoveTo(0, 200);
-        LineTo line = new LineTo(700, 700);
+        MoveTo start = new MoveTo(0, 100);
+        LineTo line = new LineTo(700, 500);
 
         //Add all points to the Path
         trackdecline.getElements().addAll(start, line);
@@ -86,6 +83,7 @@ public class Trackselections {
         return trackdecline;
     }
 
+    //By Vinith and Obaidah
     public Path inclinettrack() {
 
 
@@ -94,25 +92,24 @@ public class Trackselections {
 
         Path trackincline = new Path(
 
-                new MoveTo(0, 500),
-                new LineTo(830, 0),
-                new LineTo(1160,0),
-                new LineTo(1160,660),
-                new LineTo(0,660),
-                new LineTo(0,500)
+             new MoveTo(0,500),
+             new LineTo(830,0),
+             new LineTo(1160,0),
+             new LineTo(0,660),
+             new LineTo(0,500)
 
 
         );
 
-        Image grass = new Image("file:src/main/resources/grass.png");
 
-        trackincline.setFill(new ImagePattern(grass));
+        trackincline.setFill(Color.LAWNGREEN);
 
         trackincline.setStroke(Color.BLACK);
         trackincline.setStrokeWidth(2);
 
         //Define the points of the track
 
+        //Add all points to the Path
 
         /*
         angle = 20;
@@ -141,22 +138,6 @@ public class Trackselections {
         return trackincline;
     }
 
-    public Path inclinesky () {
-
-        Path inclineskyy = new Path(
-
-                new MoveTo(0, 500),
-                new LineTo(0, 0),
-                new LineTo(830,0),
-                new LineTo(0,500)
-
-        );
-
-        inclineskyy.setFill(Color.LIGHTBLUE);
-
-        return inclineskyy;
-    }
-
 
 
 
@@ -164,8 +145,39 @@ public class Trackselections {
 
     //the angles are not all the same, this will be fixed next time
 
+    //By Vinith
+   public Path combotrack(StackPane center) {
 
-   public Path combotrack() {
+
+       //Simplified the track
+
+       Path combo = new Path();
+       combo.setStroke(Color.BLACK); // Outline color
+       combo.setStrokeWidth(2);
+       combo.setFill(Color.GREEN);
+
+       double width = center.getWidth();
+       double height = center.getHeight();
+
+
+       // Start point
+       combo.getElements().add(new MoveTo(185, height*2/3)); // Bottom-left start point
+
+
+
+       // Top track coordinates
+       combo.getElements().add(new LineTo(180+(width/5), height*2/3)); // (200, 200)
+       combo.getElements().add(new LineTo(180+(2*width/5), height*1/3)); // (300, 150)
+       combo.getElements().add(new LineTo(180+(3*width/5), height*1/3)); // (400, 150)
+       combo.getElements().add(new LineTo(180+(4*width/5), height*2/3)); // (500, 200)
+       combo.getElements().add(new LineTo(180+(5*width/5), height*2/3)); // (700, 200)
+
+       // Close the shape to the bottom edge
+       combo.getElements().add(new LineTo(180+(5*width/5), height)); // Bottom-right
+       combo.getElements().add(new LineTo(185, height));   // Bottom-left
+       combo.getElements().add(new ClosePath());      // Close the shape
+
+
 
         /*
         double startpointx = 50;
@@ -274,29 +286,6 @@ public class Trackselections {
         double endSeventhTrackY = pointsSeventhsection.get(9);
         animate.timelineanimation(pointsSeventhsection, timesSeventhsection );
 
-
-         */
-        //Simplified the track
-
-       Path combo = new Path();
-       combo.setStroke(Color.BLACK); // Outline color
-       combo.setStrokeWidth(2);
-       combo.setFill(Color.GREEN);
-
-       // Start point
-       combo.getElements().add(new MoveTo(0, 200)); // Bottom-left start point
-
-       // Top track coordinates
-       combo.getElements().add(new LineTo(200, 200)); // (200, 200)
-       combo.getElements().add(new LineTo(300, 150)); // (300, 150)
-       combo.getElements().add(new LineTo(400, 150)); // (400, 150)
-       combo.getElements().add(new LineTo(500, 200)); // (500, 200)
-       combo.getElements().add(new LineTo(700, 200)); // (700, 200)
-
-       // Close the shape to the bottom edge
-       combo.getElements().add(new LineTo(700, 400)); // Bottom-right
-       combo.getElements().add(new LineTo(0, 400));   // Bottom-left
-       combo.getElements().add(new ClosePath());      // Close the shape
 
        /*
         Path combination = new Path(

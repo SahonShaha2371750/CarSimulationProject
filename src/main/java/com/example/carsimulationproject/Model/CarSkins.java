@@ -3,45 +3,49 @@ package com.example.carsimulationproject.Model;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+//By Vinith
 public class CarSkins {
 
- ImageView lamborghiniSkin() {
+ //By Vinith
+ public ImageView lamborghiniSkin() {
 
-  Image lamboimage = new Image("file:C:\\Users\\user\\IdeaProjects\\CarSimulationProject\\src\\main\\resources\\lambo.png");
+  Image lamboimage = new Image("lambo.png");
 
   ImageView lamboView = new ImageView(lamboimage);
 
 
-  lamboView.setFitWidth(300);
-  lamboView.setFitHeight(200);
+  lamboView.setFitWidth(100);
+  lamboView.setFitHeight(100);
   lamboView.setPreserveRatio(true);
 
 
    return lamboView;
  }
 
- ImageView cybertruckSkin() {
+ //By Vinith
+ public ImageView cybertruckSkin() {
 
-  Image cyberimage = new Image("file:C:\\Users\\user\\IdeaProjects\\CarSimulationProject\\src\\main\\resources\\cybertruck.png");
+  Image cyberimage = new Image("cybertruck.png");
 
   ImageView cyberView = new ImageView(cyberimage);
 
-  cyberView.setFitWidth(300);
-  cyberView.setFitHeight(200);
+  cyberView.setFitWidth(100);
+  cyberView.setFitHeight(100);
   cyberView.setPreserveRatio(true);
 
    return cyberView;
  }
 
- ImageView regulartruckSkin() {
+ //By Vinith
+ public ImageView regulartruckSkin() {
 
-  Image truckimage = new Image("file:C:\\Users\\user\\IdeaProjects\\CarSimulationProject\\src\\main\\resources\\truck.png");
+  Image truckimage = new Image("truck.png");
 
   ImageView truckView = new ImageView(truckimage);
 
 
-  truckView.setFitWidth(300);
-  truckView.setFitHeight(200);
+  truckView.setFitWidth(100);
+  truckView.setFitHeight(100);
   truckView.setPreserveRatio(true);
 
   return truckView;

@@ -1,9 +1,8 @@
 package com.example.carsimulationproject.View;
 
-import com.example.carsimulationproject.Controller.PhysicsEquations;
 import com.example.carsimulationproject.Model.Animate;
+import com.example.carsimulationproject.Model.CarSkins;
 import com.example.carsimulationproject.Model.Trackselections;
-import javafx.animation.AnimationTimer;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -11,14 +10,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.LineTo;
-import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
 
 public class MainScreen {
     public BorderPane root = new BorderPane();
@@ -26,7 +22,8 @@ public class MainScreen {
     public int totalVelocity = 0; // enginetype
     int totalFriction = 0; // tire (increase) + weather (depends on type of track)
     Path chosenTrack;
-    Path chosenSky;
+    Pane chosenAnimation;
+    ImageView chosenCar;
 
     public BorderPane initialize() {
         // root.getStylesheets().add(getClass().getResource("/light-theme.css").toExternalForm());
@@ -62,17 +59,44 @@ public class MainScreen {
         MenuItem enableDarkMode = new MenuItem("Enable Dark Mode");
         changeTheme.getItems().addAll(enableLightMode, enableDarkMode);
 
-        Menu userGuide = new Menu("User Guide");
+        Menu userGuide = new Menu("Help/User Guide");
         MenuItem viewUserGuide = new MenuItem("View User Guide");
         viewUserGuide.setOnAction(e -> {
             Stage userGuideWindow = new Stage();
             //Add user guide text here
-            String text = "Add text here";
+            String text = "\n   Welcome to the Car Simulation Application!\n" +
+                    "\n\n" +
+                    "  - Navigation\n" +
+                    "\n" +
+                    "\tUse the Menu Bar at the top to access features.\n" +
+                    "\tClick on buttons for specific actions.\n\n" +
+                    "  - Functions\n" +
+                    "\n" +
+                    "\tUse the menus on the left to modify the simulation.\n" +
+                    "\tFor example, click on \"Change Track\" to select a type of track.\n" +
+                    "\tMake sure to select at least one item from each menu\n" +
+                    "\tbefore running.\n" +
+                    "\n" +
+                    "  - Exit\n" +
+                    "\n" +
+                    "\tClick the \"X\" button on the top right corner or " +
+                    "\n\tpress Alt + F4 to close the application.\n" +
+                    "\n  - Need More Help?\n" +
+                    "\n" +
+                    "\tSee the full \"User Guide\" document that comes with\n" +
+                    "\tthe application.\n" +
+                    "\n\tEnjoy driving!\n\n\n" +
+                    "\tDeveloped by: Team Vroom\n";
 
             Text userGuideText = new Text(text);
 
             StackPane userGuideRoot = new StackPane(userGuideText);
-            Scene scene = new Scene(userGuideRoot, 400, 300);
+            ScrollPane scrollPane = new ScrollPane(userGuideRoot);
+
+            // Hide the scrollbars but keep scrolling functional
+            scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+            scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+            Scene scene = new Scene(scrollPane, 400, 300);
             userGuideWindow.setTitle("User Guide");
             userGuideWindow.setScene(scene);
             userGuideWindow.show();
@@ -84,8 +108,16 @@ public class MainScreen {
         MenuButton changeCar = new MenuButton("Change Car"); // Mass which affects normal force which affects friction force which will reduce velocity and acceleration || PROBABLY NOT NEEDED
         MenuItem car = new MenuItem("Car");
         MenuItem truck = new MenuItem("Truck");
-        car.setOnAction(actionEvent -> vehicleMass += 50);
-        truck.setOnAction(actionEvent -> vehicleMass += 100);
+        car.setOnAction(actionEvent -> {
+            CarSkins carSkins = new CarSkins();
+            vehicleMass = 1520;
+            chosenCar = carSkins.lamborghiniSkin();
+        });
+        truck.setOnAction(actionEvent -> {
+            CarSkins carSkins = new CarSkins();
+            vehicleMass += 4500;
+            chosenCar = carSkins.regulartruckSkin();
+        });
         changeCar.getItems().addAll(car, truck);
 
         MenuButton changeEngine = new MenuButton("Change Engine"); // affects acceleration
@@ -104,7 +136,39 @@ public class MainScreen {
 
         MenuButton changeWeather = new MenuButton("Change Weather"); // affects the coefficient of friction which increases friction force
         MenuItem sunny = new MenuItem("Sunny Weather");
+
+        sunny.setOnAction(actionEvent -> {
+
+            Image sunnybackgroundimage = new Image("sunnysky.jpg");
+            ImageView sunnyView = new ImageView(sunnybackgroundimage);
+            sunnyView.setFitWidth(center.getWidth());
+            sunnyView.setFitHeight(center.getHeight());
+
+
+            BackgroundImage backgroundImage = new BackgroundImage(
+                    sunnybackgroundimage,
+                    BackgroundRepeat.NO_REPEAT, // No repeat
+                    BackgroundRepeat.NO_REPEAT, // No repeat
+                    BackgroundPosition.CENTER,  // Center the image
+                    BackgroundSize.DEFAULT      // Default size
+            );
+
+            // Create a Background object with the BackgroundImage
+            Background sunnybackground = new Background(backgroundImage);
+            //center.setBackground(sunnybackground);
+            center.getChildren().clear();
+            center.getChildren().add(sunnyView);
+        });
+
+
         MenuItem rainy = new MenuItem("Rainy Weather");
+
+        rainy.setOnAction(actionEvent -> {
+
+
+        });
+
+
         changeWeather.getItems().addAll(sunny, rainy);
         sunny.setOnAction(actionEvent -> {totalFriction += 1;});
         rainy.setOnAction(actionEvent -> {totalFriction += 10;});
@@ -115,28 +179,25 @@ public class MainScreen {
         MenuItem downhill = new MenuItem("Downhill Track");
         MenuItem uphill = new MenuItem("Uphill Track");
         changeTrack.getItems().addAll(combo, downhill, uphill);
-
+        Trackselections ts = new Trackselections();
         combo.setOnAction(actionEvent -> {
-            Trackselections ts = new Trackselections();
-            /*center.getChildren().clear();
-            center.getChildren().add(ts.combotrack());*/
-            chosenTrack = ts.combotrack();
-
+            Animate animation = new Animate();
+            chosenTrack = ts.combotrack(center);
+            chosenAnimation = animate.comboTrackAnimation(vehicleMass, totalVelocity, chosenTrack, totalFriction, root, chosenCar, center);
         });
 
         downhill.setOnAction(actionEvent -> {
-            Trackselections ts = new Trackselections();
-            /*center.getChildren().clear();
-            center.getChildren().add(ts.declinetrack());*/
-            chosenTrack = ts.declinetrack();
+
+            Animate animation = new Animate();
+            chosenTrack = ts.declinetrack(center);
+            chosenAnimation = animate.animateDecline(vehicleMass, totalVelocity, chosenTrack, totalFriction, root, chosenCar);
         });
 
         uphill.setOnAction(actionEvent -> {
-            Trackselections ts = new Trackselections();
-            /*center.getChildren().clear();
-            center.getChildren().add(ts.inclinettrack());*/
+
+            Animate animation = new Animate();
             chosenTrack = ts.inclinettrack();
-            chosenSky = ts.inclinesky();
+            chosenAnimation = animate.animateIncline(vehicleMass, totalVelocity, chosenTrack, totalFriction, root, chosenCar);
         });
 
         TextField userSetVelocity = new TextField();
@@ -155,6 +216,7 @@ public class MainScreen {
 
 
         // STYLING EVERYTHING
+        // By Sahon and Obaidah
         changeCar.setFont(menuButtonFont);
         changeEngine.setFont(menuButtonFont);
         changeTires.setFont(menuButtonFont);
@@ -223,7 +285,7 @@ public class MainScreen {
         root.setRight(goAndResetButtons);
 
 
-
+        //By Sahon and Obaidah
         // LIGHT MODE COLOR SWITCHES
         enableLightMode.setOnAction(actionEvent -> {
             /*center.setStyle("-fx-border-color: #b190bb; -fx-border-width: 5px; -fx-background-color: #7190a8;");
@@ -285,7 +347,7 @@ public class MainScreen {
             reset.setStyle(originalGoAndResetOptionStyle);
         });
 
-
+        //By Sahon and Obaidah
         enableDarkMode.setOnAction(actionEvent -> {
             /*center.setStyle("-fx-border-color: #65446f; -fx-border-width: 5px; -fx-background-color: #17083a;");
             root.setStyle("-fx-background-color: #060809");*/
@@ -341,22 +403,26 @@ public class MainScreen {
         });
 
 
+        // By Sahon and Obaidah
         go.setOnAction(actionEvent -> {
-            PhysicsEquations equations = new PhysicsEquations();
             totalVelocity += Integer.parseInt(userSetVelocity.getText());
 
             Animate animation = new Animate();
             animation.setLayoutX(400);
             animation.setLayoutY(300);
+
             center.getChildren().clear();
-            center.getChildren().add(animation.animateIncline(vehicleMass, totalVelocity, chosenTrack, totalFriction, root,chosenSky));
+            center.getChildren().add(chosenAnimation);
             center.setAlignment(Pos.CENTER);
+            animate.getPathTransition().play(); // We take the pathTransition from the animate class, that is being set by the comboTrackAnimation method
 
         });
 
+        //By Obaidah and Sahon
         reset.setOnAction(e-> {
             totalVelocity = 0;
             center.getChildren().clear();
+            animate.getPathTransition().stop();
         });
 
 
@@ -426,6 +492,7 @@ public class MainScreen {
 
     }
 
+    //By Obaidah
     private void showCodePhysicsEquations() {
         Stage codeWindow = new Stage();
         //Add the code here
@@ -433,13 +500,18 @@ public class MainScreen {
 
         Text codeArea = new Text(codeSnippet);
 
-        StackPane codeRoot = new StackPane(codeArea);
-        Scene codeScene = new Scene(codeRoot, 400, 300);
+        ScrollPane scrollPane = new ScrollPane(codeArea);
+
+        // Hide the scrollbars but keep scrolling functional
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        Scene codeScene = new Scene(scrollPane, 400, 300);
         codeWindow.setTitle("PhysicsEquations");
         codeWindow.setScene(codeScene);
         codeWindow.show();
     }
 
+    //By Obaidah
     private void showCodeAnimate() {
         Stage codeWindow = new Stage();
         //Add the code here
@@ -447,13 +519,18 @@ public class MainScreen {
 
         Text codeArea = new Text(codeSnippet);
 
-        StackPane codeRoot = new StackPane(codeArea);
-        Scene codeScene = new Scene(codeRoot, 400, 300);
+        ScrollPane scrollPane = new ScrollPane(codeArea);
+
+        // Hide the scrollbars but keep scrolling functional
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        Scene codeScene = new Scene(scrollPane, 400, 300);
         codeWindow.setTitle("Animate");
         codeWindow.setScene(codeScene);
         codeWindow.show();
     }
 
+    //By Obaidah
     private void showCodeModel() {
         Stage codeWindow = new Stage();
         //Add the code here
@@ -461,13 +538,18 @@ public class MainScreen {
 
         Text codeArea = new Text(codeSnippet);
 
-        StackPane codeRoot = new StackPane(codeArea);
-        Scene codeScene = new Scene(codeRoot, 400, 300);
+        ScrollPane scrollPane = new ScrollPane(codeArea);
+
+        // Hide the scrollbars but keep scrolling functional
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        Scene codeScene = new Scene(scrollPane, 400, 300);
         codeWindow.setTitle("Model");
         codeWindow.setScene(codeScene);
         codeWindow.show();
     }
 
+    //By Obaidah
     private void showCodeMainScreen() {
         Stage codeWindow = new Stage();
         //Add the code here
@@ -475,8 +557,12 @@ public class MainScreen {
 
         Text codeArea = new Text(codeSnippet);
 
-        StackPane codeRoot = new StackPane(codeArea);
-        Scene codeScene = new Scene(codeRoot, 400, 300);
+        ScrollPane scrollPane = new ScrollPane(codeArea);
+
+        // Hide the scrollbars but keep scrolling functional
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        Scene codeScene = new Scene(scrollPane, 400, 300);
         codeWindow.setTitle("MainScreen");
         codeWindow.setScene(codeScene);
         codeWindow.show();

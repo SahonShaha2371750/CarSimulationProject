@@ -2,22 +2,30 @@ package com.example.carsimulationproject.Model;
 
 import com.example.carsimulationproject.Controller.PhysicsEquations;
 import javafx.animation.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
 
+//By Vinith
 public class Animate extends Pane {
 
     Rectangle car = new Rectangle(30, 50, 40, 20);
+    public PathTransition pathTransition;
+
+    public PathTransition getPathTransition() {
+        return pathTransition;
+    }
 
 
+    //By Vinith
     public Animate() {
 
     //setting the vehicule properties like setting the engine
@@ -30,6 +38,7 @@ public class Animate extends Pane {
 
     }
 
+    //By Vinith
     public void timelineanimation(ArrayList<Double> arrayListpositions,  ArrayList<Double> listTime) {
 
         if (arrayListpositions.isEmpty()) {
@@ -64,9 +73,8 @@ public class Animate extends Pane {
 
 
 
-
-
-    public Pane comboTrackAnimation(double mass, double velocity, Path combo, int friction, BorderPane root) {
+    //By Vinith
+    public Pane comboTrackAnimation(double mass, double velocity, Path combo, int friction, BorderPane root, ImageView carType, StackPane center) {
         Pane pane = new Pane();
         PhysicsEquations equations = new PhysicsEquations();
         pane.setPrefSize(800, 600);
@@ -85,37 +93,37 @@ public class Animate extends Pane {
         Path subPath = new Path();
         subPath.setStroke(Color.BLACK);
         subPath.setStrokeWidth(2);
+        double width = center.getWidth();
+        double height = center.getHeight();
 
         // Add path elements up to the stopping point
-        subPath.getElements().add(new MoveTo(0, 200)); // Start point
-        subPath.getElements().add(new LineTo(200, 200)); // Add first segment
-        subPath.getElements().add(new LineTo(300, 150)); // Add second segment
-        subPath.getElements().add(new LineTo(400, 150)); // Add third segment
-        subPath.getElements().add(new LineTo(500, 200)); // Add fourth segment
-        subPath.getElements().add(new LineTo(700, 200)); // Stop here
+        subPath.getElements().add(new MoveTo(180, height*2/3)); // Start point
+        subPath.getElements().add(new LineTo(180+(width/5), height*2/3)); // Add first segment
+
+        subPath.getElements().add(new LineTo(180+(2*width/5), height/3)); // Add second segment
+        subPath.getElements().add(new LineTo(180+(3*width/5), height/3)); // Add third segment
+        subPath.getElements().add(new LineTo(180+(4*width/5), height*2/3)); // Add fourth segment
+        subPath.getElements().add(new LineTo(180+(5*width/5), height*2/3)); // Stop here
 
         // Center the subPath
         subPath.setTranslateX(centerX);
         subPath.setTranslateY(centerY);
 
         // Add the car to the pane
-        pane.getChildren().addAll(combo, car);
+        pane.getChildren().addAll(combo, carType);
 
-//        // Text display for energy (optional)
-//        Text energyDisplay = new Text(10, 500, "Energy: ");
-//        energyDisplay.setFill(Color.BLACK);
-//        pane.getChildren().add(energyDisplay);
 
         // PathTransition for the car animation
-        PathTransition pathTransition = new PathTransition();
+        pathTransition = new PathTransition();
         pathTransition.setPath(subPath);
-        pathTransition.setNode(car);
+        pathTransition.setNode(carType);
         pathTransition.setInterpolator(Interpolator.LINEAR);
         pathTransition.setDuration(Duration.seconds(subPath.getBoundsInLocal().getWidth() / velocity));
         pathTransition.setCycleCount(1);
 
+
         // Play the animation
-        pathTransition.play();
+        // pathTransition.play();
 
         TextFlow energyDisplay = equations.energyDisplayComboTrack(combo, velocity, friction, mass, pathTransition);
         root.setBottom(energyDisplay);
@@ -123,8 +131,8 @@ public class Animate extends Pane {
         return pane;
     }
 
-
-    public Pane animateIncline(double mass, double velocity, Path incline, int friction, BorderPane root) {
+    //By Vinith
+    public Pane animateIncline(double mass, double velocity, Path incline, int friction, BorderPane root, ImageView carType) {
         Pane pane = new Pane();
         PhysicsEquations equations = new PhysicsEquations();
         pane.setPrefSize(800, 600);
@@ -157,18 +165,18 @@ public class Animate extends Pane {
         /*trackincline.setTranslateX(centerX);
         trackincline.setTranslateY(centerY);*/
 
-        pane.getChildren().addAll(incline, car);
+        pane.getChildren().addAll(incline, carType);
 
         // PathTransition for the car animation
-        PathTransition pathTransition = new PathTransition();
+        pathTransition = new PathTransition();
         pathTransition.setPath(trackincline);
-        pathTransition.setNode(car);
+        pathTransition.setNode(carType);
         pathTransition.setInterpolator(Interpolator.LINEAR);
         pathTransition.setDuration(Duration.seconds(trackincline.getBoundsInLocal().getWidth() / velocity));
         pathTransition.setCycleCount(1);
 
         // Play the animation
-        pathTransition.play();
+        //pathTransition.play();
 
         TextFlow energyDisplay = equations.createEnergyDisplayUphill(incline, velocity, friction, mass, pathTransition);
         root.setBottom(energyDisplay);
@@ -176,13 +184,11 @@ public class Animate extends Pane {
         return pane;
     }
 
-    public Pane animateDecline(int mass, double velocity, Path decline, int friction, BorderPane root) {
+    //By Vinith
+    public Pane animateDecline(int mass, double velocity, Path decline, int friction, BorderPane root, ImageView carType) {
         PhysicsEquations equations = new PhysicsEquations();
         Pane pane = new Pane();
         pane.setPrefSize(800, 600);
-
-        // Create the car rectangle
-        Rectangle car = new Rectangle(30, 20, Color.BLUE);
 
         // Define the track
         Path trackdecline = new Path();
@@ -199,16 +205,16 @@ public class Animate extends Pane {
         trackdecline.setTranslateX(centerX);
         trackdecline.setTranslateY(centerY);
 
-        pane.getChildren().addAll(trackdecline, car);
+        pane.getChildren().addAll(trackdecline, carType);
 
-        PathTransition pathTransition = new PathTransition();
+        pathTransition = new PathTransition();
         pathTransition.setPath(trackdecline);
-        pathTransition.setNode(car);
+        pathTransition.setNode(carType);
         pathTransition.setInterpolator(Interpolator.LINEAR);
         pathTransition.setDuration(Duration.seconds(trackdecline.getBoundsInLocal().getWidth() / (velocity - friction)));
         pathTransition.setCycleCount(1);
 
-        pathTransition.play();
+        //pathTransition.play();
 
         TextFlow energyDisplay = equations.createEnergyDisplay(decline, velocity, friction, mass, pathTransition);
         root.setBottom(energyDisplay);
@@ -217,14 +223,13 @@ public class Animate extends Pane {
     }
 
 
-
-
-
+    //By Vinith
     //running the animation
     public void playanimation() {
        // timelineanimation().play();
     }
 
+    //By Vinith
     //stopping the animation
     public void stopanimation() {
        // timelineanimation().stop();
