@@ -137,7 +137,8 @@ public class Animate extends Pane {
         PhysicsEquations equations = new PhysicsEquations();
         pane.setPrefSize(800, 600);
 
-        Rectangle car = new Rectangle(50, 30, Color.RED);
+        //double totalVelocity = velocity - (velocity * (friction/100));
+
         double centerX = (pane.getPrefWidth() - incline.getBoundsInLocal().getWidth()) / 2;
         double centerY = (pane.getPrefHeight() - incline.getBoundsInLocal().getHeight()) / 2;
 
