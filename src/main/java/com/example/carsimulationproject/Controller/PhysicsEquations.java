@@ -1,12 +1,17 @@
 package com.example.carsimulationproject.Controller;
 
 import com.example.carsimulationproject.Model.Animate;
+import com.example.carsimulationproject.View.MainScreen;
 import javafx.animation.*;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Path;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import javafx.util.Duration;
 
@@ -180,13 +185,17 @@ public class PhysicsEquations {
 
     //By Shon
     public TextFlow createEnergyDisplay(Path trackdecline, double velocity, int friction, double mass, PathTransition pathTransition) {
-        Text keText = new Text("KE: 0 J\n");
-        Text peText = new Text("PE: 0 J\n");
-        Text meText = new Text("ME: 0 J\n");
+        Text keText = new Text("Kinetic Energy: 0 J\n");
+        Text peText = new Text("Potential Energy: 0 J\n");
+        Text meText = new Text("Mechanical Energy: 0 J\n");
+
+        keText.setFont(new Font("Monaco", 18));
+        peText.setFont(new Font("Monaco", 18));
+        meText.setFont(new Font("Monaco", 18));
 
         TextFlow energyDisplay = new TextFlow(keText, peText, meText);
         energyDisplay.setPadding(new Insets(10));
-        energyDisplay.setStyle("-fx-background-color: lightgrey; -fx-border-color: black; -fx-border-width: 1px;");
+        energyDisplay.setStyle("-fx-background-color: lightgray; -fx-border-color: black; -fx-border-width: 1px;");
 
 
         //.currentTimeProperty serves to update the time as the animation progresses
@@ -222,9 +231,13 @@ public class PhysicsEquations {
 
     //By Shon
     public TextFlow createEnergyDisplayUphill(Path trackdecline, double velocity, int friction, double mass, PathTransition pathTransition) {
-        Text keText = new Text("KE: 0 J\n");
-        Text peText = new Text("PE: 0 J\n");
-        Text meText = new Text("ME: 0 J\n");
+        Text keText = new Text("Kinetic Energy: 0 J\n");
+        Text peText = new Text("Potential Energy: 0 J\n");
+        Text meText = new Text("Mechanical Energy: 0 J\n");
+
+        keText.setFont(new Font("Monaco", 18));
+        peText.setFont(new Font("Monaco", 18));
+        meText.setFont(new Font("Monaco", 18));
 
         TextFlow energyDisplay = new TextFlow(keText, peText, meText);
         energyDisplay.setPadding(new Insets(10));
@@ -273,10 +286,13 @@ public class PhysicsEquations {
         Text peText = new Text("Potential Energy: 0 J\n");
         Text meText = new Text("Mechanical Energy: 0 J\n");
 
+        keText.setFont(new Font("Monaco", 18));
+        peText.setFont(new Font("Monaco", 18));
+        meText.setFont(new Font("Monaco", 18));
+
         TextFlow energyDisplay = new TextFlow(keText, peText, meText);
         energyDisplay.setPadding(new Insets(10));
-        energyDisplay.setStyle("-fx-background-color: lightgrey; -fx-border-color: black; -fx-border-width: 1px;");
-
+        energyDisplay.setStyle("-fx-background-color: lightgray; -fx-border-color: black; -fx-border-width: 1px;");
 
         //.currentTimeProperty serves to update the time as the animation progresses
         // .addListener does something whenever a property is change, in this case the time
