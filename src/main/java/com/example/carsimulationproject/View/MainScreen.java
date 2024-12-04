@@ -337,7 +337,7 @@ public class MainScreen {
             changeTrack.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
             combo.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
             uphill.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
-            downhill.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");*/
+            downhill.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
 
             // Reset styles to their original values
             center.setStyle(originalCenterStyle);
