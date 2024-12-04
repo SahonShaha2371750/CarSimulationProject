@@ -88,6 +88,7 @@ public class Trackselections {
         animate.timelineanimation(pointsdecline, timesAtPointsdecline );
 
          */
+        return trackdecline;
     }
 
     //By Vinith and Obaidah
