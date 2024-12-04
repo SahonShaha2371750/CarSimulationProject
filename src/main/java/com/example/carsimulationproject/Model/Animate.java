@@ -17,7 +17,7 @@ import java.util.ArrayList;
 //By Vinith
 public class Animate extends Pane {
 
-    Rectangle car = new Rectangle(30, 50, 40, 20);
+    /*Rectangle car = new Rectangle(30, 50, 40, 20);*/
     public PathTransition pathTransition;
 
     public PathTransition getPathTransition() {
@@ -26,7 +26,7 @@ public class Animate extends Pane {
 
 
     //By Vinith
-    public Animate() {
+   /* public Animate() {
 
     //setting the vehicule properties like setting the engine
 
@@ -36,10 +36,10 @@ public class Animate extends Pane {
         this.getChildren().addAll(car);
 
 
-    }
+    }*/
 
     //By Vinith
-    public void timelineanimation(ArrayList<Double> arrayListpositions,  ArrayList<Double> listTime) {
+   /* public void timelineanimation(ArrayList<Double> arrayListpositions,  ArrayList<Double> listTime) {
 
         if (arrayListpositions.isEmpty()) {
             throw new IllegalStateException("Points must be generated before animating.");
@@ -69,11 +69,11 @@ public class Animate extends Pane {
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
 
-    }
+    }*/
 
 
 
-    //By Vinith
+    //By Sahon
     public Pane comboTrackAnimation(double mass, double velocity, Path combo, int friction, BorderPane root, ImageView carType, StackPane center) {
         Pane pane = new Pane();
         PhysicsEquations equations = new PhysicsEquations();
@@ -131,7 +131,7 @@ public class Animate extends Pane {
         return pane;
     }
 
-    //By Vinith
+    //By Sahon
     public Pane animateIncline(double mass, double velocity, Path incline, int friction, BorderPane root, ImageView carType) {
         Pane pane = new Pane();
         PhysicsEquations equations = new PhysicsEquations();
@@ -176,7 +176,7 @@ public class Animate extends Pane {
         return pane;
     }
 
-    //By Vinith
+    //By Sahon
     public Pane animateDecline(int mass, double velocity, Path decline, int friction, BorderPane root, ImageView carType) {
         PhysicsEquations equations = new PhysicsEquations();
         Pane pane = new Pane();
@@ -217,7 +217,7 @@ public class Animate extends Pane {
 
     //By Vinith
     //running the animation
-    public void playanimation() {
+    /*public void playanimation() {
        // timelineanimation().play();
     }
 
@@ -225,6 +225,6 @@ public class Animate extends Pane {
     //stopping the animation
     public void stopanimation() {
        // timelineanimation().stop();
-    }
+    }*/
 
 }

@@ -17,10 +17,10 @@ import javafx.util.Duration;
 
 import java.util.ArrayList;
 
-//By Obaidah, Shon, and Vinith
+//By Sahon
 public class PhysicsEquations {
 
-    public double g = 9.8;
+    /*public double g = 9.8;
 
     //Dummy values
     double carMass = 1000;
@@ -102,10 +102,10 @@ public class PhysicsEquations {
 
         return mechanicalEnergy;
 
-    }
+    }*/
 
     //By Obaidah and Vinith
-    public double findNetAcceleration(double EngineAcceleration, double angle, double mu, String direction) {
+    /*public double findNetAcceleration(double EngineAcceleration, double angle, double mu, String direction) {
 
         double angleInRadians = Math.toRadians(angle);
         double netAcceleration = 0;
@@ -126,10 +126,10 @@ public class PhysicsEquations {
 
         return netAcceleration;
 
-    }
+    }*/
 
-    //By Shon
-    public ArrayList<Double> findPoints(double startx, double starty, double distance, double angle, String condition) {
+
+    /*public ArrayList<Double> findPoints(double startx, double starty, double distance, double angle, String condition) {
         ArrayList<Double> arrayListPositions = new ArrayList<>();
 
         for (int i = 1; i <= 5; i++) {
@@ -151,10 +151,10 @@ public class PhysicsEquations {
         }
 
         return arrayListPositions;
-    }
+    }*/
 
-    //By Shon
-    public ArrayList<Double> velocitiesAtPoint(double initialSpeed, double distance,
+
+    /*public ArrayList<Double> velocitiesAtPoint(double initialSpeed, double distance,
                                                double engineAcceleration, double angle, double mu, String direction) {
 
         double netAcceleration = findNetAcceleration(engineAcceleration, angle, mu, direction);
@@ -166,10 +166,10 @@ public class PhysicsEquations {
         }
 
         return listvelocities;
-    }
+    }*/
 
-    //By Shon
-    public ArrayList<Double> timeAtPoint(double initialSpeed, double distance,
+
+    /*public ArrayList<Double> timeAtPoint(double initialSpeed, double distance,
                                          double engineAcceleration, double angle, double mu, String direction) {
 
         ArrayList<Double> listvelocities = velocitiesAtPoint(initialSpeed, distance, engineAcceleration, angle, mu, direction);
@@ -181,9 +181,9 @@ public class PhysicsEquations {
 
         return listTime;
 
-    }
+    }*/
 
-    //By Shon
+    //By Sahon
     public TextFlow createEnergyDisplay(Path trackdecline, double velocity, int friction, double mass, PathTransition pathTransition) {
         Text keText = new Text("Kinetic Energy: 0 kJ\n");
         Text peText = new Text("Potential Energy: 0 kJ\n");
@@ -229,7 +229,7 @@ public class PhysicsEquations {
         return energyDisplay;
     }
 
-    //By Shon
+    //By Sahon
     public TextFlow createEnergyDisplayUphill(Path trackdecline, double velocity, int friction, double mass, PathTransition pathTransition) {
         Text keText = new Text("Kinetic Energy: 0 kJ\n");
         Text peText = new Text("Potential Energy: 0 kJ\n");
@@ -280,7 +280,7 @@ public class PhysicsEquations {
         return energyDisplay;
     }
 
-    //By Shon
+    //By Sahon
     public TextFlow energyDisplayComboTrack(Path trackdecline, double velocity, int friction, double mass, PathTransition pathTransition) {
         Text keText = new Text("Kinetic Energy: 0 kJ\n");
         Text peText = new Text("Potential Energy: 0 kJ\n");
@@ -327,7 +327,7 @@ public class PhysicsEquations {
         return energyDisplay;
     }
 
-    //By Shon
+    //By Sahon
     public double findHeight(double progress) {
         double[] heightPerPart = {200, 200, 150, 150, 200, 200};
 
@@ -339,46 +339,6 @@ public class PhysicsEquations {
         double y1 = heightPerPart[whichPartCarIsOn];
         double y2 = heightPerPart[whichPartCarIsOn + 1];
         return y1 + (y2 - y1) * progressOnSpecificPart;
-    }
-
-    //By Shon
-    //Setters
-    public void setCarMass(double carMass) {
-        this.carMass = carMass;
-    }
-
-    public void setCarSpeed(double carSpeed) {
-        this.carSpeed = carSpeed;
-    }
-
-    public void setHeight(double height) {
-        this.height = height;
-    }
-
-    public void setKineticEnergy(double kineticEnergy) {
-        this.kineticEnergy = kineticEnergy;
-    }
-
-    public void setPotentialEnergy(double potentialEnergy) {
-        this.potentialEnergy = potentialEnergy;
-    }
-
-    public void setMechanicalEnergy(double mechanicalEnergy) {
-        this.mechanicalEnergy = mechanicalEnergy;
-    }
-
-    //By Obaidah
-    //Getters
-    public double getKineticEnergy() {
-        return kineticEnergy;
-    }
-
-    public double getPotentialEnergy() {
-        return potentialEnergy;
-    }
-
-    public double getMechanicalEnergy() {
-        return mechanicalEnergy;
     }
 
 

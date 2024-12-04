@@ -40,7 +40,7 @@ public class Trackselections {
     }*/
 
 
-    //By Vinith and Obaidah
+    //By Vinith, Obaidah and Sahon
     //Decline track
     public  Path declinetrack(StackPane center) {
 
@@ -90,7 +90,7 @@ public class Trackselections {
          */
     }
 
-    //By Vinith and Obaidah
+    //By Vinith, Obaidah and Sahon
     public Path inclinettrack(StackPane center) {
 
         double width = center.getWidth();
@@ -154,7 +154,7 @@ public class Trackselections {
 
     //the angles are not all the same, this will be fixed next time
 
-    //By Vinith
+    //By Vinith and Sahon
    public Path combotrack(StackPane center) {
 
 
