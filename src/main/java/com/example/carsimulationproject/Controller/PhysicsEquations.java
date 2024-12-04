@@ -202,7 +202,7 @@ public class PhysicsEquations {
         // .addListener does something whenever a property is change, in this case the time
         // obs is the property being observed, oldtime is the time before the update, newTime is the time after
         pathTransition.currentTimeProperty().addListener((obs, oldTime, newTime) -> {
-            double progress = newTime.toSeconds() / pathTransition.getTotalDuration().toSeconds(); // finds how mch % of the animation is done
+            double progress = newTime.toSeconds() / pathTransition.getTotalDuration().toSeconds(); // finds how much % of the animation is done
 
             double x = 50 + progress * (750 - 50); // initialX + distance done so far ; 750 - 50 represents the distance of the track
             double y = 100 + progress * (500 - 100);
@@ -274,7 +274,7 @@ public class PhysicsEquations {
         pathTransition.setOnFinished(event -> {
             keText.setText("Kinetic Energy: Finished\n");
             peText.setText("Potential Energy: Finished\n");
-            meText.setText("Mechanicaly Energy: Finished\n");
+            meText.setText("Mechanical Energy: Finished\n");
         });
 
         return energyDisplay;
@@ -314,14 +314,14 @@ public class PhysicsEquations {
 
             keText.setText(String.format("Kinetic Energy: %.2f kJ\n", ke));
             peText.setText(String.format("Potential Energy: %.2f kJ\n", pe));
-            meText.setText(String.format("ME: %.2f kJ\n", me));
+            meText.setText(String.format("Mechanical Energy: %.2f kJ\n", me));
         });
 
 
         pathTransition.setOnFinished(event -> {
             keText.setText("Kinetic Energy: Finished\n");
             peText.setText("Potential Energy: Finished\n");
-            meText.setText("Mechanicaly Energy: Finished\n");
+            meText.setText("Mechanical Energy: Finished\n");
         });
 
         return energyDisplay;

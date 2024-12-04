@@ -37,7 +37,7 @@ public class Animate extends Pane {
 
 
     }*/
-
+    // Old Version
     //By Vinith
    /* public void timelineanimation(ArrayList<Double> arrayListpositions,  ArrayList<Double> listTime) {
 
@@ -79,9 +79,6 @@ public class Animate extends Pane {
         PhysicsEquations equations = new PhysicsEquations();
         pane.setPrefSize(800, 600);
 
-        // Rectangle representing the car
-        Rectangle car = new Rectangle(50, 30, Color.RED);
-
         // Center the path in the pane
         double centerX = (pane.getPrefWidth() - combo.getBoundsInLocal().getWidth()) / 2;
         double centerY = (pane.getPrefHeight() - combo.getBoundsInLocal().getHeight()) / 2;
@@ -89,14 +86,13 @@ public class Animate extends Pane {
         combo.setTranslateX(centerX);
         combo.setTranslateY(centerY);
 
-        // Create a sub-path up to the desired point
+        // Creating a new path that stops at a certain point instead of the car doing the full animation
         Path subPath = new Path();
         subPath.setStroke(Color.BLACK);
         subPath.setStrokeWidth(2);
         double width = center.getWidth();
         double height = center.getHeight();
 
-        // Add path elements up to the stopping point
         subPath.getElements().add(new MoveTo(center.getLayoutX()*3/5-5, height*2/3)); // Start point
         subPath.getElements().add(new LineTo(center.getLayoutX()*3/5+(width/5), height*2/3)); // Add first segment
 
@@ -105,11 +101,10 @@ public class Animate extends Pane {
         subPath.getElements().add(new LineTo(center.getLayoutX()*3/5+(4*width/5), height*2/3)); // Add fourth segment
         subPath.getElements().add(new LineTo(center.getLayoutX()*3/5+(5*width/5)-10, height*2/3)); // Stop here
 
-        // Center the subPath
+        // Centering
         subPath.setTranslateX(centerX);
         subPath.setTranslateY(centerY);
 
-        // Add the car to the pane
         pane.getChildren().addAll(combo, carType);
 
 
@@ -120,10 +115,6 @@ public class Animate extends Pane {
         pathTransition.setInterpolator(Interpolator.LINEAR);
         pathTransition.setDuration(Duration.seconds(subPath.getBoundsInLocal().getWidth() / velocity));
         pathTransition.setCycleCount(1);
-
-
-        // Play the animation
-        // pathTransition.play();
 
         TextFlow energyDisplay = equations.energyDisplayComboTrack(combo, velocity, friction, mass, pathTransition);
         root.setBottom(energyDisplay);
@@ -137,21 +128,18 @@ public class Animate extends Pane {
         PhysicsEquations equations = new PhysicsEquations();
         pane.setPrefSize(800, 600);
 
-        //double totalVelocity = velocity - (velocity * (friction/100));
-
         double centerX = (pane.getPrefWidth() - incline.getBoundsInLocal().getWidth()) / 2;
         double centerY = (pane.getPrefHeight() - incline.getBoundsInLocal().getHeight()) / 2;
 
         incline.setTranslateX(centerX);
         incline.setTranslateY(centerY);
 
+        // Creating the new path for the car to follow
         Path trackincline = new Path();
         trackincline.setStroke(Color.BLACK);
         trackincline.setStrokeWidth(2);
-
-        // Define the points of the incline track
         MoveTo start = new MoveTo(190, 530);
-        LineTo summit = new LineTo(1340, 150); // Summit
+        LineTo summit = new LineTo(1340, 150); // Highest point
 
         trackincline.setTranslateX(centerX);
         trackincline.setTranslateY(centerY);
@@ -168,8 +156,6 @@ public class Animate extends Pane {
         pathTransition.setDuration(Duration.seconds(trackincline.getBoundsInLocal().getWidth() / velocity));
         pathTransition.setCycleCount(1);
 
-        // Play the animation
-        //pathTransition.play();
 
         TextFlow energyDisplay = equations.createEnergyDisplayUphill(incline, velocity, friction, mass, pathTransition);
         root.setBottom(energyDisplay);
@@ -183,7 +169,7 @@ public class Animate extends Pane {
         Pane pane = new Pane();
         pane.setPrefSize(800, 600);
 
-        // Define the track
+        // Creating the new path for the car to follow on
         Path trackdecline = new Path();
         trackdecline.setStroke(Color.BLACK);
         trackdecline.setStrokeWidth(2);
@@ -206,8 +192,6 @@ public class Animate extends Pane {
         pathTransition.setInterpolator(Interpolator.LINEAR);
         pathTransition.setDuration(Duration.seconds(trackdecline.getBoundsInLocal().getWidth() / (velocity - friction)));
         pathTransition.setCycleCount(1);
-
-        //pathTransition.play();
 
         TextFlow energyDisplay = equations.createEnergyDisplay(decline, velocity, friction, mass, pathTransition);
         root.setBottom(energyDisplay);

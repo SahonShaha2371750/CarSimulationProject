@@ -15,12 +15,9 @@ public class Trackselections {
     public PhysicsEquations pe = new PhysicsEquations();
     Animate animate = new Animate();
 
-    void setInitialvelocityVelocity ( double velocity) {
-        this.initialvelocity = velocity;
-    }
-
 
       //Default track
+        // Old Version done by Vinith
     /*public Path defaulttrack() {
 
         angle = 0;
@@ -68,7 +65,7 @@ public class Trackselections {
 
 
         /*
-
+        Old Version done by Vinith
         angle = 20;
         Rotate rotate = new Rotate(angle,50,50);
         distance = 200;
@@ -117,10 +114,9 @@ public class Trackselections {
         trackincline.setStroke(Color.BLACK);
         trackincline.setStrokeWidth(2);
 
+        // Old Version done by Vinith
         //Define the points of the track
-
         //Add all points to the Path
-
         /*
         angle = 20;
         Rotate rotate = new Rotate((-1*angle),50,50);
@@ -148,12 +144,6 @@ public class Trackselections {
         return trackincline;
     }
 
-
-
-
-
-
-    //the angles are not all the same, this will be fixed next time
 
     //By Vinith and Sahon
    public Path combotrack(StackPane center) {
@@ -189,7 +179,7 @@ public class Trackselections {
 
 
 
-        /*
+        /* Old Version done by Vinith
         double startpointx = 50;
         double startpointy = 50;
 
