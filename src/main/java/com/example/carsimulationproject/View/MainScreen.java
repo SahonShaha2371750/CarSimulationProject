@@ -186,7 +186,9 @@ public class MainScreen {
         MenuItem downhill = new MenuItem("Downhill Track");
         MenuItem uphill = new MenuItem("Uphill Track");
         changeTrack.getItems().addAll(combo, downhill, uphill);
+
         Trackselections ts = new Trackselections();
+
         combo.setOnAction(actionEvent -> {
             Animate animation = new Animate();
             chosenTrack = ts.combotrack(center);
@@ -194,7 +196,6 @@ public class MainScreen {
         });
 
         downhill.setOnAction(actionEvent -> {
-
             Animate animation = new Animate();
             chosenTrack = ts.declinetrack(center);
             chosenAnimation = animate.animateDecline(vehicleMass, totalVelocity, chosenTrack, totalFriction, root, chosenCar);
@@ -371,23 +372,6 @@ public class MainScreen {
             mechanicalEnergyLabel.setStyle("-fx-text-fill: #e9eff1");
             mechanicalEnergyLevel.setFill(Color.WHITESMOKE);
 
-            /*changeCar.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            car.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            truck.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            changeEngine.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            strongEngine.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            weakEngine.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            changeTires.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            regularTire.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            winterTire.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            changeWeather.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            rainy.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            sunny.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            changeTrack.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            combo.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            uphill.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");
-            downhill.setStyle("-fx-background-color: #453659; -fx-text-fill: #e9eff1");*/
-
 
             changeCar.setStyle("-fx-background-color: #6734ac; -fx-text-fill: #e9eff1");
             lambomenuitem.setStyle(/*"-fx-background-color: #453659;*/" -fx-text-fill: #131542");
@@ -432,6 +416,7 @@ public class MainScreen {
             totalVelocity = 0;
             center.getChildren().clear();
             animate.getPathTransition().stop();
+            root.setBottom(null);
         });
 
 

@@ -44,24 +44,25 @@ public class Trackselections {
     //Decline track
     public  Path declinetrack(StackPane center) {
 
-            double width = center.getWidth();
-            double height = center.getHeight();
+        double width = center.getWidth();
+        double height = center.getHeight();
 
-            System.out.println(width);
-            System.out.println(height);
+        System.out.println(width);
+        System.out.println(height);
 
-            // Simplified the track
-            Path trackdecline = new Path();
-            trackdecline.getElements().addAll(
-                    new MoveTo(190, 150),
-                    new LineTo(1340, 530),
-                    new LineTo(190, 530),
-                    new ClosePath()
-            );
+        // Define the path for the inverted triangle
+        Path trackdecline = new Path(
+                new MoveTo(190, 530),  // Bottom-left corner (90-degree angle)
+                new LineTo(1340, 530), // Bottom-right
+                new LineTo(190, 150),  // Top-left
+                new ClosePath()        // Ensures the path is fully closed
+        );
 
-            trackdecline.setFill(Color.LAWNGREEN);
-            trackdecline.setStroke(Color.BLACK);
-            trackdecline.setStrokeWidth(2);
+        trackdecline.setFill(Color.LAWNGREEN); // Set the fill color
+        trackdecline.setStroke(Color.BLACK);  // Set the stroke color
+        trackdecline.setStrokeWidth(2);       // Set the stroke width
+
+        return trackdecline;
 
 
 
@@ -87,7 +88,6 @@ public class Trackselections {
         animate.timelineanimation(pointsdecline, timesAtPointsdecline );
 
          */
-        return trackdecline;
     }
 
     //By Vinith and Obaidah
@@ -111,7 +111,7 @@ public class Trackselections {
         );
 
 
-        trackincline.setFill(Color.LAWNGREEN);
+        trackincline.setFill(Color.GREEN);
 
         trackincline.setStroke(Color.BLACK);
         trackincline.setStrokeWidth(2);
