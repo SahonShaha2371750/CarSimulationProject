@@ -183,15 +183,15 @@ public class MainScreen {
 
         changeWeather.getItems().addAll(sunny, rainy);
         sunny.setOnAction(actionEvent -> {totalFriction += 1;});
-        rainy.setOnAction(actionEvent -> {totalFriction += 10;});
+        rainy.setOnAction(actionEvent -> {totalFriction += 50;});
 
 
         // Done by Sahon
         MenuButton changeTrack = new MenuButton("Change Track");
         MenuItem combo = new MenuItem("Combo Track");
-        MenuItem downhill = new MenuItem("Downhill Track");
+        //MenuItem downhill = new MenuItem("Downhill Track");
         MenuItem uphill = new MenuItem("Uphill Track");
-        changeTrack.getItems().addAll(combo, downhill, uphill);
+        changeTrack.getItems().addAll(combo,  uphill);
 
         Trackselections ts = new Trackselections();
 
@@ -201,11 +201,11 @@ public class MainScreen {
             chosenAnimation = animate.comboTrackAnimation(vehicleMass, totalVelocity, chosenTrack, totalFriction, root, chosenCar, center);
         });
 
-        downhill.setOnAction(actionEvent -> {
+        /*downhill.setOnAction(actionEvent -> {
             Animate animation = new Animate();
             chosenTrack = ts.declinetrack(center);
             chosenAnimation = animate.animateDecline(vehicleMass, totalVelocity, chosenTrack, totalFriction, root, chosenCar);
-        });
+        });*/
 
         uphill.setOnAction(actionEvent -> {
 
@@ -337,7 +337,7 @@ public class MainScreen {
             changeTrack.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
             combo.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
             uphill.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
-            downhill.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
+            //downhill.setStyle("-fx-background-color: #b5a6c9; -fx-text-fill: #0e1416");
 
             // Reset styles to their original values
             center.setStyle(originalCenterStyle);
@@ -360,7 +360,7 @@ public class MainScreen {
             changeTrack.setStyle(originalButtonStyle);
             combo.setStyle(originalOptionStyle);
             uphill.setStyle(originalOptionStyle);
-            downhill.setStyle(originalOptionStyle);
+            //downhill.setStyle(originalOptionStyle);
             go.setStyle(originalGoAndResetOptionStyle);
             reset.setStyle(originalGoAndResetOptionStyle);
         });
@@ -392,7 +392,7 @@ public class MainScreen {
             changeTrack.setStyle("-fx-background-color: #6734ac; -fx-text-fill: #e9eff1");
             combo.setStyle(/*"-fx-background-color: #453659;*/" -fx-text-fill: #131542");
             uphill.setStyle(/*"-fx-background-color: #453659;*/" -fx-text-fill: #131542");
-            downhill.setStyle(/*"-fx-background-color: #453659;*/" -fx-text-fill: #131542");
+            //downhill.setStyle(/*"-fx-background-color: #453659;*/" -fx-text-fill: #131542");
             go.setStyle("-fx-background-color: #2b5624; -fx-text-fill: #e9eff1");
             reset.setStyle("-fx-background-color: #660a0e; -fx-text-fill: #e9eff1");
 
